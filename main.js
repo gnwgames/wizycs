@@ -18,7 +18,7 @@ function preload() {
   game.load.spritesheet('flame', './assets/sprites/fireball.png', 64,64)
   game.load.spritesheet('chars', './assets/sprites/chartiles.png', 32, 32)
   game.load.spritesheet('pika', './assets/sprites/pika.jpg', 16,24)
-\}
+}
 
 function create() {
   game.physics.startSystem(Phaser.Physics.Arcade)
