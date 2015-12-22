@@ -56,14 +56,14 @@ function create() {
 }
 
 function update() {
-  if (wzrd) wzrd.collided(collision)
+  wzrd.collide(collision)
   game.physics.arcade.collide(enemy, collision)
   if (keys.left.isDown) {
-    wzrd.left()
+    wzrd.l()
   } else if (keys.right.isDown) {
-    wzrd.right()
+    wzrd.r()
   } else {
-    wzrd.stop()
+    wzrd.st()
   }
 
   if (keys.up.isDown) {
@@ -72,6 +72,7 @@ function update() {
     // flame.position.y = wzrd.position.y + 13
     // flame.play('fire')
     wzrd.fly()
+
   } else {
     // flame.visible = false
     // flame.animations.stop()
