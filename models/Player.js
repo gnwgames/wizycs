@@ -21,9 +21,10 @@ Player.prototype = Object.create(Phaser.Sprite.prototype)
 Player.prototype.constructor = Player
 
 Player.prototype.equip = function(key, handler) {
+  var obj = this;
   this.power = (game.input.keyboard.addKey(key));
   this.power.onDown.add(function() {
-    handler(this.game, this)
+    handler(obj)
   })
 }
 

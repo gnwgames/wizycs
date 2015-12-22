@@ -15,6 +15,7 @@ var Fire = function (game, x, y) {
 
   this.checkWorldBounds = true;
   this.outOfBoundsKill = true;
+  this.game.add.existing(this)
 }
 
 Fire.prototype = Object.create(Power.prototype)
@@ -30,12 +31,12 @@ Fire.prototype.shoot = function (dir) {
   }
 }
 
-Fire.handleInput = function (game, char) {
+Fire.handleInput = function (char) {
   if (char.body.velocity.x > 0) {
-    var flame = new Fire(game, char.position.x, char.position.y)
+    var flame = new Fire(char.game, char.position.x, char.position.y - 16)
     flame.shoot('right')
   } else {
-    var flame = new Fire(game, char.position.x, char.position.y)
+    var flame = new Fire(char.game, char.position.x - 20, char.position.y - 16)
     flame.shoot('left')
   }
 }

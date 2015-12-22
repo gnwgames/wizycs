@@ -34,7 +34,7 @@ function create() {
   layer.resizeWorld()
   wzrd = new Player(game, 0, 0)
   pika = new PikaEnemy(game, 500, 50)
-  wzrd.equip(Phaser.Keycode.D)
+  wzrd.equip(Phaser.KeyCode.D, Fire.handleInput)
   // flame = game.add.sprite(wzrd.position.x, wzrd.position.y+16, 'flame')
   // flame.animations.add('fire', [16,17,18,19,20,21,22], 20, true)
 
