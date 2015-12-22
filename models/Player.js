@@ -5,7 +5,7 @@
 Player = {};
 
 Player.CreatePlayer = function() {
-    var wzrd = game.add.sprite(0, 0, 'chars');
+    wzrd = game.add.sprite(0, 0, 'chars');
     this.EquipPlayer();
     game.physics.arcade.enable(wzrd);
     wzrd.frame = 10;
