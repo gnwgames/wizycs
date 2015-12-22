@@ -15,7 +15,6 @@ Player.CreatePlayer = function() {
     wzrd.body.collideWorldBounds = true;
     game.camera.follow(wzrd);
 
-    return wzrd;
 };
 
 Player.EquipPlayer = function() {

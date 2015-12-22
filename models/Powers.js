@@ -33,16 +33,17 @@ Powers.CastSpell = function(x, y, angle, direction, speed, gx, gy) {
 
 };
 
-Powers.Fire = function (source) {
+Powers.Fire = function (direction) {
 
     if (this.game.time.time < this.nextFire) {
         return;
     }
 
-    var x = source.x + 10;
-    var y = source.y + 10;
+    var x = wzrd.position.x+15;
+    var y = wzrd.position.y -15;
+    var bulletSpeed = 150;
 
-    this.getFirstExists(false).CastSpell(x, y, 0, this.bulletSpeed, 0, 0);
+    this.getFirstExists(false).CastSpell(x, y, 0, direction, bulletSpeed, 0, 0);
 
     this.nextFire = this.game.time.time + this.fireRate;
 

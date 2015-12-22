@@ -10,12 +10,15 @@ var game = new Phaser.Game(600,450, Phaser.AUTO, 'Wizycs', {
 });
 
 function preload() {
-  game.load.tilemap('test1', './assets/maps/wizycs_temp_map.json', null, Phaser.Tilemap.TILED_JSON);
-  game.load.image('tiles', './assets/maps/test1.png');
-  game.load.image('collide', './assets/sprites/characterSprites.png');
-  game.load.spritesheet('flame', './assets/sprites/fireball.png', 64,64);
-  game.load.spritesheet('chars', './assets/sprites/chartiles.png', 32, 32);
-  //game.load.spritesheet('pika', './assets/sprites/pika.jpg', 16,24)
+    game.load.tilemap('test1', './assets/maps/wizycs_temp_map.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.image('tiles', './assets/maps/test1.png');
+    game.load.image('collide', './assets/sprites/characterSprites.png');
+    game.load.spritesheet('flame', './assets/sprites/fireball.png', 64, 64);
+    game.load.spritesheet('chars', './assets/sprites/chartiles.png', 32, 32);
+    //game.load.spritesheet('pika', './assets/sprites/pika.jpg', 16,24);
+    game.load.script('Player.js', './models/Player.js');
+    game.load.script('Enemy.js', './models/Enemy.js');
+    game.load.script('Powers.js', './models/Powers.js');
 }
 
 function create() {
@@ -31,7 +34,7 @@ function create() {
     // map.setCollisionBetween(1,1000, true, layer);
     layer.resizeWorld();
 
-    wzrd = Player.CreatePlayer();
+    Player.CreatePlayer();
 
     Enemy.CreateEnemy(500, 50, 'chars', 20);
     game.add.text(10,10, 'Arrow keys to move, and you can fly!')
@@ -58,11 +61,7 @@ function update() {
 
     if ((this.input.keyboard.isDown(Phaser.KeyCode.D)) && (keys.right.isDown))
     {
-        var x = wzrd.position.x+15;
-        var y = wzrd.position.y -15;
-        var bulletSpeed = 150;
-
-        Powers.CastSpell(x, y, 0, 'right', bulletSpeed, 0, 0);
+        Powers.Fire('right');
         /*
         flame.visible = true;
         flame.position.x = wzrd.position.x+15;
@@ -129,5 +128,3 @@ var SpellInstance = function (game, key) {
   this.scaleSpeed = 0;
 
 };
-
-Powers.Fireball.prototype = Object.create(Phaser.Group.prototype);
