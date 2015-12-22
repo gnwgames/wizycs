@@ -1,6 +1,6 @@
 'use strict'
 
-var map, layer, keys, wzrd, collision, flame
+var map, layer, keys, wzrd, collision, flame, enemy
 
 // Game instantiation
 var game = new Phaser.Game(600,450, Phaser.AUTO, 'Wizycs', {
@@ -15,6 +15,7 @@ function preload() {
   game.load.image('collide', './assets/maps/sprite_sheet (6).png')
   game.load.spritesheet('flame', './assets/maps/fireball.png', 64,64)
   game.load.spritesheet('chars', './assets/maps/chartiles.png', 32, 32)
+  game.load.spritesheet('pika', './assets/maps/pika.jpg', 16,22)
 }
 
 function create() {
@@ -30,6 +31,11 @@ function create() {
   // map.setCollisionBetween(1,1000, true, layer)
   layer.resizeWorld()
   wzrd = game.add.sprite(0,0, 'chars')
+  enemy = game.add.sprite(500, 50, 'pika')
+  enemy.scale.setTo(2,2)
+  game.physics.arcade.enable(enemy)
+  enemy.body.gravity.y = 500
+
   flame = game.add.sprite(wzrd.position.x, wzrd.position.y+16, 'flame')
   flame.animations.add('fire', [16,17,18,19,20,21,22], 20, true)
   game.physics.arcade.enable(wzrd)
@@ -41,10 +47,13 @@ function create() {
   game.camera.follow(wzrd)
   keys = game.input.keyboard.createCursorKeys()
   game.add.text(10,10, 'Arrow keys to move, and you can fly!')
+  enemy.state = 'left'
+  game.time.events.loop(Phaser.Timer.SECOND, function() {enemyWalk(enemy)}, this)
 }
 
 function update() {
   game.physics.arcade.collide(wzrd, collision)
+  game.physics.arcade.collide(enemy, collision)
   if (keys.left.isDown) {
     wzrd.animations.play('left')
     wzrd.body.velocity.x = -130
@@ -66,5 +75,26 @@ function update() {
   } else {
     flame.visible = false
     flame.animations.stop()
+  }
+}
+
+function enemyWalk(enemy) {
+  switch (enemy.state){
+    case 'left':
+      enemy.body.velocity.x = -100
+      enemy.state = 'stop'
+      break
+    case 'right':
+      enemy.body.velocity.x = 100
+      enemy.state = 'stop'
+      break
+    case 'stop':
+      if (enemy.body.velocity.x > 0) {
+        enemy.state = 'left'
+      } else {
+        enemy.state = 'right'
+      }
+      enemy.body.velocity.x = 0
+      break
   }
 }
