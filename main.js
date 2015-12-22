@@ -10,6 +10,7 @@ var game = new Phaser.Game(600,450, Phaser.AUTO, 'Wizycs', {
 })
 
 function preload() {
+  game.load.script('player', './models/player.js')
   game.load.tilemap('test1', './assets/maps/wizycs_temp_map.json', null, Phaser.Tilemap.TILED_JSON)
   game.load.image('tiles', './assets/maps/test1.png')
   game.load.image('collide', './assets/maps/sprite_sheet (6).png')
