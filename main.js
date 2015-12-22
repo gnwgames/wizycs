@@ -16,7 +16,7 @@ function preload() {
   game.load.spritesheet('flame', './assets/sprites/fireball.png', 64,64)
   game.load.spritesheet('chars', './assets/sprites/chartiles.png', 32, 32)
   game.load.spritesheet('pika', './assets/sprites/pika.jpg', 16,24)
-  game.load.script('player', './models/player.js')
+  // game.load.script('player', './models/player.js')
 }
 
 function create() {
@@ -56,7 +56,7 @@ function create() {
 }
 
 function update() {
-  game.physics.arcade.collide(wzrd, collision)
+  if (wzrd) wzrd.collided(collision)
   game.physics.arcade.collide(enemy, collision)
   if (keys.left.isDown) {
     wzrd.left()

@@ -18,11 +18,11 @@ var Player = function(game, x, y) {
 Player.prototype = Object.create(Phaser.Sprite.prototype)
 Player.prototype.constructor = Player
 
-Player.prototype.equip = function() {
+// Player.prototype.equip = function() {
+//
+// }
 
-}
-
-Player.prototype.left = function() {
+Player.prototype.left = function () {
   this.animations.play('left')
   this.body.velocity.x = -150
 }
@@ -40,6 +40,10 @@ Player.prototype.stop = function () {
   this.animations.stop()
   this.frame = 10
   this.body.velocity.x = 0
+}
+
+Player.prototype.collided = function (boundary) {
+  this.game.physics.arcade.collide(this, boundary)
 }
 
 // Player.CreatePlayer = function() {
