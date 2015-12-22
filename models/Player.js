@@ -12,6 +12,7 @@ var Player = function(game, x, y) {
   this.animations.add('right', [33,34,35,34], 5, true)
   this.body.gravity.y = 500
   this.body.collideWorldBounds = true
+  this.power = null
   this.game.camera.follow(this)
 
 };
@@ -19,8 +20,11 @@ var Player = function(game, x, y) {
 Player.prototype = Object.create(Phaser.Sprite.prototype)
 Player.prototype.constructor = Player
 
-Player.prototype.equip = function() {
-
+Player.prototype.equip = function(key, handler) {
+  this.power = (game.input.keyboard.addKey(key));
+  this.power.onDown.add(function() {
+    handler(this.game, this)
+  })
 }
 
 Player.prototype.l = function() {
