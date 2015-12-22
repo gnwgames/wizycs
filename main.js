@@ -29,14 +29,15 @@ function create() {
   layer = map.createLayer('world')
   collision = map.createLayer('collision')
   collision.visible = false
+
   // this value is seen in the json file for this tile map
   map.setCollision(106, true, collision)
   layer.resizeWorld()
   wzrd = new Player(game, 0, 0)
   pika = new PikaEnemy(game, 500, 50)
+
+  // Equip the flame power to the key D
   wzrd.equip(Phaser.KeyCode.D, Fire.handleInput)
-  // flame = game.add.sprite(wzrd.position.x, wzrd.position.y+16, 'flame')
-  // flame.animations.add('fire', [16,17,18,19,20,21,22], 20, true)
 
   keys = game.input.keyboard.createCursorKeys()
   game.add.text(10,10, 'Arrow keys to move, and you can fly!')
@@ -49,8 +50,5 @@ function update() {
   wzrd.handleInput(keys)
 
   pika.collide(collision)
-  // else {
-  //   // flame.visible = false
-  //   // flame.animations.stop()
-  // }
+
 }
