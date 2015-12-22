@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" nextobjectid="1">
+ <tileset firstgid="1" name="Terrain" tilewidth="16" tileheight="16" tilecount="90">
+  <image source="../../../../../Downloads/Gameboy Tileset.png" width="160" height="144"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBi5gAUJD2UwXPxBDaBKAlYbIDcSA1QYiPMDJWAoppfBnNaJjTNC6Y+QH6kRBgMZfvjsZmGgbRxT09zBmAbxgcGQb9Djl9pxzUmATw7wAmJ3NOyJpkaYAJ8YgB4GdkBsjIY9sNiDXKaQYy+63cTai49Pjv30thfm54HwLyn2khK/gUAchIaDybQXH58cMBTtdQJiZzpjFyD2AWJfOmM/IAYACxAm+Q==
+  </data>
+ </layer>
+</map>

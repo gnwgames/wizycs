@@ -1,0 +1,44 @@
+{ "height":30,
+ "layers":[
+        {
+         "compression":"zlib",
+         "data":"eJxjYBi5gAUJD2UwXPxBDaBKAlYbIDcSA1QYiPMDJWAoppfBnNaJjTNC6Y+QH6kRBgMZfvjsZmGgbRxT09zBmAbxgcGQb9Djl9pxzUmATw7wAmJ3NOyJpkaYAJ8YgB4GdkBsjIY9sNiDXKaQYy+63cTai49Pjv30thfm54HwLyn2khK\/gUAchIaDybQXH58cMBTtdQJiZzpjFyD2AWJfOmM\/IAYACxAm+Q==",
+         "encoding":"base64",
+         "height":30,
+         "name":"Tile Layer 1",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":30,
+         "x":0,
+         "y":0
+        }],
+ "nextobjectid":1,
+ "orientation":"orthogonal",
+ "properties":
+    {
+
+    },
+ "renderorder":"right-down",
+ "tileheight":16,
+ "tilesets":[
+        {
+         "firstgid":1,
+         "image":"..\/..\/..\/..\/..\/Downloads\/Gameboy Tileset.png",
+         "imageheight":144,
+         "imagewidth":160,
+         "margin":0,
+         "name":"Terrain",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tilecount":90,
+         "tileheight":16,
+         "tilewidth":16
+        }],
+ "tilewidth":16,
+ "version":1,
+ "width":30
+}
