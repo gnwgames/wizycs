@@ -19,6 +19,7 @@ function preload() {
     game.load.script('Player.js', './models/Player.js');
     game.load.script('Enemy.js', './models/Enemy.js');
     game.load.script('Powers.js', './models/Powers.js');
+    game.load.script('Game.js', './models/Game.js');
 }
 
 function create() {
@@ -36,95 +37,19 @@ function create() {
 
     Player.CreatePlayer();
 
-    Enemy.CreateEnemy(500, 50, 'chars', 20);
+    enemy = Enemy.CreateEnemy(500, 50, 'chars', 20);
+
     game.add.text(10,10, 'Arrow keys to move, and you can fly!')
+
+    Game.CreateKeyboardEvents();
 
 }
 
 function update() {
-    keys = game.input.keyboard.createCursorKeys();
+
+    Game.CreateMovementKeymap();
     game.physics.arcade.collide(wzrd, collision);
     game.physics.arcade.collide(enemy, collision);
-    if (keys.left.isDown) {
-        wzrd.animations.play('left');
-        wzrd.body.velocity.x = -130;
-    } else if (keys.right.isDown) {
-        wzrd.animations.play('right');
-        wzrd.body.velocity.x = 130;
-    } else if (keys.up.isDown) {
-        wzrd.body.velocity.y = -150;
-    } else {
-        wzrd.animations.stop();
-        wzrd.frame = 10;
-        wzrd.body.velocity.x = 0;
-    }
-
-    if ((this.input.keyboard.isDown(Phaser.KeyCode.D)) && (keys.right.isDown))
-    {
-        Powers.Fire('right');
-        /*
-        flame.visible = true;
-        flame.position.x = wzrd.position.x+15;
-        flame.position.y = wzrd.position.y -15;
-        flame.play('fireRight');
-        */
-    } else if ((this.input.keyboard.isDown(Phaser.KeyCode.D)) && (keys.left.isDown))
-    {
-        flame.visible = true;
-        flame.position.x = wzrd.position.x-30;
-        flame.position.y = wzrd.position.y -15;
-        flame.play('fireLeft');
-    } else {
-        flame.visible = false;
-        flame.animations.stop();
-    }
-
-    if ((this.input.keyboard.isDown(Phaser.KeyCode.A)) && (keys.right.isDown))
-    {
-        console.log('right melee');
-    } else if ((this.input.keyboard.isDown(Phaser.KeyCode.A)) && (keys.left.isDown))
-    {
-        console.log('left melee');
-    }
 }
 
-function enemyWalk(enemy) {
-  switch (enemy.state){
-    case 'left':
-      enemy.animations.play('wl');
-      enemy.body.velocity.x = -100;
-      enemy.state = 'stop';
-      break;
-    case 'right':
-      enemy.animations.play('wr');
-      enemy.body.velocity.x = 100;
-      enemy.state = 'stop';
-      break;
-    case 'stop':
-      enemy.animations.stop();
-      if (enemy.body.velocity.x > 0) {
-        enemy.state = 'left'
-      } else {
-        enemy.state = 'right'
-      }
-      enemy.body.velocity.x = 0;
-      break
-  }
-}
 
-var SpellInstance = function (game, key) {
-
-  Phaser.Sprite.call(this, game, 0, 0, key);
-
-  this.texture.baseTexture.scaleMode = PIXI.scaleModes.NEAREST;
-
-  this.anchor.set(0.5);
-
-  this.checkWorldBounds = true;
-  this.outOfBoundsKill = true;
-  this.exists = false;
-
-  this.tracking = false;
-  this.scaleSpeed = 0;
-
-};
