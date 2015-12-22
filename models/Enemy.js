@@ -11,6 +11,10 @@ var Enemy = function (game, x, y, key) {
 Enemy.prototype = Object.create(Phaser.Sprite.prototype)
 Enemy.prototype.constructor = Enemy
 
+Enemy.prototype.collide = function (obj) {
+  this.game.physics.arcade.collide(this, obj)
+}
+
 var PikaEnemy = function (game, x, y) {
   Enemy.call(this, game, x, y, 'pika')
   this.animations.add('walkRight', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], 21, true)
@@ -24,26 +28,26 @@ var PikaEnemy = function (game, x, y) {
 PikaEnemy.prototype = Object.create(Enemy.prototype)
 PikaEnemy.prototype.constructor = PikaEnemy
 
-// Enemy.EnemyWalk = function(enemy) {
-//     switch (enemy.state){
-//         case 'left':
-//             enemy.animations.play('wl');
-//             enemy.body.velocity.x = -100;
-//             enemy.state = 'stop';
-//             break;
-//         case 'right':
-//             enemy.animations.play('wr');
-//             enemy.body.velocity.x = 100;
-//             enemy.state = 'stop';
-//             break;
-//         case 'stop':
-//             enemy.animations.stop();
-//             if (enemy.body.velocity.x > 0) {
-//                 enemy.state = 'left'
-//             } else {
-//                 enemy.state = 'right'
-//             }
-//             enemy.body.velocity.x = 0;
-//             break;
-//     }
-// };
+PikaEnemy.prototype.updateState = function () {
+  switch (this.state){
+    case 'left':
+      this.animations.play('walkLeft')
+      this.body.velocity.x = -100
+      this.state = 'stop'
+      break
+    case 'right':
+      this.animations.play('walkRight')
+      this.body.velocity.x = 100
+      this.state = 'stop'
+      break
+    case 'stop':
+      this.animations.stop()
+      if (this.body.velocity.x > 0) {
+        this.state = 'left'
+      } else {
+        this.state = 'right'
+      }
+      this.body.velocity.x = 0
+      break
+  }
+}

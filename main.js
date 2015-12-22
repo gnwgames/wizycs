@@ -1,6 +1,6 @@
 'use strict'
 
-var map, layer, keys, wzrd, collision, flame, enemy
+var map, layer, keys, wzrd, collision, flame, pika
 
 // Game instantiation
 var game = new Phaser.Game(600,450, Phaser.AUTO, 'Wizycs', {
@@ -33,7 +33,7 @@ function create() {
   layer.resizeWorld()
   wzrd = new Player(game, 0, 0)
   // wzrd = game.add.sprite(0,0, 'chars')
-  enemy = new PikaEnemy(game, 500, 50)
+  pika = new PikaEnemy(game, 500, 50)
 
   // flame = game.add.sprite(wzrd.position.x, wzrd.position.y+16, 'flame')
   // flame.animations.add('fire', [16,17,18,19,20,21,22], 20, true)
@@ -46,12 +46,13 @@ function create() {
   // game.camera.follow(wzrd)
   keys = game.input.keyboard.createCursorKeys()
   game.add.text(10,10, 'Arrow keys to move, and you can fly!')
-  game.time.events.loop(Phaser.Timer.SECOND, function() {enemyWalk(enemy)}, this)
+  game.time.events.loop(Phaser.Timer.SECOND, function() {pika.updateState()}, this)
 }
 
 function update() {
   wzrd.collide(collision)
-  game.physics.arcade.collide(enemy, collision)
+  pika.collide(collision)
+  wzrd.collide(pika)
   if (keys.left.isDown) {
     wzrd.l()
   } else if (keys.right.isDown) {
@@ -70,29 +71,5 @@ function update() {
   } else {
     // flame.visible = false
     // flame.animations.stop()
-  }
-}
-
-function enemyWalk(enemy) {
-  switch (enemy.state){
-    case 'left':
-      enemy.animations.play('walkLeft')
-      enemy.body.velocity.x = -100
-      enemy.state = 'stop'
-      break
-    case 'right':
-      enemy.animations.play('walkRight')
-      enemy.body.velocity.x = 100
-      enemy.state = 'stop'
-      break
-    case 'stop':
-      enemy.animations.stop()
-      if (enemy.body.velocity.x > 0) {
-        enemy.state = 'left'
-      } else {
-        enemy.state = 'right'
-      }
-      enemy.body.velocity.x = 0
-      break
   }
 }
