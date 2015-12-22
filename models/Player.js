@@ -16,8 +16,8 @@ var Player = function(game, x, y) {
 
 };
 
-Player.prototype = Object.create(Phaser.Sprite.prototype);
-Player.prototype.constructor = Player;
+Player.prototype = Object.create(Phaser.Sprite.prototype)
+Player.prototype.constructor = Player
 
 Player.prototype.equip = function() {
 
