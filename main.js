@@ -19,26 +19,27 @@ function preload() {
 }
 
 function create() {
-  game.physics.startSystem(Phaser.Physics.Arcade)
-  game.stage.backgroundColor = '#5DDCDE'
-  map = game.add.tilemap('test1')
-  map.addTilesetImage('tiles', 'tiles')
-  map.addTilesetImage('collide', 'collide')
-  layer = map.createLayer('world')
-  collision = map.createLayer('collision')
-  collision.visible = false
-  map.setCollision(106, true, collision)
-  // map.setCollisionBetween(1,1000, true, layer)
-  layer.resizeWorld()
+    game.physics.startSystem(Phaser.Physics.Arcade)
+    game.stage.backgroundColor = '#5DDCDE'
+    map = game.add.tilemap('test1')
+    map.addTilesetImage('tiles', 'tiles')
+    map.addTilesetImage('collide', 'collide')
+    layer = map.createLayer('world')
+    collision = map.createLayer('collision')
+    collision.visible = false
+    map.setCollision(106, true, collision)
+    // map.setCollisionBetween(1,1000, true, layer)
+    layer.resizeWorld()
 
-  self.createPlayer();
-  self.placeEnemies();
-  keys = game.input.keyboard.createCursorKeys();
-  game.add.text(10,10, 'Arrow keys to move, and you can fly!')
+    wzrd = Player.CreatePlayer();
+
+    Enemy.CreateEnemy(500, 50, 'chars', 20);
+    game.add.text(10,10, 'Arrow keys to move, and you can fly!')
 
 }
 
 function update() {
+    keys = game.input.keyboard.createCursorKeys();
     game.physics.arcade.collide(wzrd, collision)
     game.physics.arcade.collide(enemy, collision)
     if (keys.left.isDown) {
@@ -55,13 +56,20 @@ function update() {
         wzrd.body.velocity.x = 0
     }
 
-    if ((this.input.keyboard.isDown(Phaser.KeyCode.W)) && (keys.right.isDown))
+    if ((this.input.keyboard.isDown(Phaser.KeyCode.D)) && (keys.right.isDown))
     {
+        var x = wzrd.position.x+15;
+        var y = wzrd.position.y -15;
+        var bulletSpeed = 150;
+
+        self.castFireball(x, y, 0, 'right', bulletSpeed, 0, 0);
+        /*
         flame.visible = true;
         flame.position.x = wzrd.position.x+15;
         flame.position.y = wzrd.position.y -15;
         flame.play('fireRight');
-    } else if ((this.input.keyboard.isDown(Phaser.KeyCode.W)) && (keys.left.isDown))
+        */
+    } else if ((this.input.keyboard.isDown(Phaser.KeyCode.D)) && (keys.left.isDown))
     {
         flame.visible = true;
         flame.position.x = wzrd.position.x-30;
@@ -72,46 +80,13 @@ function update() {
         flame.animations.stop()
     }
 
-    if ((this.input.keyboard.isDown(Phaser.KeyCode.D)) && (keys.right.isDown))
+    if ((this.input.keyboard.isDown(Phaser.KeyCode.A)) && (keys.right.isDown))
     {
         console.log('right melee');
     } else if ((this.input.keyboard.isDown(Phaser.KeyCode.A)) && (keys.left.isDown))
     {
         console.log('left melee');
     }
-}
-
-function createPlayer() {
-  wzrd = game.add.sprite(0,0, 'chars');
-  self.equipPlayer();
-  game.physics.arcade.enable(wzrd);
-  wzrd.frame = 10;
-  wzrd.animations.add('left', [21,22,23,22], 5, true);
-  wzrd.animations.add('right', [33,34,35,34], 5, true);
-  wzrd.body.gravity.y = 500;
-  wzrd.body.collideWorldBounds = true;
-  game.camera.follow(wzrd);
-}
-
-function equipPlayer() {
-    flame = game.add.sprite(wzrd.position.x, wzrd.position.y-15, 'flame');
-    flame.animations.add('fireRight', [32,33,34,35,36,37,39], 20, true);
-    flame.animations.add('fireLeft', [0,1,2,3,4,5,6,7], 20, true);
-}
-function placeEnemies() {
-  /*
-  enemy = game.add.sprite(500, 50, 'pika');
-  enemy.animations.add('wr', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], 15, true);
-  enemy.animations.add('wl', [20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0], 15, true);
-  enemy.scale.setTo(1.5,1.5);
-  game.physics.arcade.enable(enemy);
-  enemy.body.gravity.y = 500
-
- enemy.state = 'right'
- game.time.events.loop(Phaser.Timer.SECOND, function() {enemyWalk(enemy)}, this)
-  */
-
-
 }
 
 function enemyWalk(enemy) {
@@ -138,7 +113,7 @@ function enemyWalk(enemy) {
   }
 }
 
-var Bullet = function (game, key) {
+var SpellInstance = function (game, key) {
 
   Phaser.Sprite.call(this, game, 0, 0, key);
 
@@ -155,19 +130,4 @@ var Bullet = function (game, key) {
 
 };
 
-Weapon.SingleBullet = function (game) {
-
-  Phaser.Group.call(this, game, game.world, 'Single Bullet', false, true, Phaser.Physics.ARCADE);
-
-  this.nextFire = 0;
-  this.bulletSpeed = 600;
-  this.fireRate = 100;
-
-  for (var i = 0; i < 10; i++)
-  {
-    this.add(new Bullet(game, 'bullet5'), true);
-  }
-
-  return this;
-
-};
+Powers.Fireball.prototype = Object.create(Phaser.Group.prototype);
