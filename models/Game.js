@@ -9,15 +9,14 @@ Game.CreateKeyboardEvents = function() {
 
     var dKey = game.input.keyboard.addKey(Phaser.KeyCode.D);
     dKey.onDown.add(function(){
-        console.log(1);
         if (keys.right.isDown)
         {
-            Powers.Fire('right');
+            Powers.Fire(wzrd.equippedPower, 'right');
         } else if  (keys.left.isDown)
         {
-            Powers.Fire('left');
+            Powers.Fire(wzrd.equippedPower, 'left');
         } else {
-            Powers.Fire('right');
+            Powers.Fire(wzrd.equippedPower, 'right');
         }
     }, this);
 

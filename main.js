@@ -35,7 +35,8 @@ function create() {
     // map.setCollisionBetween(1,1000, true, layer);
     layer.resizeWorld();
 
-    Player.CreatePlayer();
+    wzrd = Player.CreatePlayer(0,0);
+    wzrd.equippedPower = 'flame';
 
     enemy = Enemy.CreateEnemy(500, 50, 'chars', 20);
 
