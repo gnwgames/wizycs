@@ -46,3 +46,21 @@ Player.prototype.st = function () {
 Player.prototype.collide = function (obj) {
   this.game.physics.arcade.collide(this, obj)
 }
+
+Player.prototype.handleInput = function (keys) {
+  if (keys.left.isDown) {
+    this.l()
+  } else if (keys.right.isDown) {
+    this.r()
+  } else {
+    this.st()
+  }
+  if (keys.up.isDown) {
+    // flame.visible = true
+    // flame.position.x = wzrd.position.x - 15
+    // flame.position.y = wzrd.position.y + 13
+    // flame.play('fire')
+    this.fly()
+
+  }
+}

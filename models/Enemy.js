@@ -23,6 +23,8 @@ var PikaEnemy = function (game, x, y) {
   this.game.add.existing(this)
   this.body.gravity.y = 500
   this.state = 'right'
+  // when the player runs into enemy, he cannot move the enemy
+  this.body.immovable = true
 }
 
 PikaEnemy.prototype = Object.create(Enemy.prototype)
