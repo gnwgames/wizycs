@@ -26,6 +26,8 @@ CollisionHandler.PowerCollision = function(power, obj)
             wzrd.body.velocity.y = -200;
         }
         power.kill();
+
+        //Animate obj kill - blinking sprite, which disappears
         obj.kill();
     }
 };

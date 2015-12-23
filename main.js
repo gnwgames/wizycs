@@ -39,7 +39,7 @@ function create() {
   wzrd = new Player(game, 0, 0);
 
   enemies = game.add.group();
-  pika = new PikaEnemy(game, 500, 50);
+  pika = new PikaEnemy(game, 450, 50, 150);
   enemies.add(pika);
 
   Flame.hitGroups = enemies;
