@@ -18,6 +18,7 @@ function preload() {
   game.load.spritesheet('flame', './assets/sprites/fireball.png', 64,64)
   game.load.spritesheet('chars', './assets/sprites/chartiles.png', 32, 32)
   game.load.spritesheet('pika', './assets/sprites/pika.jpg', 16,24)
+  game.load.spritesheet('staves', './assets/sprites/staves.png', 32,32)
 }
 
 function create() {
@@ -42,10 +43,11 @@ function create() {
   enemies.add(pika);
 
   Flame.hitGroups = enemies;
+  Melee.hitGroups = enemies;
 
-  // Equip the flame power to the key D
+  // Equip the flame power to the key D / Melee to W
   wzrd.equip(Phaser.KeyCode.D, Flame.handleInput);
-  wzrd.equip(Phaser.KeyCode.W, Flame.handleInput);
+  wzrd.equip(Phaser.KeyCode.W, Melee.handleInput);
 
   //game.add.text(10,10, 'Arrow keys to move, and you can fly!')
   game.time.events.loop(Phaser.Timer.SECOND, function() {pika.updateState()}, this);

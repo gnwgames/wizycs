@@ -109,7 +109,7 @@ Player.prototype.handleInput = function (keys) {
 
         case STATE.FLYING:
             if (keys.down.isDown) {
-                this.body.velocity.y = -(this.body.velocity.y + 50);
+                this.body.velocity.y = -(this.body.velocity.y*2);
                 this.state = STATE.DIVING;
             }
             break;

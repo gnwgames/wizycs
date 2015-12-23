@@ -10,7 +10,6 @@ CollisionHandler.PlayerCollision = function(player, obj)
         if ( obj.body.touching.up )
         {
             player.body.velocity.y = -200;
-            obj.kill();
         }
         else
         {
@@ -23,6 +22,9 @@ CollisionHandler.PlayerCollision = function(player, obj)
 CollisionHandler.PowerCollision = function(power, obj)
 {
     if (obj instanceof Enemy) {
+        if (power instanceof Melee) {
+            wzrd.body.velocity.y = -200;
+        }
         power.kill();
         obj.kill();
     }
