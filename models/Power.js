@@ -35,6 +35,13 @@ Flame.prototype.shoot = function (dir) {
   }
 }
 
+Flame.hitGroups = null
+
+Flame.prototype.update = function () {
+  console.log('update')
+  this.game.physics.arcade.overlap(Flame.hitGroups, this, CollisionHandler.PowerCollision)
+}
+
 Flame.handleInput = function (char) {
   if (char.body.velocity.x >= 0) {
     var flame = new Flame(char.game, char.position.x, char.position.y - 16)
