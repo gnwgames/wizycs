@@ -22,7 +22,7 @@ CollisionHandler.PlayerCollision = function(player, obj)
 CollisionHandler.PowerCollision = function(power, obj)
 {
     if (obj instanceof Enemy) {
-        if (power instanceof Melee) {
+        if ((power instanceof Melee) && (wzrd.state === STATE.DIVING)){
             wzrd.body.velocity.y = -200;
         }
         power.kill();
