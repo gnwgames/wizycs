@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="25" tilewidth="16" tileheight="16" backgroundcolor="#58a7a0" nextobjectid="1">
+ <tileset firstgid="1" name="world" tilewidth="16" tileheight="16" tilecount="20">
+  <image source="sprite_sheet (4).png" width="80" height="64"/>
+ </tileset>
+ <layer name="stones" width="100" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztlsEKhDAMRNVVdFcQ9f8/1oAIbmmKQpuOdh7MxUMbeExqVxEkutwDkD/oAwv6wII+sKAPLOgDC/rAgj6woA8s6AML+sAil49e0kiGTPejYu3j8LBIasla0csZKx+uBzf0smPl4yv5XMjPaB5UYvuYI59XGseeOOfuzqCDePh2+ZXO0EEatLe19Hc1Fz4foY5MRnOViuZD68hoN1qRaD60jtBHWkI+fP9etefb3bi96yOc+ZaEfKSK27vW4M6nsAG7pgLw
+  </data>
+ </layer>
+</map>
