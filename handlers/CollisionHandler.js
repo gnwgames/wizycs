@@ -7,14 +7,27 @@ var CollisionHandler = {};
 CollisionHandler.PlayerCollision = function(player, obj)
 {
     if (obj instanceof Enemy) {
-        CombatHandler.HandleEncounter(player, obj);
+        if ( obj.body.touching.up )
+        {
+            player.body.velocity.y = -200;
+        }
+        else
+        {
+            //Animate death - blinking sprite, which disappears and then reappears at 0,0
+            player.kill();
+        }
     }
 };
 
 CollisionHandler.PowerCollision = function(power, obj)
 {
     if (obj instanceof Enemy) {
-        console.log('here');
-        CombatHandler.HandlePowerAttack(power, obj);
+        if ((power instanceof Melee) && (wzrd.state === STATE.DIVING)){
+            wzrd.body.velocity.y = -200;
+        }
+        power.kill();
+
+        //Animate obj kill - blinking sprite, which disappears
+        obj.kill();
     }
 };
