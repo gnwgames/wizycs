@@ -1,42 +1,55 @@
 /**
  * Created by gattra on 12/22/2015.
  */
+'use strict';
 
-Enemy = {};
+var Enemy = function (game, x, y, key) {
+  Phaser.Sprite.call(this, game, x, y, key)
+  this.game.physics.arcade.enable(this)
+}
 
-Enemy.CreateEnemy = function(x, y, key, frame) {
+Enemy.prototype = Object.create(Phaser.Sprite.prototype)
+Enemy.prototype.constructor = Enemy
 
-     enemy1 = game.add.sprite(x, y, key);
-     enemy1.animations.add('wr', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], 15, true);
-     enemy1.animations.add('wl', [20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0], 15, true);
-     enemy1.scale.setTo(1.5,1.5);
-     game.physics.arcade.enable(enemy1);
-     enemy1.body.gravity.y = 500;
+Enemy.prototype.collide = function (obj) {
+  this.game.physics.arcade.collide(this, obj)
+}
 
-     enemy1.state = 'right';
-     //game.time.events.loop(Phaser.Timer.SECOND, function() {Enemy.EnemyWalk(enemy)}, this)
-};
+var PikaEnemy = function (game, x, y) {
+  Enemy.call(this, game, x, y, 'pika')
+  this.animations.add('walkRight', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], 21, true)
+  this.animations.add('walkLeft', [20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0], 21, true)
+  this.scale.setTo(1.5, 1.5)
+  this.game.add.existing(this)
+  this.body.gravity.y = 500
+  this.state = 'right'
+  // when the player runs into enemy, he cannot move the enemy
+  this.body.immovable = true
+}
 
-Enemy.EnemyWalk = function(enemy, velocity) {
-    switch (enemy.state){
-        case 'left':
-            enemy.animations.play('wl');
-            enemy.body.velocity.x = velocity;
-            enemy.state = 'stop';
-            break;
-        case 'right':
-            enemy.animations.play('wr');
-            enemy.body.velocity.x = -velocity;
-            enemy.state = 'stop';
-            break;
-        case 'stop':
-            enemy.animations.stop();
-            if (enemy.body.velocity.x > 0) {
-                enemy.state = 'left'
-            } else {
-                enemy.state = 'right'
-            }
-            enemy.body.velocity.x = 0;
-            break;
-    }
-};
+PikaEnemy.prototype = Object.create(Enemy.prototype)
+PikaEnemy.prototype.constructor = PikaEnemy
+
+PikaEnemy.prototype.updateState = function () {
+  switch (this.state){
+    case 'left':
+      this.animations.play('walkLeft')
+      this.body.velocity.x = -100
+      this.state = 'stop'
+      break
+    case 'right':
+      this.animations.play('walkRight')
+      this.body.velocity.x = 100
+      this.state = 'stop'
+      break
+    case 'stop':
+      this.animations.stop()
+      if (this.body.velocity.x > 0) {
+        this.state = 'left'
+      } else {
+        this.state = 'right'
+      }
+      this.body.velocity.x = 0
+      break
+  }
+}
