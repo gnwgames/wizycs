@@ -21,10 +21,6 @@ var Flame = function (game, x, y) {
 Flame.prototype = Object.create(Power.prototype)
 Flame.prototype.constructor = Flame
 
-Flame.prototype.overlap = function(obj) {
-  this.game.physics.arcade.overlap(this, obj, CollisionHandler.PowerCollision);
-};
-
 Flame.prototype.shoot = function (dir) {
   if (dir === 'left') {
     this.body.velocity.x = -300
@@ -35,10 +31,9 @@ Flame.prototype.shoot = function (dir) {
   }
 }
 
-Flame.hitGroups = null
+Flame.hitGroups = null;
 
 Flame.prototype.update = function () {
-  console.log('update')
   this.game.physics.arcade.overlap(Flame.hitGroups, this, CollisionHandler.PowerCollision)
 }
 

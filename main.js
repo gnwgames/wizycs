@@ -33,16 +33,18 @@ function create() {
   // this value is seen in the json file for this tile map
   map.setCollision(106, true, collision)
   layer.resizeWorld()
-  enemies = game.add.group()
+
   wzrd = new Player(game, 0, 0);
 
+  enemies = game.add.group()
   pika = new PikaEnemy(game, 500, 50)
   enemies.add(pika)
 
-  Flame.hitGroups = enemies
+  Flame.hitGroups = enemies;
+
   // Equip the flame power to the key D
-  wzrd.equip(Phaser.KeyCode.D, Flame.handleInput, pika)
-  wzrd.equip(Phaser.KeyCode.W, Flame.handleInput, pika)
+  wzrd.equip(Phaser.KeyCode.D, Flame.handleInput)
+  wzrd.equip(Phaser.KeyCode.W, Flame.handleInput)
 
   keys = game.input.keyboard.createCursorKeys()
   game.add.text(10,10, 'Arrow keys to move, and you can fly!')
