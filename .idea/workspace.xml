@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="79fb1c21-2057-4fac-9263-b93fcbf4cee6" name="Default" comment="created double jump">
+    <list default="true" id="79fb1c21-2057-4fac-9263-b93fcbf4cee6" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.js" afterPath="$PROJECT_DIR$/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/Player.js" afterPath="$PROJECT_DIR$/models/Player.js" />
     </list>
     <ignored path="wizycs.iws" />
@@ -50,8 +49,8 @@
       <file leaf-file-name="Player.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/models/Player.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6398259">
-              <caret line="58" column="2" selection-start-line="58" selection-start-column="2" selection-end-line="58" selection-end-column="2" />
+            <state vertical-scroll-proportion="0.7486398">
+              <caret line="111" column="68" selection-start-line="111" selection-start-column="68" selection-end-line="111" selection-end-column="68" />
               <folding />
             </state>
           </provider>
@@ -371,7 +370,13 @@
       <option name="project" value="LOCAL" />
       <updated>1450880958546</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="created double jump and spacebar = fly">
+      <created>1450883483744</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1450883483744</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -420,7 +425,8 @@
     <MESSAGE value="building kill enemy on flame collision - not working / incomplete" />
     <MESSAGE value="removed extra stuff - deleted combat handler (redundant)" />
     <MESSAGE value="fixed minor reference error" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed minor reference error" />
+    <MESSAGE value="created double jump and spacebar = fly" />
+    <option name="LAST_COMMIT_MESSAGE" value="created double jump and spacebar = fly" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -654,8 +660,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/models/Player.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6398259">
-          <caret line="58" column="2" selection-start-line="58" selection-start-column="2" selection-end-line="58" selection-end-column="2" />
+        <state vertical-scroll-proportion="0.7486398">
+          <caret line="111" column="68" selection-start-line="111" selection-start-column="68" selection-end-line="111" selection-end-column="68" />
           <folding />
         </state>
       </provider>

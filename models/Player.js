@@ -2,6 +2,13 @@
  * Created by gattra on 12/22/2015.
  */
 'use strict';
+var STATE =
+{
+    STANDING : 0,
+    JUMPING : 1,
+    FLYING: 2,
+    DIVING : 3
+};
 
 var Player = function(game, x, y) {
     Phaser.Sprite.call(this, game, x, y, 'chars')
@@ -16,6 +23,8 @@ var Player = function(game, x, y) {
     this.power = {}
     this.game.camera.follow(this)
     this.jumpCount = 0;
+    this.state = STATE.STANDING;
+
 };
 
 Player.prototype = Object.create(Phaser.Sprite.prototype)
@@ -40,7 +49,7 @@ Player.prototype.r = function () {
 };
 
 Player.prototype.jump = function () {
-    this.jumpCount+= 1;
+    this.jumpCount += 1;
     this.body.velocity.y = -220;
 };
 
@@ -53,9 +62,9 @@ Player.prototype.fly = function () {
 };
 
 Player.prototype.st = function () {
-  this.animations.stop();
-  this.frame = 10;
-  this.body.velocity.x = 0
+    this.animations.stop();
+    this.frame = 10;
+    this.body.velocity.x = 0;
 };
 
 Player.prototype.collide = function (obj) {
@@ -67,6 +76,11 @@ Player.prototype.overlap = function(obj) {
 };
 
 Player.prototype.handleInput = function (keys) {
+    if((this.body.onFloor() || this.body.touching.down)) {
+        this.state = STATE.STANDING;
+    }
+
+    //the actions below (but before the switch statement) happen regardless of the player's state
     if (keys.left.isDown) {
         this.l()
     } else if (keys.right.isDown) {
@@ -74,16 +88,35 @@ Player.prototype.handleInput = function (keys) {
     } else {
         this.st()
     }
+    if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {this.fly(); this.state = STATE.FLYING}
 
+    switch (this.state)
+    {
+        case STATE.STANDING:
+            if (keys.up.isDown) {
+                this.jumpCount = 0;
+                this.jump();
+                this.state = STATE.JUMPING;
+            }
+            break;
 
-    var upKey = keys.up;
-    upKey.onDown.add(function() {
-        if((this.body.onFloor() || this.body.touching.down)) {
-            this.jumpCount = 0;
-            this.jump();
-        } else if (this.jumpCount < 2) { this.jump(); }
-    }, this);
+        case STATE.JUMPING:
+            var upKey = keys.up;
+            upKey.onDown.add(function() {
+                if (this.jumpCount < 2) { this.jump(); }
+            }, this);
+            break;
 
-    if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {this.fly();}
+        case STATE.FLYING:
+            if (keys.down.isDown) {
+                this.body.velocity.y = -(this.body.velocity.y + 50);
+                this.state = STATE.DIVING;
+            }
+            break;
+
+        case STATE.DIVING:
+            //dive attack, jack
+            break;
+    }
 
 };
