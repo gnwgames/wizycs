@@ -15,6 +15,7 @@ var Flame = function (game, x, y) {
 
   this.checkWorldBounds = true;
   this.outOfBoundsKill = true;
+  this.outOfBoundsDestroy = true
   this.game.add.existing(this)
 }
 
