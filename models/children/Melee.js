@@ -12,7 +12,22 @@ var Melee = function (game, x, y) {
 };
 
 Melee.handleInput = function (char) {
-    PowerInputHandler.HandleMeleeInput(char);
+    if (char.body.velocity.x >= 0) {
+        var thwack = new Melee(char.game, char.position.x, char.position.y - 16);
+        thwack.overlap(Melee.hitGroups);
+        thwack.strike('right');
+    } else if (char.body.velocity.x < 0) {
+        var flame = new Flame(char.game, char.position.x - 20, char.position.y - 16);
+        flame.overlap(Flame.hitGroups);
+        flame.shoot('left');
+    }
+    /* optional dive attack
+     else if (char.state = STATE.DIVING) {
+     var flame = new Flame(char.game, char.position.x - 20, char.position.y + 30);
+     flame.overlap(Flame.hitGroups);
+     flame.shoot('down');
+     }
+     */
 };
 
 Melee.prototype = Object.create(Power.prototype);

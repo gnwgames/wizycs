@@ -75,10 +75,15 @@ Player.prototype.overlap = function(obj) {
     this.game.physics.arcade.overlap(this, obj, CollisionHandler.PlayerCollision);
 };
 
-Player.prototype.handleInput = function (keys) {
+Player.prototype.update = function () {
     if((this.body.onFloor() || this.body.touching.down)) {
         this.state = STATE.STANDING;
     }
+
+    return this.state;
+};
+
+Player.prototype.handleInput = function (keys) {
 
     //the actions below (but before the switch statement) happen regardless of the player's state
     if (keys.left.isDown) {
