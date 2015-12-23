@@ -7,16 +7,14 @@ var CollisionHandler = {};
 CollisionHandler.PlayerCollision = function(player, obj)
 {
     if (obj instanceof Enemy) {
-        if ( enemy.body.touching.up )
+        if ( obj.body.touching.up )
         {
-            //Call a jump function or something here...
             player.body.velocity.y = -200;
-            //Maybe put the enemy into a different group so it doesn't collide with the player anymore...
-            enemy.kill();
+            obj.kill();
         }
         else
         {
-            //You would probably want something a little more than this...
+            //Animate death - blinking sprite, which disappears and then reappears at 0,0
             player.kill();
         }
     }
