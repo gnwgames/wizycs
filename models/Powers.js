@@ -8,7 +8,7 @@ var Power = function (game, x, y, key) {
 Power.prototype = Object.create(Phaser.Sprite.prototype)
 Power.prototype.constructor = Power
 
-var Fire = function (game, x, y) {
+var Flame = function (game, x, y) {
   Power.call(this, game, x, y, 'flame')
   this.animations.add('leftFire', [0,1,2,3,4,5,6,7], 10, true)
   this.animations.add('rightFire', [32,33,34,35,36,37,38,39], 10, true)
@@ -18,10 +18,10 @@ var Fire = function (game, x, y) {
   this.game.add.existing(this)
 }
 
-Fire.prototype = Object.create(Power.prototype)
-Fire.prototype.constructor = Fire
+Flame.prototype = Object.create(Power.prototype)
+Flame.prototype.constructor = Flame
 
-Fire.prototype.shoot = function (dir) {
+Flame.prototype.shoot = function (dir) {
   if (dir === 'left') {
     this.body.velocity.x = -300
     this.animations.play('leftFire')
@@ -31,12 +31,12 @@ Fire.prototype.shoot = function (dir) {
   }
 }
 
-Fire.handleInput = function (char) {
+Flame.handleInput = function (char) {
   if (char.body.velocity.x > 0) {
-    var flame = new Fire(char.game, char.position.x, char.position.y - 16)
+    var flame = new Flame(char.game, char.position.x, char.position.y - 16)
     flame.shoot('right')
   } else {
-    var flame = new Fire(char.game, char.position.x - 20, char.position.y - 16)
+    var flame = new Flame(char.game, char.position.x - 20, char.position.y - 16)
     flame.shoot('left')
   }
 }

@@ -37,7 +37,7 @@ function create() {
   pika = new PikaEnemy(game, 500, 50)
 
   // Equip the flame power to the key D
-  wzrd.equip(Phaser.KeyCode.D, Fire.handleInput)
+  wzrd.equip(Phaser.KeyCode.D, Flame.handleInput)
 
   keys = game.input.keyboard.createCursorKeys()
   game.add.text(10,10, 'Arrow keys to move, and you can fly!')
