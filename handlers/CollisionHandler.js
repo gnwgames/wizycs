@@ -13,7 +13,7 @@ CollisionHandler.PlayerCollision = function(player, obj)
 
 CollisionHandler.PowerCollision = function(power, obj)
 {
-    if (obj instanceof Power) {
+    if (obj instanceof Enemy) {
         console.log('here');
         CombatHandler.HandlePowerAttack(power, obj);
     }
