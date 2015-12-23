@@ -38,7 +38,7 @@ function create() {
   keys = game.input.keyboard.createCursorKeys();
   wzrd = new Player(game, 0, 0);
 
-  enemies = game.add.group();
+  enemies = Enemies.Init();
   pika = new PikaEnemy(game, 450, 50, 150);
   enemies.add(pika);
 
@@ -54,9 +54,10 @@ function create() {
 }
 
 function update() {
-  wzrd.collide(collision)
-  wzrd.overlap(pika)
-  wzrd.handleInput(keys)
-  pika.collide(collision)
+  wzrd.collide(collision);
+  wzrd.overlap(pika);
+  wzrd.handleInput(keys);
+  pika.collide(collision);
+  enemies.forEachAlive(function(enemy){Enemies.DistanceFromPlayer(enemy, wzrd);});
 
 }
