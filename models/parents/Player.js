@@ -31,21 +31,21 @@ Player.prototype = Object.create(Phaser.Sprite.prototype)
 Player.prototype.constructor = Player
 
 Player.prototype.equip = function(key, handler) {
-  var obj = this;
-  this.power[key] = game.input.keyboard.addKey(key)
-  this.power[key].onDown.add(function() {
-    handler(obj)
-  })
+    var obj = this;
+    this.power[key] = game.input.keyboard.addKey(key)
+    this.power[key].onDown.add(function() {
+        handler(obj)
+    })
 };
 
 Player.prototype.l = function() {
-  this.animations.play('left');
-  this.body.velocity.x = -150;
+    this.animations.play('left');
+    this.body.velocity.x = -150;
 };
 
 Player.prototype.r = function () {
-  this.animations.play('right');
-  this.body.velocity.x = 150
+    this.animations.play('right');
+    this.body.velocity.x = 150
 };
 
 Player.prototype.jump = function () {
@@ -109,7 +109,7 @@ Player.prototype.handleInput = function (keys) {
 
         case STATE.FLYING:
             if (keys.down.isDown) {
-                this.body.velocity.y = -(this.body.velocity.y + 50);
+                this.body.velocity.y = -(this.body.velocity.y*2);
                 this.state = STATE.DIVING;
             }
             break;
