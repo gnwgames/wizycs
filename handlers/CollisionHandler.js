@@ -4,9 +4,17 @@
 
 var CollisionHandler = {};
 
-CollisionHandler.OverlapObject = function(player, obj)
+CollisionHandler.PlayerCollision = function(player, obj)
 {
     if (obj instanceof Enemy) {
         CombatHandler.HandleEncounter(player, obj);
+    }
+};
+
+CollisionHandler.PowerCollision = function(power, obj)
+{
+    if (obj instanceof Power) {
+        console.log('here');
+        CombatHandler.HandlePowerAttack(power, obj);
     }
 };

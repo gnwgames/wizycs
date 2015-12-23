@@ -38,8 +38,8 @@ function create() {
   pika = new PikaEnemy(game, 500, 50);
 
   // Equip the flame power to the key D
-  wzrd.equip(Phaser.KeyCode.D, Flame.handleInput)
-  wzrd.equip(Phaser.KeyCode.W, Flame.handleInput)
+  wzrd.equip(Phaser.KeyCode.D, Flame.handleInput, pika)
+  wzrd.equip(Phaser.KeyCode.W, Flame.handleInput, pika)
 
   keys = game.input.keyboard.createCursorKeys()
   game.add.text(10,10, 'Arrow keys to move, and you can fly!')
@@ -50,7 +50,6 @@ function update() {
   wzrd.collide(collision)
   wzrd.overlap(pika)
   wzrd.handleInput(keys)
-
   pika.collide(collision)
 
 }

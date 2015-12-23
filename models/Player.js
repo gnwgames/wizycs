@@ -52,7 +52,7 @@ Player.prototype.collide = function (obj) {
 }
 
 Player.prototype.overlap = function(obj) {
-    this.game.physics.arcade.overlap(this, obj, CollisionHandler.OverlapObject);
+    this.game.physics.arcade.overlap(this, obj, CollisionHandler.PlayerCollision);
 }
 
 Player.prototype.handleInput = function (keys) {

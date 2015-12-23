@@ -2,7 +2,7 @@
 
 var Power = function (game, x, y, key) {
   Phaser.Sprite.call(this, game, x, y, key)
-  this.game.physics.arcade.enable(this)
+  this.game.physics.arcade.enable(this);
 }
 
 Power.prototype = Object.create(Phaser.Sprite.prototype)
@@ -21,6 +21,10 @@ var Flame = function (game, x, y) {
 Flame.prototype = Object.create(Power.prototype)
 Flame.prototype.constructor = Flame
 
+Flame.prototype.overlap = function(obj) {
+  this.game.physics.arcade.overlap(this, obj, CollisionHandler.PowerCollision);
+};
+
 Flame.prototype.shoot = function (dir) {
   if (dir === 'left') {
     this.body.velocity.x = -300
@@ -34,9 +38,11 @@ Flame.prototype.shoot = function (dir) {
 Flame.handleInput = function (char) {
   if (char.body.velocity.x >= 0) {
     var flame = new Flame(char.game, char.position.x, char.position.y - 16)
+    flame.overlap(pika);
     flame.shoot('right')
   } else if (char.body.velocity.x < 0) {
     var flame = new Flame(char.game, char.position.x - 20, char.position.y - 16)
+    flame.overlap(pika);
     flame.shoot('left')
   }
 }

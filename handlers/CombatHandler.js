@@ -18,3 +18,10 @@ CombatHandler.HandleEncounter = function(player, enemy) {
         player.kill();
     }
 };
+
+
+CombatHandler.HandlePowerAttack = function(power, enemy) {
+
+    enemy.kill();
+
+};
