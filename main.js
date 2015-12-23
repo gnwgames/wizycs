@@ -39,8 +39,16 @@ function create() {
   wzrd = new Player(game, 0, 0);
 
   enemies = Enemies.Init();
-  pika = new PikaEnemy(game, 450, 50, 150);
-  enemies.add(pika);
+  var pikas = [];
+  pikas.push(new PikaEnemy(game, 450, 50, 150));
+  pikas.push(new PikaEnemy(game, 350, 50, 50));
+  pikas.push(new PikaEnemy(game, 250, 50, 50));
+  pikas.push(new PikaEnemy(game, 150, 50, 150));
+
+  for (var i=0;i<pikas.length;i++) {
+    console.log(pikas[i]);
+    enemies.add(pikas[i]);
+  }
 
   Flame.hitGroups = enemies;
   Melee.hitGroups = enemies;
@@ -49,15 +57,25 @@ function create() {
   wzrd.equip(Phaser.KeyCode.D, Flame.handleInput);
   wzrd.equip(Phaser.KeyCode.W, Melee.handleInput);
 
+  enemies.forEachAlive(function(enemy) {
+    game.time.events.loop(Phaser.Timer.SECOND, function() {enemy.updateState()}, this);
+  });
+
+
   //game.add.text(10,10, 'Arrow keys to move, and you can fly!')
-  game.time.events.loop(Phaser.Timer.SECOND, function() {pika.updateState()}, this);
 }
 
 function update() {
   wzrd.collide(collision);
-  wzrd.overlap(pika);
   wzrd.handleInput(keys);
-  pika.collide(collision);
-  enemies.forEachAlive(function(enemy){Enemies.DistanceFromPlayer(enemy, wzrd);});
+  enemies.forEachAlive(function(enemy) {
+    enemy.collide(collision);
+    wzrd.overlap(enemy);
+    Enemies.DistanceFromPlayer(enemy, wzrd);
+  });
+
+  //if (!wzrd.alive) {
+  //  GameHandler.ResetPlayer(wzrd);
+  //}
 
 }
