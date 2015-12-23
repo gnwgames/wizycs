@@ -12,7 +12,7 @@ var Player = function(game, x, y) {
   this.animations.add('right', [33,34,35,34], 5, true)
   this.body.gravity.y = 500
   this.body.collideWorldBounds = true
-  this.power = null
+  this.power = {}
   this.game.camera.follow(this)
 
 };
@@ -22,8 +22,8 @@ Player.prototype.constructor = Player
 
 Player.prototype.equip = function(key, handler) {
   var obj = this;
-  this.power = (game.input.keyboard.addKey(key));
-  this.power.onDown.add(function() {
+  this.power[key] = game.input.keyboard.addKey(key)
+  this.power[key].onDown.add(function() {
     handler(obj)
   })
 }
