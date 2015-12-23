@@ -1,6 +1,22 @@
 /**
  * Created by gattra on 12/23/2015.
  */
+var Flame = function (game, x, y) {
+    Power.call(this, game, x, y, 'flame');
+    this.animations.add('leftFire', [0,1,2,3,4,5,6,7], 10, true);
+    this.animations.add('rightFire', [32,33,34,35,36,37,38,39], 10, true);
+    this.animations.add('downFire', [48,49,50,51,52,53,54,55], 10, true);
+
+    this.checkWorldBounds = true;
+    this.outOfBoundsKill = true;
+    this.game.add.existing(this);
+
+    this.hitGroups = null;
+};
+
+Flame.handleInput = function (char) {
+    PowerInputHandler.HandleFlameInput(char);
+};
 
 Flame.prototype = Object.create(Power.prototype);
 Flame.prototype.constructor = Flame;
