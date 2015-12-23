@@ -12,7 +12,7 @@ var Melee = function (game, x, y) {
 };
 
 Melee.handleInput = function (char) {
-    if (char.body.velocity.x >= 0) {
+    if (char.body.velocity.x > 0) {
         var thwack = new Melee(char.game, char.position.x, char.position.y - 16);
         thwack.overlap(Melee.hitGroups);
         thwack.strike('right');
