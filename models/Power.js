@@ -32,10 +32,10 @@ Flame.prototype.shoot = function (dir) {
 }
 
 Flame.handleInput = function (char) {
-  if (char.body.velocity.x > 0) {
+  if (char.body.velocity.x >= 0) {
     var flame = new Flame(char.game, char.position.x, char.position.y - 16)
     flame.shoot('right')
-  } else {
+  } else if (char.body.velocity.x < 0) {
     var flame = new Flame(char.game, char.position.x - 20, char.position.y - 16)
     flame.shoot('left')
   }

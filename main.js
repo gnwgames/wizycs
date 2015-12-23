@@ -33,8 +33,9 @@ function create() {
   // this value is seen in the json file for this tile map
   map.setCollision(106, true, collision)
   layer.resizeWorld()
-  wzrd = new Player(game, 0, 0)
-  pika = new PikaEnemy(game, 500, 50)
+  wzrd = new Player(game, 0, 0);
+
+  pika = new PikaEnemy(game, 500, 50);
 
   // Equip the flame power to the key D
   wzrd.equip(Phaser.KeyCode.D, Flame.handleInput)
@@ -47,7 +48,7 @@ function create() {
 
 function update() {
   wzrd.collide(collision)
-  wzrd.collide(pika)
+  wzrd.overlap(pika)
   wzrd.handleInput(keys)
 
   pika.collide(collision)

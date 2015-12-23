@@ -14,7 +14,6 @@ var Player = function(game, x, y) {
   this.body.collideWorldBounds = true
   this.power = {}
   this.game.camera.follow(this)
-
 };
 
 Player.prototype = Object.create(Phaser.Sprite.prototype)
@@ -38,8 +37,8 @@ Player.prototype.r = function () {
   this.body.velocity.x = 150
 }
 
-Player.prototype.fly = function () {
-  this.body.velocity.y += -18
+Player.prototype.jump = function () {
+    this.body.velocity.y = -220;
 }
 
 Player.prototype.st = function () {
@@ -49,23 +48,30 @@ Player.prototype.st = function () {
 }
 
 Player.prototype.collide = function (obj) {
-  this.game.physics.arcade.collide(this, obj)
+    this.game.physics.arcade.collide(this, obj)
+}
+
+Player.prototype.overlap = function(obj) {
+    this.game.physics.arcade.overlap(this, obj, CollisionHandler.OverlapObject);
 }
 
 Player.prototype.handleInput = function (keys) {
-  if (keys.left.isDown) {
-    this.l()
-  } else if (keys.right.isDown) {
-    this.r()
-  } else {
-    this.st()
-  }
-  if (keys.up.isDown) {
+    if (keys.left.isDown) {
+        this.l()
+    } else if (keys.right.isDown) {
+        this.r()
+    } else {
+        this.st()
+    }
+
+    var upKey = keys.up;
+    upKey.onDown.add(function() {
     // flame.visible = true
     // flame.position.x = wzrd.position.x - 15
     // flame.position.y = wzrd.position.y + 13
     // flame.play('fire')
-    this.fly()
-
-  }
-}
+      //if (this.body.touching.down) {
+          this.jump();
+      //
+    }, this);
+};

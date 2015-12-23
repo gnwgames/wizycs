@@ -12,8 +12,9 @@ Enemy.prototype = Object.create(Phaser.Sprite.prototype)
 Enemy.prototype.constructor = Enemy
 
 Enemy.prototype.collide = function (obj) {
-  this.game.physics.arcade.collide(this, obj)
+    this.game.physics.arcade.collide(this, obj)
 }
+
 
 var PikaEnemy = function (game, x, y) {
   Enemy.call(this, game, x, y, 'pika')
