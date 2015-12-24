@@ -22,10 +22,12 @@ Enemies.chasePlayer = function(enemy, player) {
     enemy.state = 'stop';
     changeUpdateMethodForEnemy(enemy);
     enemy.body.velocity.x = 0;
-    enemy.body.velocity.y = 0;
+    before = enemy.body.velocity.y
+    // enemy.body.velocity.y = 0;
     if (player.alive) {
         game.physics.arcade.moveToObject(enemy, player, 150);
     }
+    enemy.body.velocity.y = before
 };
 
 function changeUpdateMethodForEnemy(enemy) {

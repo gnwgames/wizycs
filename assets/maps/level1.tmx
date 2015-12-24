@@ -5,7 +5,7 @@
  </tileset>
  <layer name="stones" width="100" height="25">
   <data encoding="base64" compression="zlib">
-   eJztlsEKhDAMRNVVdFcQ9f8/1oAIbmmKQpuOdh7MxUMbeExqVxEkutwDkD/oAwv6wII+sKAPLOgDC/rAgj6woA8s6AML+sAil49e0kiGTPejYu3j8LBIasla0csZKx+uBzf0smPl4yv5XMjPaB5UYvuYI59XGseeOOfuzqCDePh2+ZXO0EEatLe19Hc1Fz4foY5MRnOViuZD68hoN1qRaD60jtBHWkI+fP9etefb3bi96yOc+ZaEfKSK27vW4M6nsAG7pgLw
+   eJztltsKgzAQBWNtsRcobf//Y7tQBA3ZoJBstmYGzosPycJwNoYAAAAAAHBcLq0HgBX48AU+fIEPX+DDF618TJKT5Nrofq9Y+5g9vCWD5BPwssTKR+whDl5+WPm4ScYNuRvN45XSPl6Fz+uNeU8ss3dn4KAcqV2+pTM4qIP2tvb+rrYi5SPXkafRXL2i+dA68rAbrUs0H1pH8FGXnI/Uv9eQ+LY3ce+mAmceJTkftRL37mxw57/wBQhKAs0=
   </data>
  </layer>
 </map>
