@@ -1,11 +1,16 @@
+'use strict'
 var WizrdGame = WizrdGame || {}
 
-WizrdGame.level1 = function(){}
+WizrdGame.level1 = function(){
+  this.wizrd = {}
+  this.collision = {}
+}
 
 WizrdGame.level1.prototype = {
   preload: function() {
     this.load.image('tiles', './assets/maps/sprite_sheet (4).png')
-    this.load.tilemap('level1', './assets/maps/level1.json')
+    this.load.tilemap('level1', 'assets/maps/level1.json', null, Phaser.Tilemap.TILED_JSON)
+    this.load.spritesheet('chars', './assets/sprites/chartiles.png', 32, 32)
 
   },
 
@@ -13,15 +18,23 @@ WizrdGame.level1.prototype = {
     // start physics system, set background color, and
     // load the tilemap
     this.physics.startSystem(Phaser.Physics.Arcade)
-    game.stage.backgroundColor = '#333'
-    map = this.add.tilemap('level1')
-    map.addTilesetImage('tiles', 'world')
+    this.stage.backgroundColor = '#333'
+    var map = this.add.tilemap('level1')
+    map.addTilesetImage('world', 'tiles')
     // map.addTilesetImage('collide', 'collision')
-    layer = map.createLayer('stones')
-    collision = map.createLayer('collision')
-    collision.visible = false
-    map.setCollision(1, true, collision)
+    var layer = map.createLayer('stones')
+    layer.setScale(2,2)
+    this.collision = map.createLayer('collision')
+    this.collision.setScale(2,2)
+    this.collision.visible = false
+    map.setCollision(1, true, this.collision)
     layer.resizeWorld()
+    var keys = this.input.keyboard.createCursorKeys()
+    this.wizrd = new Player(this.game, 50,64, keys)
 
+  },
+
+  update: function () {
+    this.physics.arcade.collide(this.wizrd, this.collision)
   }
 }

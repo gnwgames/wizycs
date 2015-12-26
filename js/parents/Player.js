@@ -10,7 +10,7 @@ var STATE =
     DIVING : 3
 };
 
-var Player = function(game, x, y) {
+var Player = function(game, x, y, keys) {
     Phaser.Sprite.call(this, game, x, y, 'chars')
     this.game.physics.arcade.enable(this)
     this.game.add.existing(this)
@@ -19,11 +19,12 @@ var Player = function(game, x, y) {
     this.animations.add('right', [33,34,35,34], 5, true)
     this.body.gravity.y = 500
     this.body.bounce.y = 0.2;
-    this.body.collideWorldBounds = true
+    // this.body.collideWorldBounds = true
     this.power = {}
     this.game.camera.follow(this)
-    this.jumpCount = 0;
+    // this.jumpCount = 0;
     this.state = STATE.STANDING;
+    this.keys = keys
 
 };
 
@@ -76,12 +77,8 @@ Player.prototype.overlap = function(obj) {
 };
 
 Player.prototype.update = function () {
-    if((this.body.onFloor() || this.body.touching.down)) {
-        this.state = STATE.STANDING;
-    }
-
-    return this.state;
-};
+  this.handleInput(this.keys)
+}
 
 Player.prototype.handleInput = function (keys) {
 
@@ -93,7 +90,7 @@ Player.prototype.handleInput = function (keys) {
     } else {
         this.st()
     }
-    if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {this.fly(); this.state = STATE.FLYING}
+    if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {this.fly(); this.state = STATE.FLYING}
 
     switch (this.state)
     {
