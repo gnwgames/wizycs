@@ -2,12 +2,11 @@
 
 var map, layer, keys, wzrd, collision, flame, pika, enemies
 
+var WizrdGame = WizrdGame || {}
 // Game instantiation
-var game = new Phaser.Game(600,450, Phaser.AUTO, 'Wizycs', {
-  preload: preload,
-  create: create,
-  update: update
-})
+WizrdGame = new Phaser.Game(600,450, Phaser.AUTO, 'Wizycs')
+WizrdGame.state.add('level1', WizrdGame.level1)
+WizrdGame.state.start('level1')
 
 function preload() {
   // I load all my scripts in the html file
