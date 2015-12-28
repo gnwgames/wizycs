@@ -1,6 +1,6 @@
 'use strict'
 
-var map, layer, keys, wzrd, collision, flame, pika, enemies
+var map, layer, keys, wzrd, collision, flame, pika, enemyGroup;
 
 // Game instantiation
 var game = new Phaser.Game(600,450, Phaser.AUTO, 'Wizycs', {
@@ -30,6 +30,11 @@ function create() {
   map.setCollision(106, true, collision);
   layer.resizeWorld();
 
+  createObjects();
+  integrateObjects();
+}
+
+function createObjects() {
   keys = game.input.keyboard.createCursorKeys();
   wzrd = new Player(game, 0, 0);
 
@@ -38,34 +43,34 @@ function create() {
   pika = new PikaEnemy(game, 450, 50, 150, Enemy.ATTACK_TYPE.PURSUE);
   pikas.push(pika);
 
-  console.log(pikas);
+  //enemies = new EnemyGroup(pikas);
+  //enemyGroup = EnemyGroup.Init();
+  enemyGroup = new EnemyGroup();
+  enemyGroup.addEnemies(pikas);
+}
 
-  enemies = new EnemyGroup(pikas);
-
-
-  Flame.hitGroups = enemies;
-  Melee.hitGroups = enemies;
+function integrateObjects() {
+  Flame.hitGroups = enemyGroup;
+  Melee.hitGroups = enemyGroup;
 
   // Equip the flame power to the key D / Melee to W
   wzrd.equip(Phaser.KeyCode.D, Flame.handleInput);
   wzrd.equip(Phaser.KeyCode.W, Melee.handleInput);
 
-  enemies.forEachAlive(function(enemy) {
+  enemyGroup.forEachAlive(function(enemy) {
     game.time.events.loop(Phaser.Timer.SECOND, function() {enemy.updateState()}, this);
   });
 
-
-  //game.add.text(10,10, 'Arrow keys to move, and you can fly!')
 }
 
 function update() {
   wzrd.collide(collision);
   wzrd.handleInput(keys);
-  if (enemies) {
-      enemies.forEachAlive(function(enemy) {
-      enemies.collide(collision);
-      wzrd.overlap(enemy);
-      enemies.distanceFromPlayer(enemy, wzrd);
+  if (enemyGroup) {
+      enemyGroup.forEachAlive(function(enemy) {
+        enemy.collide(collision);
+        wzrd.overlap(enemy);
+        enemyGroup.distanceFromPlayer(enemy, wzrd);
     });
   }
   // somehow restart the level or respawn the player when it dies

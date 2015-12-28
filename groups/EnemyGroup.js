@@ -2,21 +2,20 @@
  * Created by gattra on 12/23/2015.
  */
 
-
-var EnemyGroup = function(enemies) {
+var EnemyGroup = function() {
     game.add.group();
-    this.enemies = enemies;
-    this.addEnemies(this.enemies);
-    //return this;
 };
 
 EnemyGroup.prototype = Object.create(Phaser.Group.prototype);
 EnemyGroup.prototype.constructor = EnemyGroup;
 
 EnemyGroup.prototype.addEnemies = function(enemies) {
+    console.log(enemies.length);
     for (var i=0;i<enemies.length;i++) {
+        console.log(i);
         this.add(enemies[i]);
     }
+    console.log('done');
 };
 
 EnemyGroup.prototype.distanceFromPlayer = function(enemy, player) {
