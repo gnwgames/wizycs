@@ -6,11 +6,18 @@ var STATE =
 {
     STANDING : 0,
     JUMPING : 1,
-    FLYING: 2,
-    DIVING : 3
+    FLYING : 2,
+    FALLING : 3,
+    DIVING : 4
 };
 
+<<<<<<< HEAD:js/parents/Player.js
 var Player = function(game, x, y, keys) {
+=======
+var staff;
+
+var Player = function(game, x, y) {
+>>>>>>> d29c59de8e4fb9ea68276a9a64dfae0bcd396e15:models/parents/Player.js
     Phaser.Sprite.call(this, game, x, y, 'chars')
     this.game.physics.arcade.enable(this)
     this.game.add.existing(this)
@@ -51,7 +58,17 @@ Player.prototype.r = function () {
 
 Player.prototype.jump = function () {
     this.jumpCount += 1;
-    this.body.velocity.y = -220;
+    this.body.velocity.y = -280;
+
+    /*
+     if (keys.down.isDown) {
+        this.body.velocity.y = -600;
+        this.state = STATE.DIVING;
+     } else if (keys.up.isDown) {
+        this.jumpCount += 1;
+        this.body.velocity.y = -220;
+     }
+     */
 };
 
 Player.prototype.fly = function () {
@@ -77,8 +94,22 @@ Player.prototype.overlap = function(obj) {
 };
 
 Player.prototype.update = function () {
+<<<<<<< HEAD:js/parents/Player.js
   this.handleInput(this.keys)
 }
+=======
+    if((this.body.onFloor() || this.body.touching.down)) {
+        if (staff) {
+            this.removeChild(staff);
+            staff.kill();
+        }
+        this.state = STATE.STANDING;
+    }
+
+
+    return this.state;
+};
+>>>>>>> d29c59de8e4fb9ea68276a9a64dfae0bcd396e15:models/parents/Player.js
 
 Player.prototype.handleInput = function (keys) {
 
@@ -105,8 +136,14 @@ Player.prototype.handleInput = function (keys) {
         case STATE.JUMPING:
             var upKey = keys.up;
             upKey.onDown.add(function() {
-                if (this.jumpCount < 2) { this.jump(); }
+                if (this.jumpCount < 2) { this.jump();}
+                else {this.state = STATE.FALLING;}
             }, this);
+            if (keys.down.isDown) {
+                this.equipDivingStaff();
+                this.body.velocity.y = 600;
+                this.state = STATE.DIVING;
+            }
             break;
 
         case STATE.FLYING:
@@ -116,9 +153,30 @@ Player.prototype.handleInput = function (keys) {
             }
             break;
 
+        case STATE.FALLING:
+            if (keys.down.isDown) {
+                this.state = STATE.DIVING;
+            }
+            break;
+
         case STATE.DIVING:
             //dive attack, jack
+            if (keys.down.isDown) {
+                this.equipDivingStaff();
+                this.body.velocity.y = 600;
+            }
             break;
     }
-
 };
+
+
+Player.prototype.equipDivingStaff = function () {
+    weaponGroup = new WeaponGroup(game);
+    staff = weaponGroup.add.sprite(0, 0, 'stave_diving');
+    staff.scale.set(.60,.60);
+    // Tweak anchor position to correctly align clothing over player
+    staff.anchor.setTo(.07,-0.4);
+    this.addChild(staff);
+};
+
+
