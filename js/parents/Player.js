@@ -11,13 +11,9 @@ var STATE =
     DIVING : 4
 };
 
-<<<<<<< HEAD:js/parents/Player.js
-var Player = function(game, x, y, keys) {
-=======
 var staff;
 
-var Player = function(game, x, y) {
->>>>>>> d29c59de8e4fb9ea68276a9a64dfae0bcd396e15:models/parents/Player.js
+var Player = function(game, x, y, keys) {
     Phaser.Sprite.call(this, game, x, y, 'chars')
     this.game.physics.arcade.enable(this)
     this.game.add.existing(this)
@@ -94,22 +90,18 @@ Player.prototype.overlap = function(obj) {
 };
 
 Player.prototype.update = function () {
-<<<<<<< HEAD:js/parents/Player.js
   this.handleInput(this.keys)
+    // if((this.body.onFloor() || this.body.touching.down)) {
+    //     if (staff) {
+    //         this.removeChild(staff);
+    //         staff.kill();
+    //     }
+    //     this.state = STATE.STANDING;
+    // }
+    //
+    //
+    // return this.state;
 }
-=======
-    if((this.body.onFloor() || this.body.touching.down)) {
-        if (staff) {
-            this.removeChild(staff);
-            staff.kill();
-        }
-        this.state = STATE.STANDING;
-    }
-
-
-    return this.state;
-};
->>>>>>> d29c59de8e4fb9ea68276a9a64dfae0bcd396e15:models/parents/Player.js
 
 Player.prototype.handleInput = function (keys) {
 
@@ -171,12 +163,10 @@ Player.prototype.handleInput = function (keys) {
 
 
 Player.prototype.equipDivingStaff = function () {
-    weaponGroup = new WeaponGroup(game);
-    staff = weaponGroup.add.sprite(0, 0, 'stave_diving');
+    weaponGroup = new WeaponGroup(this.game);
+    staff = weaponGroup.game.add.sprite(0, 0, 'stave_diving');
     staff.scale.set(.60,.60);
     // Tweak anchor position to correctly align clothing over player
     staff.anchor.setTo(.07,-0.4);
     this.addChild(staff);
 };
-
-

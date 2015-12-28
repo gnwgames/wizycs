@@ -11,6 +11,8 @@ WizrdGame.level1.prototype = {
     this.load.image('tiles', './assets/maps/sprite_sheet (4).png')
     this.load.tilemap('level1', 'assets/maps/level1.json', null, Phaser.Tilemap.TILED_JSON)
     this.load.spritesheet('chars', './assets/sprites/chartiles.png', 32, 32)
+    this.load.spritesheet('stave_diving', './assets/sprites/stave_straight.png', 55,55);
+
 
   },
 

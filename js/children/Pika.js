@@ -70,7 +70,7 @@ PikaEnemy.prototype.pursuePlayer = function (player) {
 };
 
 PikaEnemy.prototype.attackPlayer = function() {
-
+    //pass
 };
 
 PikaEnemy.prototype.changeUpdateMethod = function() {

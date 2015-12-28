@@ -8,6 +8,8 @@ WizrdGame.game = new Phaser.Game(600,400, Phaser.AUTO, 'Wizycs')
 WizrdGame.game.state.add('level1', WizrdGame.level1)
 WizrdGame.game.state.start('level1')
 
+// 
+// the following scripts are not used any more:
 function preload() {
   // I load all my scripts in the html file
   // sort of superstition, because of errors before
