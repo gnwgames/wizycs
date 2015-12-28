@@ -35,18 +35,18 @@ function create() {
 }
 
 function createObjects() {
-  keys = game.input.keyboard.createCursorKeys();
-  wzrd = new Player(game, 0, 0);
+    keys = game.input.keyboard.createCursorKeys();
+    wzrd = new Player(game, 0, 0);
 
 
-  var pikas = [];
-  pika = new PikaEnemy(game, 450, 50, 150, Enemy.ATTACK_TYPE.PURSUE);
-  pikas.push(pika);
+    var pikas = [];
+    pika = new PikaEnemy(game, 450, 50, 150, Enemy.ATTACK_TYPE.PURSUE);
+    pikas.push(pika);
 
-  //enemies = new EnemyGroup(pikas);
-  //enemyGroup = EnemyGroup.Init();
-  enemyGroup = new EnemyGroup();
-  enemyGroup.addEnemies(pikas);
+    //enemies = new EnemyGroup(pikas);
+    //enemyGroup = EnemyGroup.Init();
+    enemyGroup = new EnemyGroup(game);
+    enemyGroup.addEnemies(pikas);
 }
 
 function integrateObjects() {
