@@ -14,7 +14,7 @@ CollisionHandler.PlayerCollision = function(player, obj)
         else
         {
             //Animate death - blinking sprite, which disappears and then reappears at 0,0
-            player.kill();
+            player.kill()
         }
     }
 };
