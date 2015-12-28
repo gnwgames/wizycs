@@ -4,7 +4,7 @@
 
 var GameHandler = {};
 
-GameHandler.ResetPlayer = function(player) {
+GameHandler.RespawnPlayer = function(player) {
     player.parent.removeChild(player);
     createNewPlayer();
 };
