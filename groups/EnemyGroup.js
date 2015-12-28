@@ -2,9 +2,8 @@
  * Created by gattra on 12/23/2015.
  */
 
-var EnemyGroup = function(game, enemies) {
+var EnemyGroup = function(game) {
     Phaser.Group.call(this, game);
-    this.enemies = enemies;
 };
 
 EnemyGroup.prototype = Object.create(Phaser.Group.prototype);
@@ -21,14 +20,19 @@ EnemyGroup.prototype.addEnemies = function(enemies) {
 EnemyGroup.prototype.distanceFromPlayer = function(enemy, player) {
     if (game.physics.arcade.distanceBetween(enemy,player) < 100) {
         //Enemies.chasePlayer(enemy, player);
+        animateDetection(enemy);
         switch (enemy.attackType) {
             case Enemy.ATTACK_TYPE.STAND:
                 enemy.attackPlayer();
                 break;
             case Enemy.ATTACK_TYPE.PURSUE:
-                //enemy.chasePlayer(player);
+                enemy.pursuePlayer(player);
                 break;
         }
 
     }
 };
+
+function animateDetection(enemy) {
+
+}

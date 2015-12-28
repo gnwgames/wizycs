@@ -11,6 +11,8 @@ var STATE =
     DIVING : 4
 };
 
+var staff;
+
 var Player = function(game, x, y) {
     Phaser.Sprite.call(this, game, x, y, 'chars')
     this.game.physics.arcade.enable(this)
@@ -88,6 +90,10 @@ Player.prototype.overlap = function(obj) {
 
 Player.prototype.update = function () {
     if((this.body.onFloor() || this.body.touching.down)) {
+        if (staff) {
+            this.removeChild(staff);
+            staff.kill();
+        }
         this.state = STATE.STANDING;
     }
 
@@ -124,6 +130,7 @@ Player.prototype.handleInput = function (keys) {
                 else {this.state = STATE.FALLING;}
             }, this);
             if (keys.down.isDown) {
+                this.equipDivingStaff();
                 this.body.velocity.y = 600;
                 this.state = STATE.DIVING;
             }
@@ -145,9 +152,21 @@ Player.prototype.handleInput = function (keys) {
         case STATE.DIVING:
             //dive attack, jack
             if (keys.down.isDown) {
+                this.equipDivingStaff();
                 this.body.velocity.y = 600;
             }
             break;
     }
-
 };
+
+
+Player.prototype.equipDivingStaff = function () {
+    weaponGroup = new WeaponGroup(game);
+    staff = weaponGroup.add.sprite(0, 0, 'stave_diving');
+    staff.scale.set(.60,.60);
+    // Tweak anchor position to correctly align clothing over player
+    staff.anchor.setTo(.07,-0.4);
+    this.addChild(staff);
+};
+
+

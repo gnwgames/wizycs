@@ -29,6 +29,14 @@ CollisionHandler.PowerCollision = function(power, obj)
         power.kill();
 
         //Animate obj kill - blinking sprite, which disappears
-        obj.kill();
+        damageObject(obj);
     }
 };
+
+function damageObject(obj) {
+    obj.lifeCount -= 1;
+
+    if (obj.lifeCount === 0) {
+        obj.kill();
+    }
+}
