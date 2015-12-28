@@ -6,8 +6,9 @@ var STATE =
 {
     STANDING : 0,
     JUMPING : 1,
-    FLYING: 2,
-    DIVING : 3
+    FLYING : 2,
+    FALLING : 3,
+    DIVING : 4
 };
 
 var Player = function(game, x, y) {
@@ -50,7 +51,17 @@ Player.prototype.r = function () {
 
 Player.prototype.jump = function () {
     this.jumpCount += 1;
-    this.body.velocity.y = -220;
+    this.body.velocity.y = -280;
+
+    /*
+     if (keys.down.isDown) {
+        this.body.velocity.y = -600;
+        this.state = STATE.DIVING;
+     } else if (keys.up.isDown) {
+        this.jumpCount += 1;
+        this.body.velocity.y = -220;
+     }
+     */
 };
 
 Player.prototype.fly = function () {
@@ -80,6 +91,7 @@ Player.prototype.update = function () {
         this.state = STATE.STANDING;
     }
 
+
     return this.state;
 };
 
@@ -108,8 +120,13 @@ Player.prototype.handleInput = function (keys) {
         case STATE.JUMPING:
             var upKey = keys.up;
             upKey.onDown.add(function() {
-                if (this.jumpCount < 2) { this.jump(); }
+                if (this.jumpCount < 2) { this.jump();}
+                else {this.state = STATE.FALLING;}
             }, this);
+            if (keys.down.isDown) {
+                this.body.velocity.y = 600;
+                this.state = STATE.DIVING;
+            }
             break;
 
         case STATE.FLYING:
@@ -119,8 +136,17 @@ Player.prototype.handleInput = function (keys) {
             }
             break;
 
+        case STATE.FALLING:
+            if (keys.down.isDown) {
+                this.state = STATE.DIVING;
+            }
+            break;
+
         case STATE.DIVING:
             //dive attack, jack
+            if (keys.down.isDown) {
+                this.body.velocity.y = 600;
+            }
             break;
     }
 
