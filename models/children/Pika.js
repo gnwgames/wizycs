@@ -15,6 +15,7 @@ var PikaEnemy = function (game, x, y, range, attackType) {
     // when the player runs into enemy, he cannot move the enemy
     this.body.immovable = true;
     this.instanceType = 'Enemy';
+    this.lifeCount = 3;
 };
 
 
@@ -55,7 +56,7 @@ PikaEnemy.prototype.flipRight = function() {
     this.scale.setTo(-1.5, 1.5)
 };
 
-PikaEnemy.prototype.chasePlayer = function (player) {
+PikaEnemy.prototype.pursuePlayer = function (player) {
 
     this.body.collideWorldBounds = true;
     this.state = 'stop';
