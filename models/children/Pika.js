@@ -13,7 +13,8 @@ var PikaEnemy = function (game, x, y, range, attackType) {
     this.attackType = attackType;
     this.state = 'right';
     // when the player runs into enemy, he cannot move the enemy
-    this.body.immovable = true
+    this.body.immovable = true;
+    this.instanceType = 'Enemy';
 };
 
 

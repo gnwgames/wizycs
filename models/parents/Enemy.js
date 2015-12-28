@@ -4,8 +4,8 @@
 'use strict';
 
 var Enemy = function (game, x, y, key) {
-  Phaser.Sprite.call(this, game, x, y, key);
-  this.game.physics.arcade.enable(this);
+    Phaser.Sprite.call(this, game, x, y, key);
+    this.game.physics.arcade.enable(this);
 };
 
 Enemy.ATTACK_TYPE = {

@@ -6,9 +6,13 @@ var CollisionHandler = {};
 
 CollisionHandler.PlayerCollision = function(player, obj)
 {
-    if (obj instanceof Enemy) {
-        if ( obj.body.touching.up )
+    if (obj.instanceType === 'Enemy') {
+        if ((obj.body.touching.up) && (player.state === STATE.DIVING))
         {
+            player.body.velocity.y = -200;
+            obj.kill();
+
+        } else if (obj.body.touching.up) {
             player.body.velocity.y = -200;
         }
         else
@@ -21,10 +25,7 @@ CollisionHandler.PlayerCollision = function(player, obj)
 
 CollisionHandler.PowerCollision = function(power, obj)
 {
-    if (obj instanceof Enemy) {
-        if ((power instanceof Melee) && (wzrd.state === STATE.DIVING)){
-            wzrd.body.velocity.y = -200;
-        }
+    if (obj.instanceType === 'Enemy') {
         power.kill();
 
         //Animate obj kill - blinking sprite, which disappears

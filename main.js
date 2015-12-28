@@ -43,8 +43,6 @@ function createObjects() {
     pika = new PikaEnemy(game, 450, 50, 150, Enemy.ATTACK_TYPE.PURSUE);
     pikas.push(pika);
 
-    //enemies = new EnemyGroup(pikas);
-    //enemyGroup = EnemyGroup.Init();
     enemyGroup = new EnemyGroup(game);
     enemyGroup.addEnemies(pikas);
 }
@@ -66,13 +64,11 @@ function integrateObjects() {
 function update() {
   wzrd.collide(collision);
   wzrd.handleInput(keys);
-  if (enemyGroup) {
-      enemyGroup.forEachAlive(function(enemy) {
-        enemy.collide(collision);
-        wzrd.overlap(enemy);
-        enemyGroup.distanceFromPlayer(enemy, wzrd);
-    });
-  }
+  enemyGroup.forEachAlive(function(enemy) {
+    enemy.collide(collision);
+    wzrd.overlap(enemy);
+    enemyGroup.distanceFromPlayer(enemy, wzrd);
+  });
   // somehow restart the level or respawn the player when it dies
   //if (!wzrd.alive) {
   //  GameHandler.RespawnPlayer(wzrd);
@@ -85,7 +81,6 @@ var preloadScripts = function() {
   game.load.script('EnemyGroup.js', './groups/EnemyGroup.js');
   game.load.script('CollisionHandler.js', './handlers/CollisionHandler.js');
   game.load.script('Flame.js', './models/children/Flame.js');
-  game.load.script('Melee.js', './models/children/Melee.js');
   game.load.script('Pika.js', './models/children/Pika.js');
   game.load.script('Enemy.js', './models/parents/Enemy.js');
   game.load.script('Player.js', './models/parents/Player.js');

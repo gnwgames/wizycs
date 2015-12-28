@@ -6,8 +6,9 @@ var STATE =
 {
     STANDING : 0,
     JUMPING : 1,
-    FLYING: 2,
-    DIVING : 3
+    FLYING : 2,
+    FALLING : 3,
+    DIVING : 4
 };
 
 var Player = function(game, x, y) {
@@ -120,7 +121,7 @@ Player.prototype.handleInput = function (keys) {
             var upKey = keys.up;
             upKey.onDown.add(function() {
                 if (this.jumpCount < 2) { this.jump();}
-                else {this.state = STATE.DIVING;}
+                else {this.state = STATE.FALLING;}
             }, this);
             if (keys.down.isDown) {
                 this.body.velocity.y = 600;
@@ -131,6 +132,12 @@ Player.prototype.handleInput = function (keys) {
         case STATE.FLYING:
             if (keys.down.isDown) {
                 this.body.velocity.y = -(this.body.velocity.y*2);
+                this.state = STATE.DIVING;
+            }
+            break;
+
+        case STATE.FALLING:
+            if (keys.down.isDown) {
                 this.state = STATE.DIVING;
             }
             break;

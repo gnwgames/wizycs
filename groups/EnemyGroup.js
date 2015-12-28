@@ -26,7 +26,7 @@ EnemyGroup.prototype.distanceFromPlayer = function(enemy, player) {
                 enemy.attackPlayer();
                 break;
             case Enemy.ATTACK_TYPE.PURSUE:
-                enemy.chasePlayer(player);
+                //enemy.chasePlayer(player);
                 break;
         }
 
