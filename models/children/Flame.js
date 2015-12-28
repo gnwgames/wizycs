@@ -58,6 +58,11 @@ Flame.prototype.hitTarget = function(power, obj) {
     if (obj instanceof PikaEnemy) {
         obj.lifeCount -= 1;
     }
+
+    else if (obj instanceof Player) {
+        obj.lifeCount -= 1;
+    }
+
     if (obj.lifeCount === 0) {
         obj.kill();
     }

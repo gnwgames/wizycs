@@ -26,6 +26,7 @@ var Player = function(game, x, y) {
     this.jumpCount = 0;
     this.state = STATE.STANDING;
     this.equippedWeapon = null;
+    this.lifeCount = 10;
 
 };
 
@@ -146,6 +147,9 @@ Player.prototype.handleInput = function (keys) {
 };
 
 function collidePlayer(player, obj) {
+    if (player.equippedWeapon) {
+        player.equippedWeapon.kill();
+    }
 
     if (obj.instanceType === 'Enemy') {
         if ((obj.body.touching.up) && (player.equippedWeapon)) {
