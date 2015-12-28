@@ -47,14 +47,16 @@ function createObjects() {
 }
 
 function integrateObjects() {
-  Flame.hitGroups = enemyGroup;
+    Flame.hitGroups = enemyGroup;
+    Melee.hitGroups = enemyGroup;
 
-  // Equip the flame power to the key D / Melee to W
-  wzrd.equip(Phaser.KeyCode.D, Flame.handleInput);
+    // Equip the flame power to the key D / Melee to W
+    wzrd.equip(Phaser.KeyCode.D, Flame.handleInput);
+    wzrd.equip(Phaser.KeyCode.DOWN, Melee.handleInput);
 
-  enemyGroup.forEachAlive(function(enemy) {
-    game.time.events.loop(Phaser.Timer.SECOND, function() {enemy.updateState()}, this);
-  });
+    enemyGroup.forEachAlive(function(enemy) {
+        game.time.events.loop(Phaser.Timer.SECOND, function() {enemy.updateState()}, this);
+    });
 
 }
 
@@ -70,16 +72,14 @@ function update() {
   //if (!wzrd.alive) {
   //  GameHandler.RespawnPlayer(wzrd);
   //}
-
 }
 
 
 var preloadScripts = function() {
     game.load.script('EnemyGroup.js', './groups/EnemyGroup.js');
-    game.load.script('WeaponGroup.js', './groups/WeaponGroup.js');
-    game.load.script('CollisionHandler.js', './handlers/CollisionHandler.js');
     game.load.script('Flame.js', './models/children/Flame.js');
     game.load.script('Pika.js', './models/children/Pika.js');
+    game.load.script('Melee.js', './models/children/Melee.js');
     game.load.script('Enemy.js', './models/parents/Enemy.js');
     game.load.script('Player.js', './models/parents/Player.js');
     game.load.script('Power.js', './models/parents/Power.js');

@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="79fb1c21-2057-4fac-9263-b93fcbf4cee6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/groups/WeaponGroup.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/children/Melee.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/groups/WeaponGroup.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/handlers/CollisionHandler.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/groups/EnemyGroup.js" afterPath="$PROJECT_DIR$/groups/EnemyGroup.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/handlers/CollisionHandler.js" afterPath="$PROJECT_DIR$/handlers/CollisionHandler.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.js" afterPath="$PROJECT_DIR$/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/children/Flame.js" afterPath="$PROJECT_DIR$/models/children/Flame.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/children/Pika.js" afterPath="$PROJECT_DIR$/models/children/Pika.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/parents/Player.js" afterPath="$PROJECT_DIR$/models/parents/Player.js" />
     </list>
@@ -33,8 +35,8 @@
       <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.296296">
-              <caret line="82" column="62" selection-start-line="82" selection-start-column="62" selection-end-line="82" selection-end-column="62" />
+            <state vertical-scroll-proportion="-1.4074074">
+              <caret line="65" column="43" selection-start-line="65" selection-start-column="43" selection-end-line="65" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -43,18 +45,18 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.071429">
-              <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
+            <state vertical-scroll-proportion="-3.2142856">
+              <caret line="9" column="75" selection-start-line="9" selection-start-column="75" selection-end-line="9" selection-end-column="75" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Flame.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Flame.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/models/children/Flame.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.592592">
-              <caret line="35" column="5" selection-start-line="35" selection-start-column="3" selection-end-line="35" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.42068964">
+              <caret line="51" column="38" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
               <folding>
                 <element signature="e#0#43#0" expanded="false" />
               </folding>
@@ -62,13 +64,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameHandler.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/handlers/GameHandler.js">
+      <file leaf-file-name="Melee.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/children/Melee.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+              <caret line="37" column="24" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
               <folding>
-                <element signature="e#0#43#0" expanded="false" />
+                <element signature="e#0#41#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -78,21 +80,9 @@
         <entry file="file://$PROJECT_DIR$/groups/EnemyGroup.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="34" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+              <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
               <folding>
                 <element signature="e#0#43#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WeaponGroup.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/groups/WeaponGroup.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.41379312">
-              <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
-              <folding>
-                <element signature="e#0#41#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -101,8 +91,8 @@
       <file leaf-file-name="Player.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/parents/Player.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.666666">
-              <caret line="170" column="0" selection-start-line="170" selection-start-column="0" selection-end-line="170" selection-end-column="0" />
+            <state vertical-scroll-proportion="-15.481482">
+              <caret line="154" column="9" selection-start-line="154" selection-start-column="9" selection-end-line="154" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -112,20 +102,8 @@
         <entry file="file://$PROJECT_DIR$/models/parents/Power.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="44" selection-start-line="3" selection-start-column="44" selection-end-line="3" selection-end-column="44" />
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CollisionHandler.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/handlers/CollisionHandler.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.037037">
-              <caret line="27" column="34" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="34" />
-              <folding>
-                <element signature="e#0#41#0" expanded="false" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -133,8 +111,8 @@
       <file leaf-file-name="Pika.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/children/Pika.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-39.703705">
-              <caret line="66" column="11" selection-start-line="66" selection-start-column="10" selection-end-line="66" selection-end-column="11" />
+            <state vertical-scroll-proportion="-21.407408">
+              <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
               <folding>
                 <element signature="e#0#43#0" expanded="false" />
               </folding>
@@ -183,20 +161,21 @@
         <option value="$PROJECT_DIR$/models/enemies/Enemy.js" />
         <option value="$PROJECT_DIR$/prototypes/PlayerPrototype.js" />
         <option value="$PROJECT_DIR$/models/Player.js" />
-        <option value="$PROJECT_DIR$/models/children/Flame.js" />
         <option value="$PROJECT_DIR$/handlers/ResetHandler.js" />
         <option value="$PROJECT_DIR$/groups/Enemies.js" />
         <option value="$PROJECT_DIR$/handlers/GameHandler.js" />
         <option value="$PROJECT_DIR$/models/parents/Enemy.js" />
         <option value="$PROJECT_DIR$/models/parents/Power.js" />
-        <option value="$PROJECT_DIR$/models/children/Melee.js" />
-        <option value="$PROJECT_DIR$/handlers/CollisionHandler.js" />
+        <option value="$PROJECT_DIR$/models/children/Staff.js" />
+        <option value="$PROJECT_DIR$/groups/WeaponGroup.js" />
         <option value="$PROJECT_DIR$/models/children/Pika.js" />
+        <option value="$PROJECT_DIR$/handlers/CollisionHandler.js" />
         <option value="$PROJECT_DIR$/groups/EnemyGroup.js" />
         <option value="$PROJECT_DIR$/main.js" />
-        <option value="$PROJECT_DIR$/models/parents/Player.js" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/groups/WeaponGroup.js" />
+        <option value="$PROJECT_DIR$/models/children/Melee.js" />
+        <option value="$PROJECT_DIR$/models/parents/Player.js" />
+        <option value="$PROJECT_DIR$/models/children/Flame.js" />
       </list>
     </option>
   </component>
@@ -563,7 +542,13 @@
       <option name="project" value="LOCAL" />
       <updated>1451271362224</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="added lifeCount to enemies / trouble adding &amp; removing staff sprite on dive attack">
+      <created>1451314406835</created>
+      <option name="number" value="00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1451314406835</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -626,10 +611,13 @@
     <MESSAGE value="got the enemy group working" />
     <MESSAGE value="added diving melee attack - down arrow + landing ontop of enemy = kill enemy" />
     <MESSAGE value="added diving melee attack - down arrow before landing ontop of enemy = kill enemy" />
-    <option name="LAST_COMMIT_MESSAGE" value="added diving melee attack - down arrow before landing ontop of enemy = kill enemy" />
+    <MESSAGE value="added lifeCount to enemies / trouble adding &amp; removing staff sprite on dive attack" />
+    <option name="LAST_COMMIT_MESSAGE" value="added lifeCount to enemies / trouble adding &amp; removing staff sprite on dive attack" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -657,16 +645,6 @@
           <caret line="24" column="30" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
           <folding>
             <element signature="e#0#43#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handlers/CollisionHandler.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -720,16 +698,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handlers/CollisionHandler.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="2" selection-start-line="19" selection-start-column="2" selection-end-line="19" selection-end-column="2" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -918,11 +886,13 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/phaser.js">
+    <entry file="file://$PROJECT_DIR$/handlers/GameHandler.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="31144" column="34" selection-start-line="31144" selection-start-column="34" selection-end-line="31144" selection-end-column="34" />
-          <folding />
+          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#43#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -934,48 +904,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/parents/Power.js">
+    <entry file="file://$PROJECT_DIR$/phaser.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="44" selection-start-line="3" selection-start-column="44" selection-end-line="3" selection-end-column="44" />
+        <state vertical-scroll-proportion="779.5255">
+          <caret line="31144" column="34" selection-start-line="31144" selection-start-column="34" selection-end-line="31144" selection-end-column="34" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/children/Flame.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.592592">
-          <caret line="35" column="5" selection-start-line="35" selection-start-column="3" selection-end-line="35" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handlers/GameHandler.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handlers/CollisionHandler.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.037037">
-          <caret line="27" column="34" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/children/Pika.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-39.703705">
-          <caret line="66" column="11" selection-start-line="66" selection-start-column="10" selection-end-line="66" selection-end-column="11" />
+        <state vertical-scroll-proportion="-21.407408">
+          <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
           <folding>
             <element signature="e#0#43#0" expanded="false" />
           </folding>
@@ -984,8 +924,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.071429">
-          <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
+        <state vertical-scroll-proportion="-3.2142856">
+          <caret line="9" column="75" selection-start-line="9" selection-start-column="75" selection-end-line="9" selection-end-column="75" />
           <folding />
         </state>
       </provider>
@@ -993,35 +933,53 @@
     <entry file="file://$PROJECT_DIR$/groups/EnemyGroup.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="34" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+          <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
           <folding>
             <element signature="e#0#43#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/models/parents/Power.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/children/Melee.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="24" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#41#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.296296">
-          <caret line="82" column="62" selection-start-line="82" selection-start-column="62" selection-end-line="82" selection-end-column="62" />
+        <state vertical-scroll-proportion="-1.4074074">
+          <caret line="65" column="43" selection-start-line="65" selection-start-column="43" selection-end-line="65" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/parents/Player.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.666666">
-          <caret line="170" column="0" selection-start-line="170" selection-start-column="0" selection-end-line="170" selection-end-column="0" />
+        <state vertical-scroll-proportion="-15.481482">
+          <caret line="154" column="9" selection-start-line="154" selection-start-column="9" selection-end-line="154" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/groups/WeaponGroup.js">
+    <entry file="file://$PROJECT_DIR$/models/children/Flame.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41379312">
-          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.42068964">
+          <caret line="51" column="38" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
           <folding>
-            <element signature="e#0#41#0" expanded="false" />
+            <element signature="e#0#43#0" expanded="false" />
           </folding>
         </state>
       </provider>

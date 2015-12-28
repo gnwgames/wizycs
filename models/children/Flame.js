@@ -50,7 +50,17 @@ Flame.prototype.shoot = function (dir) {
 };
 
 Flame.prototype.update = function () {
-    this.game.physics.arcade.overlap(Flame.hitGroups, this, CollisionHandler.PowerCollision)
+    this.game.physics.arcade.overlap(Flame.hitGroups, this, this.hitTarget)
+};
+
+Flame.prototype.hitTarget = function(power, obj) {
+    power.kill();
+    if (obj instanceof PikaEnemy) {
+        obj.lifeCount -= 1;
+    }
+    if (obj.lifeCount === 0) {
+        obj.kill();
+    }
 };
 
 

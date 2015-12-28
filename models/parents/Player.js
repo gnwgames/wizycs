@@ -11,22 +11,21 @@ var STATE =
     DIVING : 4
 };
 
-var staff;
-
 var Player = function(game, x, y) {
-    Phaser.Sprite.call(this, game, x, y, 'chars')
-    this.game.physics.arcade.enable(this)
-    this.game.add.existing(this)
-    this.frame = 10
-    this.animations.add('left', [21,22,23,22], 5, true)
-    this.animations.add('right', [33,34,35,34], 5, true)
-    this.body.gravity.y = 500
+    Phaser.Sprite.call(this, game, x, y, 'chars');
+    this.game.physics.arcade.enable(this);
+    this.game.add.existing(this);
+    this.frame = 10;
+    this.animations.add('left', [21,22,23,22], 5, true);
+    this.animations.add('right', [33,34,35,34], 5, true);
+    this.body.gravity.y = 500;
     this.body.bounce.y = 0.2;
-    this.body.collideWorldBounds = true
-    this.power = {}
-    this.game.camera.follow(this)
+    this.body.collideWorldBounds = true;
+    this.power = {};
+    this.game.camera.follow(this);
     this.jumpCount = 0;
     this.state = STATE.STANDING;
+    this.equippedWeapon = null;
 
 };
 
@@ -81,23 +80,17 @@ Player.prototype.st = function () {
 };
 
 Player.prototype.collide = function (obj) {
-    this.game.physics.arcade.collide(this, obj);
+    this.game.physics.arcade.collide(this, obj, collidePlayer);
 };
 
 Player.prototype.overlap = function(obj) {
-    this.game.physics.arcade.overlap(this, obj, CollisionHandler.PlayerCollision);
+    this.game.physics.arcade.overlap(this, obj, collidePlayer);
 };
 
 Player.prototype.update = function () {
     if((this.body.onFloor() || this.body.touching.down)) {
-        if (staff) {
-            this.removeChild(staff);
-            staff.kill();
-        }
         this.state = STATE.STANDING;
     }
-
-
     return this.state;
 };
 
@@ -130,16 +123,13 @@ Player.prototype.handleInput = function (keys) {
                 else {this.state = STATE.FALLING;}
             }, this);
             if (keys.down.isDown) {
-                this.equipDivingStaff();
-                this.body.velocity.y = 600;
                 this.state = STATE.DIVING;
             }
             break;
 
         case STATE.FLYING:
-            if (keys.down.isDown) {
+            if ((keys.down.isDown)&&(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))) {
                 this.body.velocity.y = -(this.body.velocity.y*2);
-                this.state = STATE.DIVING;
             }
             break;
 
@@ -151,22 +141,24 @@ Player.prototype.handleInput = function (keys) {
 
         case STATE.DIVING:
             //dive attack, jack
-            if (keys.down.isDown) {
-                this.equipDivingStaff();
-                this.body.velocity.y = 600;
-            }
             break;
     }
 };
 
+function collidePlayer(player, obj) {
 
-Player.prototype.equipDivingStaff = function () {
-    weaponGroup = new WeaponGroup(game);
-    staff = weaponGroup.add.sprite(0, 0, 'stave_diving');
-    staff.scale.set(.60,.60);
-    // Tweak anchor position to correctly align clothing over player
-    staff.anchor.setTo(.07,-0.4);
-    this.addChild(staff);
-};
-
-
+    if (obj.instanceType === 'Enemy') {
+        if ((obj.body.touching.up) && (player.equippedWeapon)) {
+            player.body.velocity.y = -200;
+            player.equippedWeapon.kill();
+            obj.kill();
+        }
+        else if (obj.body.touching.up) {
+            player.body.velocity.y = -200;
+        }
+        else {
+            //Animate death - blinking sprite, which disappears and then reappears at 0,0
+            player.kill()
+        }
+    }
+}
