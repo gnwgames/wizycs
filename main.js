@@ -12,13 +12,8 @@ var game = new Phaser.Game(600,450, Phaser.AUTO, 'Wizycs', {
 function preload() {
   // I load all my scripts in the html file
   // sort of superstition, because of errors before
-  game.load.tilemap('test1', './assets/maps/wizycs_temp_map.json', null, Phaser.Tilemap.TILED_JSON)
-  game.load.image('tiles', './assets/maps/test1.png')
-  game.load.image('collide', './assets/maps/sprite_sheet (6).png')
-  game.load.spritesheet('flame', './assets/sprites/fireball.png', 64,64)
-  game.load.spritesheet('chars', './assets/sprites/chartiles.png', 32, 32)
-  game.load.spritesheet('pika', './assets/sprites/pika.jpg', 16,24)
-  game.load.spritesheet('stave', './assets/sprites/stave.png', 32,32)
+  preloadScripts();
+  preloadAssets();
 }
 
 function create() {
@@ -38,17 +33,15 @@ function create() {
   keys = game.input.keyboard.createCursorKeys();
   wzrd = new Player(game, 0, 0);
 
-  enemies = Enemies.Init();
-  var pikas = [];
-  pikas.push(new PikaEnemy(game, 450, 50, 150));
-  pikas.push(new PikaEnemy(game, 350, 50, 50));
-  pikas.push(new PikaEnemy(game, 250, 50, 50));
-  pikas.push(new PikaEnemy(game, 150, 50, 150));
 
-  for (var i=0;i<pikas.length;i++) {
-    console.log(pikas[i]);
-    enemies.add(pikas[i]);
-  }
+  var pikas = [];
+  pika = new PikaEnemy(game, 450, 50, 150, Enemy.ATTACK_TYPE.PURSUE);
+  pikas.push(pika);
+
+  console.log(pikas);
+
+  enemies = new EnemyGroup(pikas);
+
 
   Flame.hitGroups = enemies;
   Melee.hitGroups = enemies;
@@ -68,14 +61,39 @@ function create() {
 function update() {
   wzrd.collide(collision);
   wzrd.handleInput(keys);
-  enemies.forEachAlive(function(enemy) {
-    enemy.collide(collision);
-    wzrd.overlap(enemy);
-    Enemies.DistanceFromPlayer(enemy, wzrd);
-  });
-
+  if (enemies) {
+      enemies.forEachAlive(function(enemy) {
+      enemies.collide(collision);
+      wzrd.overlap(enemy);
+      enemies.distanceFromPlayer(enemy, wzrd);
+    });
+  }
+  // somehow restart the level or respawn the player when it dies
   //if (!wzrd.alive) {
-  //  GameHandler.ResetPlayer(wzrd);
+  //  GameHandler.RespawnPlayer(wzrd);
   //}
 
 }
+
+
+var preloadScripts = function() {
+  game.load.script('EnemyGroup.js', './groups/EnemyGroup.js');
+  game.load.script('CollisionHandler.js', './handlers/CollisionHandler.js');
+  game.load.script('Flame.js', './models/children/Flame.js');
+  game.load.script('Melee.js', './models/children/Melee.js');
+  game.load.script('Pika.js', './models/children/Pika.js');
+  game.load.script('Enemy.js', './models/parents/Enemy.js');
+  game.load.script('Player.js', './models/parents/Player.js');
+  game.load.script('Power.js', './models/parents/Power.js');
+};
+
+var preloadAssets = function() {
+  game.load.script('GameHandler.js', './handlers/GameHandler.js');
+  game.load.tilemap('test1', './assets/maps/wizycs_temp_map.json', null, Phaser.Tilemap.TILED_JSON);
+  game.load.image('tiles', './assets/maps/test1.png');
+  game.load.image('collide', './assets/maps/sprite_sheet (6).png');
+  game.load.spritesheet('flame', './assets/sprites/fireball.png', 64,64);
+  game.load.spritesheet('chars', './assets/sprites/chartiles.png', 32, 32);
+  game.load.spritesheet('pika', './assets/sprites/pika.jpg', 16,24);
+  game.load.spritesheet('stave', './assets/sprites/stave.png', 32,32);
+};

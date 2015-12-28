@@ -50,7 +50,17 @@ Player.prototype.r = function () {
 
 Player.prototype.jump = function () {
     this.jumpCount += 1;
-    this.body.velocity.y = -220;
+    this.body.velocity.y = -280;
+
+    /*
+     if (keys.down.isDown) {
+        this.body.velocity.y = -600;
+        this.state = STATE.DIVING;
+     } else if (keys.up.isDown) {
+        this.jumpCount += 1;
+        this.body.velocity.y = -220;
+     }
+     */
 };
 
 Player.prototype.fly = function () {
@@ -80,6 +90,7 @@ Player.prototype.update = function () {
         this.state = STATE.STANDING;
     }
 
+
     return this.state;
 };
 
@@ -108,8 +119,13 @@ Player.prototype.handleInput = function (keys) {
         case STATE.JUMPING:
             var upKey = keys.up;
             upKey.onDown.add(function() {
-                if (this.jumpCount < 2) { this.jump(); }
+                if (this.jumpCount < 2) { this.jump();}
+                else {this.state = STATE.DIVING;}
             }, this);
+            if (keys.down.isDown) {
+                this.body.velocity.y = 600;
+                this.state = STATE.DIVING;
+            }
             break;
 
         case STATE.FLYING:
@@ -121,6 +137,9 @@ Player.prototype.handleInput = function (keys) {
 
         case STATE.DIVING:
             //dive attack, jack
+            if (keys.down.isDown) {
+                this.body.velocity.y = 600;
+            }
             break;
     }
 
