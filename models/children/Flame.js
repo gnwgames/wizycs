@@ -10,7 +10,6 @@ var Flame = function (game, x, y) {
     this.checkWorldBounds = true;
     this.outOfBoundsKill = true;
     this.game.add.existing(this);
-
     this.hitGroups = null;
 };
 
@@ -24,13 +23,6 @@ Flame.handleInput = function (char) {
         flame.overlap(Flame.hitGroups);
         flame.shoot('left');
     }
-    /* optional dive attack
-     else if (char.state = STATE.DIVING) {
-     var flame = new Flame(char.game, char.position.x - 20, char.position.y + 30);
-     flame.overlap(Flame.hitGroups);
-     flame.shoot('down');
-     }
-     */
 };
 
 Flame.prototype = Object.create(Power.prototype);
@@ -55,13 +47,7 @@ Flame.prototype.update = function () {
 
 Flame.prototype.hitTarget = function(power, obj) {
     power.kill();
-    if (obj instanceof PikaEnemy) {
-        obj.lifeCount -= 1;
-    }
-
-    else if (obj instanceof Player) {
-        obj.lifeCount -= 1;
-    }
+    obj.lifeCount -= 1;
 
     if (obj.lifeCount === 0) {
         obj.kill();

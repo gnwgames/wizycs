@@ -23,7 +23,7 @@ EnemyGroup.prototype.distanceFromPlayer = function(enemy, player) {
         animateDetection(enemy);
         switch (enemy.attackType) {
             case Enemy.ATTACK_TYPE.STAND:
-                enemy.attackPlayer();
+                enemy.attackPlayer(player);
                 break;
             case Enemy.ATTACK_TYPE.PURSUE:
                 enemy.pursuePlayer(player);
