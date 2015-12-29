@@ -39,7 +39,8 @@ function createObjects() {
     wzrd = new Player(game, 0, 0);
 
     var pikas = [];
-    pika = new PikaEnemy(game, 450, 50, 150, Enemy.ATTACK_TYPE.STAND, Flame);
+    //pika = new PikaEnemy(game, 450, 50, 150, Enemy.ATTACK_TYPE.STAND, Flame);
+    pika = new PikaEnemy(game, 450, 50, 150, Enemy.ATTACK_TYPE.PURSUE, Flame);
     pikas.push(pika);
 
     enemyGroup = new EnemyGroup(game);
@@ -47,12 +48,12 @@ function createObjects() {
 }
 
 function integrateObjects() {
-    Flame.hitGroups = enemyGroup;
-    Melee.hitGroups = enemyGroup;
+   //Flame.hitGroups = enemyGroup;
+   // Melee.hitGroups = enemyGroup;
 
     // Equip the flame power to the key D / Melee to W
-    wzrd.equip(Phaser.KeyCode.D, Flame.handleInput);
-    wzrd.equip(Phaser.KeyCode.DOWN, Melee.handleInput);
+    wzrd.equip(Phaser.KeyCode.D, Flame.handleInput, enemyGroup);
+    wzrd.equip(Phaser.KeyCode.DOWN, Melee.handleInput, enemyGroup);
 
     enemyGroup.forEachAlive(function(enemy) {
         game.time.events.loop(Phaser.Timer.SECOND, function() {enemy.updateState()}, this);
@@ -61,19 +62,21 @@ function integrateObjects() {
 }
 
 function update() {
-  wzrd.collide(collision);
-  wzrd.handleInput(keys);
-  enemyGroup.forEachAlive(function(enemy) {
-    enemy.collide(collision);
-    wzrd.overlap(enemy);
-    enemyGroup.distanceFromPlayer(enemy, wzrd);
-  });
+    wzrd.collide(collision);
+    wzrd.handleInput(keys);
+
+    enemyGroup.forEachAlive(function(enemy) {
+        enemy.collide(collision);
+        if (wzrd.alive) {
+            wzrd.overlap(enemy);
+        }
+        enemyGroup.distanceFromPlayer(enemy, wzrd);
+    });
   // somehow restart the level or respawn the player when it dies
   //if (!wzrd.alive) {
   //  GameHandler.RespawnPlayer(wzrd);
   //}
 }
-
 
 var preloadScripts = function() {
     game.load.script('EnemyGroup.js', './groups/EnemyGroup.js');
@@ -86,13 +89,14 @@ var preloadScripts = function() {
 };
 
 var preloadAssets = function() {
-    game.load.script('GameHandler.js', './handlers/GameHandler.js');
-    game.load.tilemap('test1', './assets/maps/wizycs_temp_map.json', null, Phaser.Tilemap.TILED_JSON);
-    game.load.image('tiles', './assets/maps/test1.png');
-    game.load.image('collide', './assets/maps/sprite_sheet (6).png');
+
     game.load.spritesheet('flame', './assets/sprites/fireball.png', 64,64);
     game.load.spritesheet('chars', './assets/sprites/chartiles.png', 32, 32);
     game.load.spritesheet('pika', './assets/sprites/pika.jpg', 16,24);
     game.load.spritesheet('stave_equipped', './assets/sprites/stave.png', 55,55);
     game.load.spritesheet('stave_diving', './assets/sprites/stave_straight.png', 55,55);
+    game.load.script('GameHandler.js', './handlers/GameHandler.js');
+    game.load.tilemap('test1', './assets/maps/wizycs_temp_map.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.image('tiles', './assets/maps/test1.png');
+    game.load.image('collide', './assets/maps/sprite_sheet (6).png');
 };

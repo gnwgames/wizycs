@@ -13,14 +13,16 @@ var Flame = function (game, x, y) {
     this.hitGroups = null;
 };
 
-Flame.handleInput = function (char) {
+Flame.handleInput = function (char, hitGroup) {
     if (char.body.velocity.x >= 0) {
         var flame = new Flame(char.game, char.position.x, char.position.y - 16);
-        flame.overlap(Flame.hitGroups);
+        flame.overlap(hitGroup);
+        flame.hitGroups = hitGroup;
         flame.shoot('right');
     } else if (char.body.velocity.x < 0) {
-        var flame = new Flame(char.game, char.position.x - 20, char.position.y - 16);
-        flame.overlap(Flame.hitGroups);
+        var flame = new Flame(char.game, char.position.x - 25, char.position.y - 16);
+        flame.overlap(hitGroup);
+        flame.hitGroups = hitGroup;
         flame.shoot('left');
     }
 };
@@ -42,16 +44,27 @@ Flame.prototype.shoot = function (dir) {
 };
 
 Flame.prototype.update = function () {
-    this.game.physics.arcade.overlap(Flame.hitGroups, this, this.hitTarget)
+    this.game.physics.arcade.overlap(this.hitGroups, this, this.hitTarget)
 };
 
-Flame.prototype.hitTarget = function(power, obj) {
+Flame.prototype.hitTarget = function(obj1, obj2) {
+    //have to run this if statement because for some reason, when the player fires an object, the parameters are flipped
+    //so when a pika fires and object, the player is killed and not the flame
+    var power, obj;
+    if (obj1 instanceof Flame) {
+        power = obj1;
+        obj = obj2;
+    } else {
+        power = obj2;
+        obj = obj1;
+    }
+
     power.kill();
     obj.lifeCount -= 1;
-
     if (obj.lifeCount === 0) {
         obj.kill();
     }
+
 };
 
 

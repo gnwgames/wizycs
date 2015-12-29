@@ -27,17 +27,16 @@ var Player = function(game, x, y) {
     this.state = STATE.STANDING;
     this.equippedWeapon = null;
     this.lifeCount = 10;
-
 };
 
-Player.prototype = Object.create(Phaser.Sprite.prototype)
-Player.prototype.constructor = Player
+Player.prototype = Object.create(Phaser.Sprite.prototype);
+Player.prototype.constructor = Player;
 
-Player.prototype.equip = function(key, handler) {
+Player.prototype.equip = function(key, handler, hitGroup) {
     var obj = this;
-    this.power[key] = game.input.keyboard.addKey(key)
+    this.power[key] = game.input.keyboard.addKey(key);
     this.power[key].onDown.add(function() {
-        handler(obj)
+        handler(obj, hitGroup)
     })
 };
 
@@ -159,7 +158,7 @@ function collidePlayer(player, obj) {
         }
         else {
             //Animate death - blinking sprite, which disappears and then reappears at 0,0
-            player.kill()
+           //player.kill();
         }
     }
     else if (player.equippedWeapon) {

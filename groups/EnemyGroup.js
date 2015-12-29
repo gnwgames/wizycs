@@ -18,7 +18,11 @@ EnemyGroup.prototype.addEnemies = function(enemies) {
 };
 
 EnemyGroup.prototype.distanceFromPlayer = function(enemy, player) {
-    if (game.physics.arcade.distanceBetween(enemy,player) < 100) {
+    if (!player.alive) {
+        enemy.mode = MODE.PATROLING;
+        return;
+    }
+    if (game.physics.arcade.distanceBetween(enemy,player) < enemy.attackRange) {
         //Enemies.chasePlayer(enemy, player);
         animateDetection(enemy);
         switch (enemy.attackType) {
@@ -29,8 +33,7 @@ EnemyGroup.prototype.distanceFromPlayer = function(enemy, player) {
                 enemy.pursuePlayer(player);
                 break;
         }
-
-    }
+    } else { enemy.mode = MODE.PATROLING; }
 };
 
 function animateDetection(enemy) {
