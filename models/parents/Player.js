@@ -147,14 +147,11 @@ Player.prototype.handleInput = function (keys) {
 };
 
 function collidePlayer(player, obj) {
-    if (player.equippedWeapon) {
-        player.equippedWeapon.kill();
-    }
-
     if (obj.instanceType === 'Enemy') {
         if ((obj.body.touching.up) && (player.equippedWeapon)) {
             player.body.velocity.y = -200;
             player.equippedWeapon.kill();
+            player.equippedWeapon = null;
             obj.kill();
         }
         else if (obj.body.touching.up) {
@@ -164,5 +161,9 @@ function collidePlayer(player, obj) {
             //Animate death - blinking sprite, which disappears and then reappears at 0,0
             player.kill()
         }
+    }
+    else if (player.equippedWeapon) {
+        player.equippedWeapon.kill();
+        player.equippedWeapon = null;
     }
 }

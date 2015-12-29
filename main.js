@@ -7,7 +7,7 @@ var game = new Phaser.Game(600,450, Phaser.AUTO, 'Wizycs', {
   preload: preload,
   create: create,
   update: update
-})
+});
 
 function preload() {
   // I load all my scripts in the html file
