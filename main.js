@@ -41,8 +41,8 @@ function createObjects() {
     wzrd = new Player(game, 0, 0);
 
     var pikas = [];
-    //pika = new PikaEnemy(game, 450, 50, 150, Enemy.ATTACK_TYPE.STAND, Flame);
-    pika = new PikaEnemy(game, 450, 350, 150, Flame);
+    pika = new PikaEnemy(game, 450, 350, 150, Enemy.ATTACK_TYPE.STAND, Flame);
+    //pika = new PikaEnemy(game, 450, 350, 150, Flame);
     pikas.push(pika);
 
     enemyGroup = new EnemyGroup(game);
@@ -56,11 +56,11 @@ function integrateObjects() {
     // Equip the flame power to the key D / Melee to W
     wzrd.equip(Phaser.KeyCode.D, Flame.handleInput, enemyGroup);
     wzrd.equip(Phaser.KeyCode.DOWN, Melee.handleInput, enemyGroup);
-
+/*
     enemyGroup.forEachAlive(function(enemy) {
         game.time.events.loop(Phaser.Timer.SECOND, function() {enemy.updateState()}, this);
     });
-
+*/
 }
 
 function update() {

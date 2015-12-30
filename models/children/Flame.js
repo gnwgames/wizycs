@@ -6,7 +6,7 @@ var Flame = function (game, x, y) {
     this.animations.add('leftFire', [0,1,2,3,4,5,6,7], 10, true);
     this.animations.add('rightFire', [32,33,34,35,36,37,38,39], 10, true);
     this.animations.add('downFire', [48,49,50,51,52,53,54,55], 10, true);
-
+    this.scale.setTo(.8,.8);
     this.checkWorldBounds = true;
     this.outOfBoundsKill = true;
     this.game.add.existing(this);
@@ -15,14 +15,16 @@ var Flame = function (game, x, y) {
 
 Flame.handleInput = function (char, hitGroup) {
     if (char.body.velocity.x >= 0) {
-        var flame = new Flame(char.game, char.position.x, char.position.y - 16);
-        flame.overlap(hitGroup);
+        var flame = new Flame(char.game, char.position.x-10, char.position.y - 16);
+        //flame.overlap(hitGroup);
         flame.hitGroups = hitGroup;
+        flame.collideGroups = collision;
         flame.shoot('right');
     } else if (char.body.velocity.x < 0) {
-        var flame = new Flame(char.game, char.position.x - 25, char.position.y - 16);
-        flame.overlap(hitGroup);
+        var flame = new Flame(char.game, char.position.x - 35, char.position.y - 16);
+        //flame.overlap(hitGroup);
         flame.hitGroups = hitGroup;
+        flame.collideGroups = collision;
         flame.shoot('left');
     }
 };
@@ -44,7 +46,8 @@ Flame.prototype.shoot = function (dir) {
 };
 
 Flame.prototype.update = function () {
-    this.game.physics.arcade.overlap(this.hitGroups, this, this.hitTarget)
+    this.game.physics.arcade.overlap(this.hitGroups, this, this.hitTarget);
+    this.game.physics.arcade.collide(this.collideGroups, this, this.collideTarget);
 };
 
 Flame.prototype.hitTarget = function(obj1, obj2) {
@@ -59,12 +62,24 @@ Flame.prototype.hitTarget = function(obj1, obj2) {
         obj = obj1;
     }
 
+    console.log(obj.lifeCount);
+
     power.kill();
     obj.lifeCount -= 1;
     if (obj.lifeCount === 0) {
         obj.kill();
     }
+};
 
+Flame.prototype.collideTarget = function(obj1, obj2) {
+    var power;
+    if (obj1 instanceof Flame) {
+        power = obj1;
+    } else {
+        power = obj2;
+    }
+
+    power.kill();
 };
 
 

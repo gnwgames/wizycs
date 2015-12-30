@@ -7,21 +7,23 @@ var MODE = {
     PURSUING : 2
 };
 
-var PikaEnemy = function (game, x, y, range, power, detectRange) {
+var PikaEnemy = function (game, x, y, range, attackType, power, attackRange, fireRate) {
     Enemy.call(this, game, x, y, 'pika')
     this.animations.add('walkRight', [8,9,10,11,12,13,14,15], 10, true);
     this.animations.add('walkLeft', [8,9,10,11,12,13,14,15], 10, true);
-    this.scale.setTo(1.5, 1.5)
+    this.scale.setTo(1.5, 1.5);
+    this.origin = { x : x, y : y};
     this.game.add.existing(this);
-    this.origin = { x : x, y : y };
-    this.body.gravity.y = 500;
+    this.body.gravity.y = 550;
     this.body.velocity.y = 0;
     this.patrolRange = range;
-    this.detectRange = detectRange || 250;
-    this.attackRange = 150;
-    this.fireRate = 1;
+    this.attackType = attackType;
+    this.attackRange = attackRange || 150;
+    this.fireRate = fireRate || 1;
     this.power = power;
-    this.state = 'right';
+    this.state = 'stop';
+    this.lastStopped = 0;
+    this.lastDir = 'right';
     // when the player runs into enemy, he cannot move the enemy
     this.body.immovable = true;
     this.instanceType = 'Enemy';
@@ -35,36 +37,56 @@ var PikaEnemy = function (game, x, y, range, power, detectRange) {
 PikaEnemy.prototype = Object.create(Enemy.prototype);
 PikaEnemy.prototype.constructor = PikaEnemy;
 
-PikaEnemy.prototype.updateState = function () {
-    console.log(this.mode);
+PikaEnemy.prototype.update = function () {
+    if((this.body.blocked.left || this.body.blocked.right)) {
+        this.jump(-160, 200);
+    }
+
     if (this.mode === MODE.ATTACKING) {
         //do nothing
-    } else if ((this.mode === MODE.PATROLING) && (this.patrolRange > 10)) {
+    } else if (this.mode === MODE.PATROLING) {
         switch (this.state){
             case 'left':
                 this.flipLeft();
                 this.animations.play('walkLeft');
-                this.body.velocity.x = -this.patrolRange;
-                this.state = 'stop';
+                var distanceTraveled = this.calculateDistanceFromOriginX(this.origin.x);
+                if (distanceTraveled >= this.patrolRange) { this.lastStopped = (new Date().getTime()/1000); this.state = 'stop'; break; }
+                this.body.velocity.x = -70;
                 break;
             case 'right':
                 this.flipRight();
                 this.animations.play('walkRight');
-                this.body.velocity.x = this.patrolRange;
-                this.state = 'stop';
+                var distanceTraveled = this.calculateDistanceFromOriginX(this.origin.x);
+                if (distanceTraveled <= 1) { this.lastStopped = (new Date().getTime()/1000); this.state = 'stop'; break; }
+                this.body.velocity.x = 70;
                 break;
             case 'stop':
                 this.animations.stop();
-                if (this.body.velocity.x > 0) {
-                    this.state = 'left'
-                } else {
-                    this.state = 'right'
-                }
                 this.body.velocity.x = 0;
-                break
+                this.frame = 1;
+                if (this.lastStopped < ((new Date().getTime()/1000)+2)) {
+                    if (this.lastDir === 'right') {
+                        this.state = 'left';
+                        this.lastDir = 'left';
+                    } else {
+                        this.state = 'right';
+                        this.lastDir = 'right';
+                    }
+                }
+                break;
         }
     }
 };
+
+// if (distanceTraveled === this.patrolRange) { this.lastStopped = (new Date().getTime()/1000); this.state = 'stop'; break; }
+
+PikaEnemy.prototype.calculateDistanceFromOriginX = function (originX) {
+    var currentX = this.position.x;
+    var absoluteDistance = Math.abs(currentX-originX);
+    return absoluteDistance;
+};
+
+//(this.body.onFloor() || this.body.touching.down) &&
 
 PikaEnemy.prototype.flipLeft = function() {
     this.scale.setTo (1.5, 1.5)
@@ -75,6 +97,7 @@ PikaEnemy.prototype.flipRight = function() {
 };
 
 PikaEnemy.prototype.pursuePlayer = function (player) {
+    this.mode = MODE.PURSUING;
     var playerPosition = player.position;
     var pikaPosition = this.position;
 
@@ -111,11 +134,6 @@ PikaEnemy.prototype.pursuePlayer = function (player) {
     }
     */
 
-    if (game.physics.arcade.distanceBetween(this, player) < this.attackRange) {
-        this.attackPlayer(player);
-        this.mode = MODE.ATTACKING;
-    }
-
 };
 
 PikaEnemy.prototype.st = function () {
@@ -124,8 +142,9 @@ PikaEnemy.prototype.st = function () {
     this.body.velocity.x = 0;
 };
 
-PikaEnemy.prototype.jump = function(velocity) {
-    this.body.velocity.y = -(velocity);
+PikaEnemy.prototype.jump = function(velocityY, velocityX) {
+    this.body.velocity.y = velocityY;
+    this.body.velocity.x = velocityX;
 };
 
 PikaEnemy.prototype.attackPlayer = function(player) {
@@ -145,20 +164,21 @@ PikaEnemy.prototype.attackPlayer = function(player) {
 
     //compare locations
     var xOffset, shootDir;
-    if (playerPositionX < pikaPositionX) { xOffset = -25; shootDir = 'left'; this.flipLeft(); }
+    if (playerPositionX < pikaPositionX) { xOffset = -30; shootDir = 'left'; this.flipLeft(); }
     else { xOffset = 0; shootDir = 'right'; this.flipRight(); }
 
     //check lastFired to see if ready to fire again
     var currentTime = new Date().getTime() / 1000;
     if (currentTime > this.lastFired + this.fireRate) {
+
         this.lastFired = currentTime;
 
         //conjure power object
         var power;
         if (this.power === Flame) {
             power = new Flame(this.game, pikaPositionX + xOffset, pikaPositionY - 16);
-            power.overlap(player);
             power.hitGroups = player;
+            power.collideGroups = collision;
             power.shoot(shootDir);
 
             if (player.alive) {

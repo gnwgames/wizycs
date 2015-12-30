@@ -22,15 +22,18 @@ EnemyGroup.prototype.distanceFromPlayer = function(enemy, player) {
         enemy.mode = MODE.PATROLING;
         return;
     }
-    if ((game.physics.arcade.distanceBetween(enemy,player) < enemy.detectRange) && (enemy.mode !== MODE.ATTACKING)) {
+    if (game.physics.arcade.distanceBetween(enemy,player) < enemy.attackRange) {
         //Enemies.chasePlayer(enemy, player);
         animateDetection(enemy);
-        enemy.pursuePlayer(player);
-        enemy.mode = MODE.PURSUING;
-    } else if (enemy.mode !== MODE.ATTACKING) {
-        //game.physics.arcade.moveToObject(enemy, enemy.origin.x, 200);
-        enemy.mode = MODE.PATROLING;
-    }
+        switch (enemy.attackType) {
+            case Enemy.ATTACK_TYPE.STAND:
+                enemy.attackPlayer(player);
+                break;
+            case Enemy.ATTACK_TYPE.PURSUE:
+                enemy.pursuePlayer(player);
+                break;
+        }
+    } else { enemy.mode = MODE.PATROLING; }
 };
 
 function animateDetection(enemy) {
