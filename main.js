@@ -1,6 +1,6 @@
 'use strict'
 
-var map, layer, keys, wzrd, collision, flame, pika, enemyGroup, weaponGroup;
+var map, layer, terrain, keys, wzrd, collision, flame, pika, enemyGroup, weaponGroup;
 
 // Game instantiation
 var game = new Phaser.Game(600,450, Phaser.AUTO, 'Wizycs', {
@@ -18,18 +18,20 @@ function preload() {
 
 function create() {
   game.physics.startSystem(Phaser.Physics.Arcade);
-  game.stage.backgroundColor = '#5DDCDE';
-  map = game.add.tilemap('test1');
-  map.addTilesetImage('tiles', 'tiles');
-  map.addTilesetImage('collide', 'collide');
-  layer = map.createLayer('world');
-  collision = map.createLayer('collision');
-  collision.visible = false;
+  game.stage.backgroundColor = '#63D1F4';
+  map = game.add.tilemap('gregtest');
+  map.addTilesetImage('clouds', 'clouds');
+  map.addTilesetImage('terrain', 'terrain');
+    map.addTilesetImage('collision', 'collision');
+  layer = map.createLayer('Background');
+  terrain = map.createLayer('Terrain');
+    collision = map.createLayer('Collision');
+    collision.visible = false;
 
   // this value is seen in the json file for this tile map
-  map.setCollision(106, true, collision);
+  map.setCollision(22, true, collision);
   layer.resizeWorld();
-
+    terrain.resizeWorld();
   createObjects();
   integrateObjects();
 }
@@ -40,7 +42,7 @@ function createObjects() {
 
     var pikas = [];
     //pika = new PikaEnemy(game, 450, 50, 150, Enemy.ATTACK_TYPE.STAND, Flame);
-    pika = new PikaEnemy(game, 450, 50, 150, Enemy.ATTACK_TYPE.PURSUE, Flame);
+    pika = new PikaEnemy(game, 450, 350, 150, Flame);
     pikas.push(pika);
 
     enemyGroup = new EnemyGroup(game);
@@ -96,7 +98,8 @@ var preloadAssets = function() {
     game.load.spritesheet('stave_equipped', './assets/sprites/stave.png', 55,55);
     game.load.spritesheet('stave_diving', './assets/sprites/stave_straight.png', 55,55);
     game.load.script('GameHandler.js', './handlers/GameHandler.js');
-    game.load.tilemap('test1', './assets/maps/wizycs_temp_map.json', null, Phaser.Tilemap.TILED_JSON);
-    game.load.image('tiles', './assets/maps/test1.png');
-    game.load.image('collide', './assets/maps/sprite_sheet (6).png');
+    game.load.tilemap('gregtest', './assets/maps/gregtestmap.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.image('clouds', './assets/maps/clouds.jpg');
+    game.load.image('terrain', './assets/maps/sprite_sheet (4).png');
+    game.load.image('collision', './assets/maps/collision_tiles.jpg');
 };

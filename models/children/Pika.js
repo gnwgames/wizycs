@@ -7,18 +7,19 @@ var MODE = {
     PURSUING : 2
 };
 
-var PikaEnemy = function (game, x, y, range, attackType, power, attackRange, fireRate) {
+var PikaEnemy = function (game, x, y, range, power, detectRange) {
     Enemy.call(this, game, x, y, 'pika')
     this.animations.add('walkRight', [8,9,10,11,12,13,14,15], 10, true);
     this.animations.add('walkLeft', [8,9,10,11,12,13,14,15], 10, true);
     this.scale.setTo(1.5, 1.5)
     this.game.add.existing(this);
+    this.origin = { x : x, y : y };
     this.body.gravity.y = 500;
     this.body.velocity.y = 0;
     this.patrolRange = range;
-    this.attackType = attackType;
-    this.attackRange = attackRange || 250;
-    this.fireRate = fireRate || 1;
+    this.detectRange = detectRange || 250;
+    this.attackRange = 150;
+    this.fireRate = 1;
     this.power = power;
     this.state = 'right';
     // when the player runs into enemy, he cannot move the enemy
@@ -38,7 +39,7 @@ PikaEnemy.prototype.updateState = function () {
     console.log(this.mode);
     if (this.mode === MODE.ATTACKING) {
         //do nothing
-    } else if (this.mode === MODE.PATROLING) {
+    } else if ((this.mode === MODE.PATROLING) && (this.patrolRange > 10)) {
         switch (this.state){
             case 'left':
                 this.flipLeft();
@@ -74,7 +75,6 @@ PikaEnemy.prototype.flipRight = function() {
 };
 
 PikaEnemy.prototype.pursuePlayer = function (player) {
-    this.mode = MODE.PURSUING;
     var playerPosition = player.position;
     var pikaPosition = this.position;
 
@@ -110,6 +110,11 @@ PikaEnemy.prototype.pursuePlayer = function (player) {
         game.physics.arcade.moveToObject(this, player, 150);
     }
     */
+
+    if (game.physics.arcade.distanceBetween(this, player) < this.attackRange) {
+        this.attackPlayer(player);
+        this.mode = MODE.ATTACKING;
+    }
 
 };
 

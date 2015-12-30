@@ -2,15 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="79fb1c21-2057-4fac-9263-b93fcbf4cee6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/maps/level1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/maps/clouds.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/maps/collision_tiles.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/maps/gregtestmap.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/maps/gregtestmap.tmx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/maps/sprite_sheet (4).png" afterPath="$PROJECT_DIR$/assets/maps/sprite_sheet (4).png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/groups/EnemyGroup.js" afterPath="$PROJECT_DIR$/groups/EnemyGroup.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.js" afterPath="$PROJECT_DIR$/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/children/Flame.js" afterPath="$PROJECT_DIR$/models/children/Flame.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/children/Melee.js" afterPath="$PROJECT_DIR$/models/children/Melee.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/children/Pika.js" afterPath="$PROJECT_DIR$/models/children/Pika.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/parents/Player.js" afterPath="$PROJECT_DIR$/models/parents/Player.js" />
     </list>
     <ignored path="wizycs.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,24 +31,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.24138">
-              <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.4515778">
+              <caret line="36" column="1" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameHandler.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/handlers/GameHandler.js">
+      <file leaf-file-name="gregtestmap.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/maps/gregtestmap.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#43#0" expanded="false" />
-              </folding>
+            <state vertical-scroll-proportion="-27.263159">
+              <caret line="74" column="25" selection-start-line="74" selection-start-column="25" selection-end-line="74" selection-end-column="25" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -57,16 +55,29 @@
         <entry file="file://$PROJECT_DIR$/phaser.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="81850" column="24" selection-start-line="81850" selection-start-column="24" selection-end-line="81850" selection-end-column="24" />
+              <caret line="89660" column="38" selection-start-line="89660" selection-start-column="31" selection-end-line="89660" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sprite_sheet (6).png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/maps/sprite_sheet (6).png">
-          <provider selected="true" editor-type-id="images">
-            <state />
+      <file leaf-file-name="gregtestmap.tmx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/maps/gregtestmap.tmx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wizycs_temp_map.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/maps/wizycs_temp_map.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.1355932">
+              <caret line="6" column="21" selection-start-line="6" selection-start-column="21" selection-end-line="10" selection-end-column="14" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
@@ -74,19 +85,7 @@
         <entry file="file://$PROJECT_DIR$/groups/EnemyGroup.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="57" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="57" />
-              <folding>
-                <element signature="e#0#43#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Flame.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/children/Flame.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="64" column="8" selection-start-line="64" selection-start-column="8" selection-end-line="64" selection-end-column="8" />
+              <caret line="26" column="32" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
               <folding>
                 <element signature="e#0#43#0" expanded="false" />
               </folding>
@@ -124,11 +123,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Pika.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Pika.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/children/Pika.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7486398">
-              <caret line="102" column="2" selection-start-line="102" selection-start-column="2" selection-end-line="102" selection-end-column="2" />
+            <state vertical-scroll-proportion="49.96552">
+              <caret line="35" column="44" selection-start-line="35" selection-start-column="44" selection-end-line="35" selection-end-column="44" />
               <folding>
                 <element signature="e#0#43#0" expanded="false" />
               </folding>
@@ -190,10 +189,13 @@
         <option value="$PROJECT_DIR$/models/children/Melee.js" />
         <option value="$PROJECT_DIR$/assets/maps/level1.json" />
         <option value="$PROJECT_DIR$/models/children/Flame.js" />
-        <option value="$PROJECT_DIR$/main.js" />
-        <option value="$PROJECT_DIR$/groups/EnemyGroup.js" />
         <option value="$PROJECT_DIR$/models/parents/Player.js" />
         <option value="$PROJECT_DIR$/models/children/Pika.js" />
+        <option value="$PROJECT_DIR$/assets/maps/gregtestmap.tmx" />
+        <option value="$PROJECT_DIR$/groups/EnemyGroup.js" />
+        <option value="$PROJECT_DIR$/assets/maps/wizycs_temp_map.json" />
+        <option value="$PROJECT_DIR$/assets/maps/gregtestmap.json" />
+        <option value="$PROJECT_DIR$/main.js" />
       </list>
     </option>
   </component>
@@ -233,7 +235,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -303,8 +304,41 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wizycs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wizycs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wizycs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wizycs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -315,7 +349,6 @@
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/gattra/Desktop/wizycs/models/Powers.js" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
-    <property name="FullScreen" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -564,7 +597,13 @@
       <option name="project" value="LOCAL" />
       <updated>1451351711987</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="working enemy magic attack / onto AI (not fully functioning currently)">
+      <created>1451420658281</created>
+      <option name="number" value="00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1451420658281</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -603,7 +642,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="working fireball attack / game not registering when player is touching ground&#10;" />
     <MESSAGE value="Merge branch 'windev' of github.com:gnwgames/wizycs into gregdev&#10;&#10;# Conflicts:&#10;#&#9;main.js&#10;#&#9;models/Enemy.js&#10;#&#9;models/Player.js&#10;#&#9;models/Powers.js&#10;" />
     <MESSAGE value="mario collision events - land ontop = kill enemy/ side-collision = kill player&#10;&#10;can no longer fly, only jump. can be easily changed if we'd like" />
     <MESSAGE value="building kill enemy on flame collision - not working / incomplete" />
@@ -628,7 +666,8 @@
     <MESSAGE value="added diving melee sprite image to git" />
     <MESSAGE value="added life to player / fixed minor bug with killing melee sprite" />
     <MESSAGE value="minor bug fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor bug fixes" />
+    <MESSAGE value="working enemy magic attack / onto AI (not fully functioning currently)" />
+    <option name="LAST_COMMIT_MESSAGE" value="working enemy magic attack / onto AI (not fully functioning currently)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -637,14 +676,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/models/parents/Player.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/parents/Power.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -896,13 +927,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/maps/wizycs_temp_map.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/sprites/pika.jpg">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -938,7 +962,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -948,11 +971,6 @@
           <caret line="27" column="3" selection-start-line="27" selection-start-column="3" selection-end-line="27" selection-end-column="3" />
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/maps/sprite_sheet (4).png">
-      <provider selected="true" editor-type-id="images">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/maps/sprite_sheet (6).png">
@@ -967,22 +985,6 @@
           <folding>
             <element signature="e#0#43#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/phaser.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="81850" column="24" selection-start-line="81850" selection-start-column="24" selection-end-line="81850" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/children/Melee.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1004,14 +1006,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.24138">
-          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/parents/Player.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1020,10 +1014,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/models/children/Melee.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/maps/gregtestmap.tmx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/phaser.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="89660" column="38" selection-start-line="89660" selection-start-column="31" selection-end-line="89660" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/groups/EnemyGroup.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="57" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="57" />
+          <caret line="26" column="32" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
           <folding>
             <element signature="e#0#43#0" expanded="false" />
           </folding>
@@ -1032,11 +1050,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/models/children/Pika.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7486398">
-          <caret line="102" column="2" selection-start-line="102" selection-start-column="2" selection-end-line="102" selection-end-column="2" />
+        <state vertical-scroll-proportion="49.96552">
+          <caret line="35" column="44" selection-start-line="35" selection-start-column="44" selection-end-line="35" selection-end-column="44" />
           <folding>
             <element signature="e#0#43#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/maps/wizycs_temp_map.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.1355932">
+          <caret line="6" column="21" selection-start-line="6" selection-start-column="21" selection-end-line="10" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/maps/gregtestmap.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-27.263159">
+          <caret line="74" column="25" selection-start-line="74" selection-start-column="25" selection-end-line="74" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4515778">
+          <caret line="36" column="1" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
