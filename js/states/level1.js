@@ -1,7 +1,7 @@
 'use strict'
 var WizrdGame = WizrdGame || {}
 
-WizrdGame.level1 = function(){
+WizrdGame.level1 = function() {
   this.wizrd = {}
   this.collision = {}
 }
