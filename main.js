@@ -2,12 +2,16 @@
 
 var map, layer, keys, wzrd, collision, flame, pika, enemyGroup, weaponGroup;
 
+// Change this to 'testbed' or 'level1' or whatever level you want
+// to start with. Use testbed for testing things.
+var startLevel = 'level1'
+
 var WizrdGame = WizrdGame || {}
 // Game instantiation
 WizrdGame.game = new Phaser.Game(600,400, Phaser.AUTO, 'Wizycs')
 WizrdGame.game.state.add('testbed', WizrdGame.testbed)
 WizrdGame.game.state.add('level1', WizrdGame.level1)
-WizrdGame.game.state.start('level1')
+WizrdGame.game.state.start(startLevel)
 
 //
 // the following scripts are not used any more:
