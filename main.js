@@ -41,7 +41,7 @@ function createObjects() {
     wzrd = new Player(game, 0, 0);
 
     var pikas = [];
-    pika = new PikaEnemy(game, 450, 350, 150, Enemy.ATTACK_TYPE.STAND, Flame);
+    pika = new PikaEnemy(game, 450, 350, 150, Enemy.ATTACK_TYPE.PURSUE, Flame);
     //pika = new PikaEnemy(game, 450, 350, 150, Flame);
     pikas.push(pika);
 

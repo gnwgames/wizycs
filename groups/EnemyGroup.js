@@ -19,6 +19,7 @@ EnemyGroup.prototype.addEnemies = function(enemies) {
 
 EnemyGroup.prototype.distanceFromPlayer = function(enemy, player) {
     if (!player.alive) {
+        if (enemy.body.velocity.x < 0) { enemy.lastDir = 'left'; } else { enemy.lastDir = 'right'; }
         enemy.mode = MODE.PATROLING;
         return;
     }
@@ -33,7 +34,13 @@ EnemyGroup.prototype.distanceFromPlayer = function(enemy, player) {
                 enemy.pursuePlayer(player);
                 break;
         }
-    } else { enemy.mode = MODE.PATROLING; }
+    } else {
+        if (enemy.mode === MODE.ATTACKING || enemy.mode === MODE.PURSUING) {
+            if (enemy.body.velocity.x < 0) { enemy.lastDir = 'left'; } else { enemy.lastDir = 'right'; }
+            enemy.origin = { x : enemy.position.x, y : enemy.position.y };
+        }
+        enemy.mode = MODE.PATROLING;
+    }
 };
 
 function animateDetection(enemy) {

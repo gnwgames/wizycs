@@ -16,8 +16,8 @@ var PikaEnemy = function (game, x, y, range, attackType, power, attackRange, fir
     this.game.add.existing(this);
     this.body.gravity.y = 550;
     this.body.velocity.y = 0;
-    this.patrolRange = range;
-    this.attackType = attackType;
+    this.patrolRange = range || 150;
+    this.attackType = attackType || Enemy.ATTACK_TYPE.STAND;
     this.attackRange = attackRange || 150;
     this.fireRate = fireRate || 1;
     this.power = power;
@@ -104,11 +104,11 @@ PikaEnemy.prototype.pursuePlayer = function (player) {
     if (pikaPosition.x < playerPosition.x - 50) {
         this.flipRight();
         this.animations.play('walkRight');
-        this.body.velocity.x = 200;
+        this.body.velocity.x = 100;
     } else if (pikaPosition.x > playerPosition.x + 50)  {
         this.flipLeft();
         this.animations.play('walkLeft');
-        this.body.velocity.x = -200;
+        this.body.velocity.x = -100;
     }
 /*
     if ((playerPosition.y < pikaPosition.y) && (this.body.onFloor() || this.body.touching.down)) {
