@@ -1,6 +1,6 @@
 'use strict'
 
-var map, layer, terrain, keys, wzrd, collision, flame, pika, enemyGroup, weaponGroup;
+var map, layer, terrain, keys, wzrd, collision, flame, pika, enemyGroup, weaponGroup, warlckGroup;
 
 // Game instantiation
 var game = new Phaser.Game(600,450, Phaser.AUTO, 'Wizycs', {
@@ -41,12 +41,20 @@ function createObjects() {
     wzrd = new Player(game, 0, 0);
 
     var pikas = [];
-    pika = new PikaEnemy(game, 450, 350, 150, Enemy.ATTACK_TYPE.PURSUE, Flame);
+    //pika = new PikaEnemy(game, 450, 350, 150, Enemy.ATTACK_TYPE.PURSUE, Flame);
     //pika = new PikaEnemy(game, 450, 350, 150, Flame);
-    pikas.push(pika);
+    //pikas.push(pika);
+
+    var warlcks = [];
+    var warlck = new BasicWarlck(game, 450, 350, 150);
+    warlcks.push(warlck);
 
     enemyGroup = new EnemyGroup(game);
     enemyGroup.addEnemies(pikas);
+
+    warlckGroup = new WarlckGroup(game);
+    warlckGroup.addEnemies(warlcks);
+
 }
 
 function integrateObjects() {
@@ -74,6 +82,14 @@ function update() {
         }
         enemyGroup.distanceFromPlayer(enemy, wzrd);
     });
+
+    warlckGroup.forEachAlive(function(warlck) {
+        warlck.collide(collision);
+        if (wzrd.alive) {
+            wzrd.overlap(warlck);
+        }
+        warlckGroup.distanceFromPlayer(warlck, wzrd);
+    });
   // somehow restart the level or respawn the player when it dies
   //if (!wzrd.alive) {
   //  GameHandler.RespawnPlayer(wzrd);
@@ -81,13 +97,16 @@ function update() {
 }
 
 var preloadScripts = function() {
-    game.load.script('EnemyGroup.js', './groups/EnemyGroup.js');
-    game.load.script('Flame.js', './models/children/Flame.js');
-    game.load.script('Pika.js', './models/children/Pika.js');
-    game.load.script('Melee.js', './models/children/Melee.js');
-    game.load.script('Enemy.js', './models/parents/Enemy.js');
-    game.load.script('Player.js', './models/parents/Player.js');
-    game.load.script('Power.js', './models/parents/Power.js');
+    game.load.script('EnemyGroup.js', './models/groups/EnemyGroup.js');
+    game.load.script('EnemyGroup.js', './models/groups/WarlckGroup.js');
+    game.load.script('Flame.js', './models/powers/Flame.js');
+    game.load.script('Pika.js', './models/enemies/Pika.js');
+    game.load.script('Melee.js', './models/powers/Melee.js');
+    game.load.script('Enemy.js', './models/enemies/Enemy.js');
+    game.load.script('Player.js', './models/players/Player.js');
+    game.load.script('Power.js', './models/powers/Power.js');
+    game.load.script('Power.js', './models/warlcks/Warlck.js');
+    game.load.script('Power.js', './models/warlcks/BasicWarlck.js');
 };
 
 var preloadAssets = function() {
