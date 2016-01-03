@@ -4,17 +4,27 @@ var map, layer, keys, wzrd, collision, flame, pika, enemyGroup, weaponGroup;
 
 // Change this to 'testbed' or 'level1' or whatever level you want
 // to start with. Use testbed for testing things.
-var startLevel = 'level1'
+var levels = {
+  one: 'level1',
+  test: 'testbed',
+  test_empty: 'test_empty',
+  main: 'main_menu',
+  two: 'level2',
+}
+
+var startLevel = levels.test_empty
 
 var WizrdGame = WizrdGame || {}
 // Game instantiation
 WizrdGame.game = new Phaser.Game(600,400, Phaser.AUTO, 'Wizycs')
-WizrdGame.game.state.add('testbed', WizrdGame.testbed)
-WizrdGame.game.state.add('level1', WizrdGame.level1)
+WizrdGame.game.state.add(levels.test, WizrdGame.testbed)
+WizrdGame.game.state.add(levels.one, WizrdGame.level1)
+WizrdGame.game.state.add(levels.test_empty, WizrdGame.test_empty)
 WizrdGame.game.state.start(startLevel)
 
 //
-// the following scripts are not used any more:
+// the following scripts are not used any more by win's
+// scripts
 function preload() {
   // I load all my scripts in the html file
   // sort of superstition, because of errors before
