@@ -31,7 +31,6 @@ BasicWarlck.prototype = Object.create(Enemy.prototype);
 BasicWarlck.prototype.constructor = BasicWarlck;
 
 BasicWarlck.prototype.update = function () {
-    console.log(this.mode);
     if((this.body.blocked.left || this.body.blocked.right)) {
         this.jump(-160, 200);
     }
@@ -129,7 +128,7 @@ BasicWarlck.prototype.attackPlayer = function(player) {
         var power;
         if (this.power === Flame) {
             power = new Flame(this.game, warlckPositionX + xOffset, warlckPositionY - 16);
-            power.hitGroups = player;
+            power.hitGroups = [ player ];
             power.collideGroups = collision;
             power.shoot(shootDir);
 

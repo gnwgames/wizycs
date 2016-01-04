@@ -60,10 +60,10 @@ function createObjects() {
 function integrateObjects() {
    //Flame.hitGroups = enemyGroup;
    // Melee.hitGroups = enemyGroup;
-
+    var hitGroups = [ enemyGroup, warlckGroup ];
     // Equip the flame power to the key D / Melee to W
-    wzrd.equip(Phaser.KeyCode.D, Flame.handleInput, enemyGroup);
-    wzrd.equip(Phaser.KeyCode.DOWN, Melee.handleInput, enemyGroup);
+    wzrd.equip(Phaser.KeyCode.D, Flame.handleInput, hitGroups);
+    wzrd.equip(Phaser.KeyCode.DOWN, Melee.handleInput, hitGroups);
 /*
     enemyGroup.forEachAlive(function(enemy) {
         game.time.events.loop(Phaser.Timer.SECOND, function() {enemy.updateState()}, this);
@@ -90,6 +90,16 @@ function update() {
             warlckGroup.distanceFromPlayer(warlck, wzrd);
         }
     });
+
+    enemyGroup.forEachDead(function(enemy){
+        enemyGroup.remove(enemy);
+    });
+
+    warlckGroup.forEachDead(function(warlck){
+        warlckGroup.remove(warlck);
+    });
+
+
 
   // somehow restart the level or respawn the player when it dies
   //if (!wzrd.alive) {

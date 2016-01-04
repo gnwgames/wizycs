@@ -13,17 +13,17 @@ var Flame = function (game, x, y) {
     this.hitGroups = null;
 };
 
-Flame.handleInput = function (char, hitGroup) {
+Flame.handleInput = function (char, hitGroups) {
     if (char.body.velocity.x >= 0) {
         var flame = new Flame(char.game, char.position.x-10, char.position.y - 16);
         //flame.overlap(hitGroup);
-        flame.hitGroups = hitGroup;
+        flame.hitGroups = hitGroups;
         flame.collideGroups = collision;
         flame.shoot('right');
     } else if (char.body.velocity.x < 0) {
         var flame = new Flame(char.game, char.position.x - 35, char.position.y - 16);
         //flame.overlap(hitGroup);
-        flame.hitGroups = hitGroup;
+        flame.hitGroups = hitGroups;
         flame.collideGroups = collision;
         flame.shoot('left');
     }
@@ -46,8 +46,11 @@ Flame.prototype.shoot = function (dir) {
 };
 
 Flame.prototype.update = function () {
-    this.game.physics.arcade.overlap(this.hitGroups, this, this.hitTarget);
-    this.game.physics.arcade.collide(this.collideGroups, this, this.collideTarget);
+    if (!this.alive) { this.parent.removeChild(this); }
+    for (var i=0; i<this.hitGroups.length;i++) {
+        this.game.physics.arcade.overlap(this.hitGroups[i], this, this.hitTarget);
+    }
+    this.game.physics.arcade.collide(this.collideGroups[i], this, this.collideTarget);
 };
 
 Flame.prototype.hitTarget = function(obj1, obj2) {
@@ -65,6 +68,7 @@ Flame.prototype.hitTarget = function(obj1, obj2) {
     console.log(obj.lifeCount);
 
     power.kill();
+    power.parent.removeChild(power);
     obj.lifeCount -= 1;
     if (obj.lifeCount === 0) {
         obj.kill();
@@ -80,6 +84,7 @@ Flame.prototype.collideTarget = function(obj1, obj2) {
     }
 
     power.kill();
+    power.parent.removeChild(power);
 };
 
 

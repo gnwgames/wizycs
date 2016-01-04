@@ -177,7 +177,7 @@ PikaEnemy.prototype.attackPlayer = function(player) {
         var power;
         if (this.power === Flame) {
             power = new Flame(this.game, pikaPositionX + xOffset, pikaPositionY - 16);
-            power.hitGroups = player;
+            power.hitGroups = [ player ];
             power.collideGroups = collision;
             power.shoot(shootDir);
 

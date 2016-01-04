@@ -34,11 +34,11 @@ var Player = function(game, x, y) {
 Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
-Player.prototype.equip = function(key, handler, hitGroup) {
+Player.prototype.equip = function(key, handler, hitGroups) {
     var obj = this;
     this.power[key] = game.input.keyboard.addKey(key);
     this.power[key].onDown.add(function() {
-        handler(obj, hitGroup)
+        handler(obj, hitGroups)
     })
 };
 
