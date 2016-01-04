@@ -8,7 +8,7 @@ var Melee = function (game, x, y) {
     this.hitGroups = null;
 };
 
-Melee.handleInput = function (char) {
+Melee.handleInput = function (char, hitGroup) {
     if ((char.state !== STATE.STANDING) && (char.state !== STATE.FLYING)) {
         var staff = new Melee(game, 0, 0);
         staff.scale.set(.60, .60);
@@ -17,7 +17,6 @@ Melee.handleInput = function (char) {
         char.equippedWeapon = char.addChild(staff);
         char.body.velocity.y = 600;
     }
-
 };
 
 Melee.prototype = Object.create(Power.prototype);
@@ -30,14 +29,5 @@ Melee.prototype.sheath = function(player) {
 };
 
 Melee.prototype.update = function () {
-    this.game.physics.arcade.overlap(Melee.hitGroups, this, hitTarget)
+    this.game.physics.arcade.overlap(this.hitGroups, this)
 };
-
-
-function hitTarget(obj) {
-    //damageObject(obj);
-}
-
-function damageObject(obj) {
-    //obj.kill();
-}

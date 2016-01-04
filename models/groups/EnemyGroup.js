@@ -18,18 +18,28 @@ EnemyGroup.prototype.addEnemies = function(enemies) {
 };
 
 EnemyGroup.prototype.distanceFromPlayer = function(enemy, player) {
-    if (game.physics.arcade.distanceBetween(enemy,player) < 100) {
+    if (!player.alive) {
+        console.log('here');
+        enemy.lastDir = 'right';
+        enemy.mode = MODE.PATROLING;
+    }
+    else if (game.physics.arcade.distanceBetween(enemy,player) < enemy.attackRange) {
         //Enemies.chasePlayer(enemy, player);
         animateDetection(enemy);
         switch (enemy.attackType) {
             case Enemy.ATTACK_TYPE.STAND:
-                enemy.attackPlayer();
+                enemy.attackPlayer(player);
                 break;
             case Enemy.ATTACK_TYPE.PURSUE:
-                //enemy.pursuePlayer(player);
+                enemy.pursuePlayer(player);
                 break;
         }
-
+    } else {
+        if (enemy.mode === MODE.ATTACKING || enemy.mode === MODE.PURSUING) {
+            if (enemy.body.velocity.x < 0) { enemy.lastDir = 'left'; } else { enemy.lastDir = 'right'; }
+            enemy.origin = { x : enemy.position.x, y : enemy.position.y };
+        }
+        enemy.mode = MODE.PATROLING;
     }
 };
 
