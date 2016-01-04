@@ -4,17 +4,18 @@
 
 var BasicWarlck = function (game, x, y, range, attackRange, fireRate) {
     Warlck.call(this, game, x, y, 'chars');
-    this.animations.add('walkRight', [72, 73, 74, 72], 10, true);
+    this.animations.add('walkRight', [72, 73, 74, 73], 10, true);
     this.animations.add('walkLeft', [60, 61, 62, 61], 10, true);
     this.origin = { x : x, y : y };
     this.game.add.existing(this);
     this.body.gravity.y = 550;
     this.body.velocity.y = 0;
     this.patrolRange = range || 150;
-    this.attackRange = attackRange || 150;
+    this.attackRange = attackRange || 250;
     this.power = Flame;
     this.fireRate = fireRate || 1;
-    this.state = 'stop';
+    this.state = Warlck.STATE.NEUTRAL;
+    this.curDir = 'stop';
     this.lastStopped = 0;
     this.lastDir = 'right';
     // when the player runs into enemy, he cannot move the enemy
@@ -31,6 +32,10 @@ BasicWarlck.prototype = Object.create(Enemy.prototype);
 BasicWarlck.prototype.constructor = BasicWarlck;
 
 BasicWarlck.prototype.update = function () {
+    if((this.body.onFloor() || this.body.touching.down)) {
+        this.state = Warlck.STATE.STANDING;
+    }
+
     if((this.body.blocked.left || this.body.blocked.right)) {
         this.jump(-160, 200);
     }
@@ -38,17 +43,17 @@ BasicWarlck.prototype.update = function () {
     if (this.mode === MODE.ATTACKING) {
         //do nothing
     } else if (this.mode === MODE.PATROLING) {
-        switch (this.state){
+        switch (this.curDir){
             case 'left':
                 this.animations.play('walkLeft');
                 var distanceTraveled = this.calculateDistanceFromOriginX(this.origin.x);
-                if (distanceTraveled >= this.patrolRange) { this.lastStopped = (new Date().getTime()/1000); this.state = 'stop'; break; }
+                if (distanceTraveled >= this.patrolRange) { this.lastStopped = (new Date().getTime()/1000); this.curDir = 'stop'; break; }
                 this.body.velocity.x = -70;
                 break;
             case 'right':
                 this.animations.play('walkRight');
                 var distanceTraveled = this.calculateDistanceFromOriginX(this.origin.x);
-                if (distanceTraveled <= 1) { this.lastStopped = (new Date().getTime()/1000); this.state = 'stop'; break; }
+                if (distanceTraveled <= 1) { this.lastStopped = (new Date().getTime()/1000); this.curDir = 'stop'; break; }
                 this.body.velocity.x = 70;
                 break;
             case 'stop':
@@ -57,10 +62,10 @@ BasicWarlck.prototype.update = function () {
                 this.frame = 49;
                 if (this.lastStopped+1 < (new Date().getTime()/1000)) {
                     if (this.lastDir === 'right') {
-                        this.state = 'left';
+                        this.curDir = 'left';
                         this.lastDir = 'left';
                     } else {
-                        this.state = 'right';
+                        this.curDir = 'right';
                         this.lastDir = 'right';
                     }
                 }
@@ -77,6 +82,11 @@ BasicWarlck.prototype.calculateDistanceFromOriginX = function (originX) {
     return absoluteDistance;
 };
 
+BasicWarlck.prototype.engagePlayer = function(player, distance) {
+    if (distance > 100) { this.pursuePlayer(player); }
+    else { this.attackPlayer(player); }
+};
+
 BasicWarlck.prototype.pursuePlayer = function (player) {
     this.mode = MODE.PURSUING;
     var playerPosition = player.position;
@@ -84,12 +94,11 @@ BasicWarlck.prototype.pursuePlayer = function (player) {
 
     if (warlckPosition.x < playerPosition.x - 50) {
         this.animations.play('walkRight');
-        this.body.velocity.x = 100;
+        this.body.velocity.x = 120;
     } else if (warlckPosition.x > playerPosition.x + 50)  {
         this.animations.play('walkLeft');
-        this.body.velocity.x = -100;
+        this.body.velocity.x = -120;
     }
-
 };
 
 BasicWarlck.prototype.st = function () {
@@ -118,8 +127,8 @@ BasicWarlck.prototype.attackPlayer = function(player) {
 
     //compare locations
     var xOffset, shootDir;
-    if (playerPositionX < warlckPositionX) { xOffset = -30; shootDir = 'left'; }
-    else { xOffset = 0; shootDir = 'right'; }
+    if (playerPositionX < warlckPositionX) { xOffset = -30; shootDir = 'left'; this.frame = 61; }
+    else { xOffset = 0; shootDir = 'right'; this.frame = 73; }
 
     //check lastFired to see if ready to fire again
     var currentTime = new Date().getTime() / 1000;
@@ -137,5 +146,19 @@ BasicWarlck.prototype.attackPlayer = function(player) {
             }
         }
     }
-
 };
+
+BasicWarlck.prototype.dodgePower = function(power) {
+    this.state = Warlck.STATE.DODGING;
+    this.body.velocity.x = 0;
+    var y = power.position.y + -80;
+    var dodge = game.add.tween(this);
+    dodge.to({ y: y }, 100,  Phaser.Easing.Default);
+    dodge.onComplete.add(updateState, this, power);
+    dodge.start();
+};
+
+function updateState(warlck) {
+    warlck.curDir = 'left';
+    warlck.lastDir = 'left';
+}

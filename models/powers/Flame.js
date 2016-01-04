@@ -19,12 +19,14 @@ Flame.handleInput = function (char, hitGroups) {
         //flame.overlap(hitGroup);
         flame.hitGroups = hitGroups;
         flame.collideGroups = collision;
+        playerPowersGroup.add(flame);
         flame.shoot('right');
     } else if (char.body.velocity.x < 0) {
         var flame = new Flame(char.game, char.position.x - 35, char.position.y - 16);
         //flame.overlap(hitGroup);
         flame.hitGroups = hitGroups;
         flame.collideGroups = collision;
+        playerPowersGroup.add(flame);
         flame.shoot('left');
     }
 };
@@ -34,13 +36,13 @@ Flame.prototype.constructor = Flame;
 
 Flame.prototype.shoot = function (dir) {
     if (dir === 'left') {
-        this.body.velocity.x = -300;
+        this.body.velocity.x = -400;
         this.animations.play('leftFire')
     } else if (dir === 'right') {
-        this.body.velocity.x = 300;
+        this.body.velocity.x = 400;
         this.animations.play('rightFire')
     } else if (dir === 'down') {
-        this.body.velocity.y = 300;
+        this.body.velocity.y = 400;
         this.animations.play('downFire');
     }
 };

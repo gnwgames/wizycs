@@ -10,7 +10,8 @@ var Enemy = function (game, x, y, key) {
 
 Enemy.ATTACK_TYPE = {
     STAND : 0,
-    PURSUE : 1
+    PURSUE : 1,
+    PURSUE_ATTACK : 2
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);

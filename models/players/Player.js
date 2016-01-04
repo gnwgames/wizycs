@@ -28,7 +28,7 @@ var Player = function(game, x, y) {
     this.jumpCount = 0;
     this.state = STATE.STANDING;
     this.equippedWeapon = null;
-    this.lifeCount = 10;
+    this.lifeCount = 100;
 };
 
 Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -165,7 +165,8 @@ function collidePlayer(player, obj) {
             player.body.velocity.y = -200;
             player.equippedWeapon.kill();
             player.equippedWeapon = null;
-            obj.kill();
+            obj.lifeCount -= 3;
+
         }
         else if (obj.body.touching.up) {
             player.body.velocity.y = -200;
@@ -198,6 +199,7 @@ function collidePlayer(player, obj) {
     }
 
     if (player.lifeCount < 0) { player.kill() }
+    if (obj.lifeCount < 0) { obj.kill(); obj.parent.removeChild(obj); }
 }
 
 Player.prototype.animateInjury = function() {

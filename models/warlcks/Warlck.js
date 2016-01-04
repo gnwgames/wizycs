@@ -7,10 +7,23 @@ var Warlck = function (game, x, y, key) {
     this.game.physics.arcade.enable(this);
 };
 
-Warlck.MODE = {
+Warlck.MODE =
+{
     PATROLING : 0,
     ATTACKING : 1,
     PURSUING : 2
+};
+
+Warlck.STATE =
+{
+    STANDING : 0,
+    JUMPING : 1,
+    FLYING : 2,
+    FALLING : 3,
+    DIVING : 4,
+    INJURED : 5,
+    DODGING : 6,
+    NEUTRAL : 7
 };
 
 Warlck.prototype = Object.create(Phaser.Sprite.prototype);

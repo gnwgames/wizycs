@@ -1,6 +1,6 @@
 'use strict'
 
-var map, layer, terrain, keys, wzrd, collision, flame, pika, enemyGroup, weaponGroup, warlckGroup;
+var map, layer, terrain, keys, wzrd, collision, flame, pika, enemyGroup, weaponGroup, warlckGroup, playerPowersGroup;
 
 // Game instantiation
 var game = new Phaser.Game(600,450, Phaser.AUTO, 'Wizycs', {
@@ -43,7 +43,7 @@ function createObjects() {
     var pikas = [];
     //pika = new PikaEnemy(game, 450, 350, 150, Enemy.ATTACK_TYPE.PURSUE, Flame);
     pika = new PikaEnemy(game, 450, 350, 150, null, Flame, null, null);
-    pikas.push(pika);
+    //pikas.push(pika);
 
     var warlcks = [];
     var warlck = new BasicWarlck(game, 450, 350, 150);
@@ -55,6 +55,7 @@ function createObjects() {
     warlckGroup = new WarlckGroup(game);
     warlckGroup.addEnemies(warlcks);
 
+    playerPowersGroup = new PowerGroup(game);
 }
 
 function integrateObjects() {
@@ -89,6 +90,11 @@ function update() {
             wzrd.overlap(warlck);
             warlckGroup.distanceFromPlayer(warlck, wzrd);
         }
+        playerPowersGroup.forEachAlive(function(power) {
+           if ((game.physics.arcade.distanceBetween(power,warlck)<100) && (warlck.state !== Warlck.STATE.DODGING)) {
+               warlck.dodgePower(power);
+           }
+        });
     });
 
     enemyGroup.forEachDead(function(enemy){
@@ -99,8 +105,6 @@ function update() {
         warlckGroup.remove(warlck);
     });
 
-
-
   // somehow restart the level or respawn the player when it dies
   //if (!wzrd.alive) {
   //  GameHandler.RespawnPlayer(wzrd);
@@ -110,6 +114,7 @@ function update() {
 var preloadScripts = function() {
     game.load.script('EnemyGroup.js', './models/groups/EnemyGroup.js');
     game.load.script('EnemyGroup.js', './models/groups/WarlckGroup.js');
+    game.load.script('EnemyGroup.js', './models/groups/PowerGroup.js');
     game.load.script('Flame.js', './models/powers/Flame.js');
     game.load.script('Pika.js', './models/enemies/Pika.js');
     game.load.script('Melee.js', './models/powers/Melee.js');
