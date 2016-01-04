@@ -7,7 +7,7 @@ var Warlck = function (game, x, y, key) {
     this.game.physics.arcade.enable(this);
 };
 
-var MODE = {
+Warlck.MODE = {
     PATROLING : 0,
     ATTACKING : 1,
     PURSUING : 2

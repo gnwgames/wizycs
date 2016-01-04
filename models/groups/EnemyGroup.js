@@ -19,11 +19,11 @@ EnemyGroup.prototype.addEnemies = function(enemies) {
 
 EnemyGroup.prototype.distanceFromPlayer = function(enemy, player) {
     if (!player.alive) {
-        if (enemy.body.velocity.x < 0) { enemy.lastDir = 'left'; } else { enemy.lastDir = 'right'; }
+        console.log('here');
+        enemy.lastDir = 'right';
         enemy.mode = MODE.PATROLING;
-        return;
     }
-    if (game.physics.arcade.distanceBetween(enemy,player) < enemy.attackRange) {
+    else if (game.physics.arcade.distanceBetween(enemy,player) < enemy.attackRange) {
         //Enemies.chasePlayer(enemy, player);
         animateDetection(enemy);
         switch (enemy.attackType) {

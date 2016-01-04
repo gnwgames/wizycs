@@ -8,7 +8,7 @@ var MODE = {
 };
 
 var PikaEnemy = function (game, x, y, range, attackType, power, attackRange, fireRate) {
-    Enemy.call(this, game, x, y, 'pika')
+    Enemy.call(this, game, x, y, 'pika');
     this.animations.add('walkRight', [8,9,10,11,12,13,14,15], 10, true);
     this.animations.add('walkLeft', [8,9,10,11,12,13,14,15], 10, true);
     this.scale.setTo(1.5, 1.5);
@@ -19,7 +19,7 @@ var PikaEnemy = function (game, x, y, range, attackType, power, attackRange, fir
     this.patrolRange = range || 150;
     this.attackType = attackType || Enemy.ATTACK_TYPE.STAND;
     this.attackRange = attackRange || 150;
-    this.fireRate = fireRate || 1;
+    this.fireRate = fireRate || 2;
     this.power = power;
     this.state = 'stop';
     this.lastStopped = 0;
@@ -64,7 +64,7 @@ PikaEnemy.prototype.update = function () {
                 this.animations.stop();
                 this.body.velocity.x = 0;
                 this.frame = 1;
-                if (this.lastStopped < ((new Date().getTime()/1000)+2)) {
+                if (this.lastStopped+1 < (new Date().getTime()/1000)) {
                     if (this.lastDir === 'right') {
                         this.state = 'left';
                         this.lastDir = 'left';

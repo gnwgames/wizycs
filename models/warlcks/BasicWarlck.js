@@ -12,6 +12,7 @@ var BasicWarlck = function (game, x, y, range, attackRange, fireRate) {
     this.body.velocity.y = 0;
     this.patrolRange = range || 150;
     this.attackRange = attackRange || 150;
+    this.power = Flame;
     this.fireRate = fireRate || 1;
     this.state = 'stop';
     this.lastStopped = 0;
@@ -30,6 +31,7 @@ BasicWarlck.prototype = Object.create(Enemy.prototype);
 BasicWarlck.prototype.constructor = BasicWarlck;
 
 BasicWarlck.prototype.update = function () {
+    console.log(this.mode);
     if((this.body.blocked.left || this.body.blocked.right)) {
         this.jump(-160, 200);
     }
@@ -54,7 +56,7 @@ BasicWarlck.prototype.update = function () {
                 this.animations.stop();
                 this.body.velocity.x = 0;
                 this.frame = 49;
-                if (this.lastStopped < ((new Date().getTime()/1000)+2)) {
+                if (this.lastStopped+1 < (new Date().getTime()/1000)) {
                     if (this.lastDir === 'right') {
                         this.state = 'left';
                         this.lastDir = 'left';
@@ -103,7 +105,6 @@ BasicWarlck.prototype.jump = function(velocityY, velocityX) {
 
 BasicWarlck.prototype.attackPlayer = function(player) {
     this.mode = MODE.ATTACKING;
-
     this.animations.stop();
     this.body.velocity.x = 0;
 
@@ -124,10 +125,18 @@ BasicWarlck.prototype.attackPlayer = function(player) {
     //check lastFired to see if ready to fire again
     var currentTime = new Date().getTime() / 1000;
     if (currentTime > this.lastFired + this.fireRate) {
-
         this.lastFired = currentTime;
+        var power;
+        if (this.power === Flame) {
+            power = new Flame(this.game, warlckPositionX + xOffset, warlckPositionY - 16);
+            power.hitGroups = player;
+            power.collideGroups = collision;
+            power.shoot(shootDir);
 
-        console.log('firing');
+            if (player.alive) {
+                game.physics.arcade.moveToObject(power, player, 300);
+            }
+        }
     }
 
 };

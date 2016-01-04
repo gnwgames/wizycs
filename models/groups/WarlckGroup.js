@@ -23,19 +23,16 @@ WarlckGroup.prototype.addEnemies = function(warlcks) {
 
 WarlckGroup.prototype.distanceFromPlayer = function(warlck, player) {
     if (!player.alive) {
-        if (warlck.body.velocity.x < 0) { warlck.lastDir = 'left'; } else { warlck.lastDir = 'right'; }
+        warlck.lastDir = 'right';
         warlck.mode = MODE.PATROLING;
-        return;
     }
-    if (game.physics.arcade.distanceBetween(warlck,player) < warlck.attackRange) {
+    else if (game.physics.arcade.distanceBetween(warlck,player) < warlck.attackRange) {
         warlck.attackPlayer(player);
     } else {
-        /*
         if (warlck.mode === MODE.ATTACKING || warlck.mode === MODE.PURSUING) {
-            if (warlck.body.velocity.x < 0) { warlck.lastDir = 'left'; } else { enemy.lastDir = 'right'; }
+            if (warlck.body.velocity.x < 0) { warlck.lastDir = 'left'; } else { warlck.lastDir = 'right'; }
             warlck.origin = { x : warlck.position.x, y : warlck.position.y };
         }
-        */
         warlck.mode = MODE.PATROLING;
 
     }

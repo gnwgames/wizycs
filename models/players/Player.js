@@ -8,7 +8,8 @@ var STATE =
     JUMPING : 1,
     FLYING : 2,
     FALLING : 3,
-    DIVING : 4
+    DIVING : 4,
+    INJURED : 5
 };
 
 var Player = function(game, x, y) {
@@ -18,6 +19,7 @@ var Player = function(game, x, y) {
     this.frame = 10;
     this.animations.add('left', [21,22,23,22], 5, true);
     this.animations.add('right', [33,34,35,34], 5, true);
+    this.animations.add('blink', [59,10], 8, true);
     this.body.gravity.y = 500;
     this.body.bounce.y = 0.2;
     this.body.collideWorldBounds = true;
@@ -96,52 +98,64 @@ Player.prototype.update = function () {
 
 Player.prototype.handleInput = function (keys) {
 
-    //the actions below (but before the switch statement) happen regardless of the player's state
-    if (keys.left.isDown) {
-        this.l()
-    } else if (keys.right.isDown) {
-        this.r()
-    } else {
-        this.st()
+    if (this.state === STATE.INJURED) {
+        return;
     }
-    if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {this.fly(); this.state = STATE.FLYING}
 
-    switch (this.state)
-    {
-        case STATE.STANDING:
-            if (keys.up.isDown) {
-                this.jumpCount = 0;
-                this.jump();
-                this.state = STATE.JUMPING;
-            }
-            break;
+    else {
+        //the actions below (but before the switch statement) happen regardless of the player's state
+        if (keys.left.isDown) {
+            this.l()
+        } else if (keys.right.isDown) {
+            this.r()
+        } else {
+            this.st()
+        }
+        if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+            this.fly();
+            this.state = STATE.FLYING
+        }
 
-        case STATE.JUMPING:
-            var upKey = keys.up;
-            upKey.onDown.add(function() {
-                if (this.jumpCount < 2) { this.jump();}
-                else {this.state = STATE.FALLING;}
-            }, this);
-            if (keys.down.isDown) {
-                this.state = STATE.DIVING;
-            }
-            break;
+        switch (this.state) {
+            case STATE.STANDING:
+                if (keys.up.isDown) {
+                    this.jumpCount = 0;
+                    this.jump();
+                    this.state = STATE.JUMPING;
+                }
+                break;
 
-        case STATE.FLYING:
-            if ((keys.down.isDown)&&(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))) {
-                this.body.velocity.y = -(this.body.velocity.y*2);
-            }
-            break;
+            case STATE.JUMPING:
+                var upKey = keys.up;
+                upKey.onDown.add(function () {
+                    if (this.jumpCount < 2) {
+                        this.jump();
+                    }
+                    else {
+                        this.state = STATE.FALLING;
+                    }
+                }, this);
+                if (keys.down.isDown) {
+                    this.state = STATE.DIVING;
+                }
+                break;
 
-        case STATE.FALLING:
-            if (keys.down.isDown) {
-                this.state = STATE.DIVING;
-            }
-            break;
+            case STATE.FLYING:
+                if ((keys.down.isDown) && (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))) {
+                    this.body.velocity.y = -(this.body.velocity.y * 2);
+                }
+                break;
 
-        case STATE.DIVING:
-            //dive attack, jack
-            break;
+            case STATE.FALLING:
+                if (keys.down.isDown) {
+                    this.state = STATE.DIVING;
+                }
+                break;
+
+            case STATE.DIVING:
+                //dive attack, jack
+                break;
+        }
     }
 };
 
@@ -158,11 +172,37 @@ function collidePlayer(player, obj) {
         }
         else {
             //Animate death - blinking sprite, which disappears and then reappears at 0,0
-           player.kill();
+            player.animateInjury();
+            player.lifeCount -= 1;
+        }
+    }
+    else if (obj.instanceType === 'Warlck') {
+        if ((obj.body.touching.up) && (player.equippedWeapon)) {
+            player.body.velocity.y = -200;
+            player.equippedWeapon.kill();
+            player.equippedWeapon = null;
+            obj.lifeCount -= 2;
+        }
+        else if (obj.body.touching.up) {
+            player.body.velocity.y = -200;
+        }
+        else {
+            //Animate death - blinking sprite, which disappears and then reappears at 0,0
+            player.animateInjury();
+            player.lifeCount -= 2;
         }
     }
     else if (player.equippedWeapon) {
         player.equippedWeapon.kill();
         player.equippedWeapon = null;
     }
+
+    if (player.lifeCount < 0) { player.kill() }
 }
+
+Player.prototype.animateInjury = function() {
+    this.state = STATE.INJURED;
+    this.animations.play('blink');
+    this.body.velocity.x = -(this.body.velocity.x);
+    this.body.velocity.y = -150;
+};

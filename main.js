@@ -42,8 +42,8 @@ function createObjects() {
 
     var pikas = [];
     //pika = new PikaEnemy(game, 450, 350, 150, Enemy.ATTACK_TYPE.PURSUE, Flame);
-    //pika = new PikaEnemy(game, 450, 350, 150, Flame);
-    //pikas.push(pika);
+    pika = new PikaEnemy(game, 450, 350, 150, null, Flame, null, null);
+    pikas.push(pika);
 
     var warlcks = [];
     var warlck = new BasicWarlck(game, 450, 350, 150);
@@ -79,17 +79,18 @@ function update() {
         enemy.collide(collision);
         if (wzrd.alive) {
             wzrd.overlap(enemy);
+            enemyGroup.distanceFromPlayer(enemy, wzrd);
         }
-        enemyGroup.distanceFromPlayer(enemy, wzrd);
     });
 
     warlckGroup.forEachAlive(function(warlck) {
         warlck.collide(collision);
         if (wzrd.alive) {
             wzrd.overlap(warlck);
+            warlckGroup.distanceFromPlayer(warlck, wzrd);
         }
-        warlckGroup.distanceFromPlayer(warlck, wzrd);
     });
+
   // somehow restart the level or respawn the player when it dies
   //if (!wzrd.alive) {
   //  GameHandler.RespawnPlayer(wzrd);
