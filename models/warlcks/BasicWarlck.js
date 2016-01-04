@@ -148,6 +148,15 @@ BasicWarlck.prototype.attackPlayer = function(player) {
     }
 };
 
+BasicWarlck.prototype.dodgeOrBlockPower = function(power) {
+    var yDif = Math.abs(power.position.y - this.position.y);
+    if (yDif > 16) {
+        this.blockPower(power);
+    } else {
+        this.dodgePower(power);
+    }
+};
+
 BasicWarlck.prototype.dodgePower = function(power) {
     this.state = Warlck.STATE.DODGING;
     this.body.velocity.x = 0;
@@ -156,6 +165,10 @@ BasicWarlck.prototype.dodgePower = function(power) {
     dodge.to({ y: y }, 100,  Phaser.Easing.Default);
     dodge.onComplete.add(updateState, this, power);
     dodge.start();
+};
+
+BasicWarlck.prototype.blockPower = function(power) {
+    power.shoot('up');
 };
 
 function updateState(warlck) {

@@ -92,7 +92,7 @@ function update() {
         }
         playerPowersGroup.forEachAlive(function(power) {
            if ((game.physics.arcade.distanceBetween(power,warlck)<100) && (warlck.state !== Warlck.STATE.DODGING)) {
-               warlck.dodgePower(power);
+               warlck.dodgeOrBlockPower(power);
            }
         });
     });

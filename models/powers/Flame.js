@@ -5,7 +5,7 @@ var Flame = function (game, x, y) {
     Power.call(this, game, x, y, 'flame');
     this.animations.add('leftFire', [0,1,2,3,4,5,6,7], 10, true);
     this.animations.add('rightFire', [32,33,34,35,36,37,38,39], 10, true);
-    this.animations.add('downFire', [48,49,50,51,52,53,54,55], 10, true);
+    this.animations.add('upFire', [16,17,18,19,20,21,22,23], 10, true);
     this.scale.setTo(.8,.8);
     this.checkWorldBounds = true;
     this.outOfBoundsKill = true;
@@ -41,9 +41,9 @@ Flame.prototype.shoot = function (dir) {
     } else if (dir === 'right') {
         this.body.velocity.x = 400;
         this.animations.play('rightFire')
-    } else if (dir === 'down') {
-        this.body.velocity.y = 400;
-        this.animations.play('downFire');
+    } else if (dir === 'up') {
+        this.body.velocity.y = -400;
+        this.animations.play('upFire');
     }
 };
 
@@ -52,7 +52,7 @@ Flame.prototype.update = function () {
     for (var i=0; i<this.hitGroups.length;i++) {
         this.game.physics.arcade.overlap(this.hitGroups[i], this, this.hitTarget);
     }
-    this.game.physics.arcade.collide(this.collideGroups[i], this, this.collideTarget);
+    this.game.physics.arcade.collide(this.collideGroups, this, this.collideTarget);
 };
 
 Flame.prototype.hitTarget = function(obj1, obj2) {
