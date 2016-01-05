@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="79fb1c21-2057-4fac-9263-b93fcbf4cee6" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.js" afterPath="$PROJECT_DIR$/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/powers/Flame.js" afterPath="$PROJECT_DIR$/models/powers/Flame.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/groups/WarlckGroup.js" afterPath="$PROJECT_DIR$/models/groups/WarlckGroup.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/warlcks/BasicWarlck.js" afterPath="$PROJECT_DIR$/models/warlcks/BasicWarlck.js" />
     </list>
     <ignored path="wizycs.iws" />
@@ -52,7 +51,7 @@
         <entry file="file://$PROJECT_DIR$/models/warlcks/Warlck.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+              <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
               <folding>
                 <element signature="e#0#39#0" expanded="false" />
               </folding>
@@ -60,11 +59,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Flame.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Flame.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/powers/Flame.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7257889">
-              <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="76" column="5" selection-start-line="76" selection-start-column="5" selection-end-line="76" selection-end-column="5" />
               <folding>
                 <element signature="e#0#43#0" expanded="false" />
               </folding>
@@ -76,7 +75,7 @@
         <entry file="file://$PROJECT_DIR$/models/groups/WarlckGroup.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+              <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#41#84#0" expanded="false" />
@@ -85,11 +84,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BasicWarlck.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BasicWarlck.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/models/warlcks/BasicWarlck.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-24.172413">
-              <caret line="170" column="22" selection-start-line="170" selection-start-column="22" selection-end-line="170" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.3373232">
+              <caret line="120" column="32" selection-start-line="120" selection-start-column="32" selection-end-line="120" selection-end-column="32" />
               <folding>
                 <element signature="e#0#39#0" expanded="false" />
               </folding>
@@ -202,17 +201,17 @@
         <option value="$PROJECT_DIR$/models/parents/Warlck.js" />
         <option value="$PROJECT_DIR$/models/children/BasicWarlck.js" />
         <option value="$PROJECT_DIR$/models/groups/EnemyGroup.js" />
-        <option value="$PROJECT_DIR$/models/players/Player.js" />
         <option value="$PROJECT_DIR$/models/enemies/Enemy.js" />
         <option value="$PROJECT_DIR$/models/enemies/Pika.js" />
         <option value="$PROJECT_DIR$/models/groups/PowersGroup.js" />
         <option value="$PROJECT_DIR$/models/groups/PowerGroup.js" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/models/groups/WarlckGroup.js" />
         <option value="$PROJECT_DIR$/models/warlcks/Warlck.js" />
         <option value="$PROJECT_DIR$/main.js" />
-        <option value="$PROJECT_DIR$/models/warlcks/BasicWarlck.js" />
         <option value="$PROJECT_DIR$/models/powers/Flame.js" />
+        <option value="$PROJECT_DIR$/models/players/Player.js" />
+        <option value="$PROJECT_DIR$/models/groups/WarlckGroup.js" />
+        <option value="$PROJECT_DIR$/models/warlcks/BasicWarlck.js" />
       </list>
     </option>
   </component>
@@ -692,7 +691,13 @@
       <option name="project" value="LOCAL" />
       <updated>1451937526835</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="working dodge and block functionality - should add warlck animations to go along with them">
+      <created>1451939155704</created>
+      <option name="number" value="00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1451939155704</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -731,7 +736,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="working on melee attack" />
     <MESSAGE value="working on melee attack - modularized prototypes and class handlers" />
     <MESSAGE value="organized code so we don't have all class prototypes in one file" />
     <MESSAGE value="minor fixes" />
@@ -756,7 +760,8 @@
     <MESSAGE value="critical change - removing dead sprites from game (otherwise memory leak)" />
     <MESSAGE value="critical change - removing dead sprites from game (otherwise memory leak)&#10;also, hitGroups must be arrays now, even if only one item" />
     <MESSAGE value="dodge functionality somewhat working - warlck jumps into flame if the warlck is slightly lower than the player/flame" />
-    <option name="LAST_COMMIT_MESSAGE" value="dodge functionality somewhat working - warlck jumps into flame if the warlck is slightly lower than the player/flame" />
+    <MESSAGE value="working dodge and block functionality - should add warlck animations to go along with them" />
+    <option name="LAST_COMMIT_MESSAGE" value="working dodge and block functionality - should add warlck animations to go along with them" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1081,17 +1086,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/groups/WarlckGroup.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#41#84#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/groups/EnemyGroup.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1130,10 +1124,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.103449">
+          <caret line="97" column="7" selection-start-line="97" selection-start-column="7" selection-end-line="97" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/powers/Flame.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="76" column="5" selection-start-line="76" selection-start-column="5" selection-end-line="76" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#43#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/models/warlcks/Warlck.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
           <folding>
             <element signature="e#0#39#0" expanded="false" />
           </folding>
@@ -1148,30 +1160,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.js">
+    <entry file="file://$PROJECT_DIR$/models/groups/WarlckGroup.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.103449">
-          <caret line="97" column="7" selection-start-line="97" selection-start-column="7" selection-end-line="97" selection-end-column="7" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#41#84#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/warlcks/BasicWarlck.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.172413">
-          <caret line="170" column="22" selection-start-line="170" selection-start-column="22" selection-end-line="170" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.3373232">
+          <caret line="120" column="32" selection-start-line="120" selection-start-column="32" selection-end-line="120" selection-end-column="32" />
           <folding>
             <element signature="e#0#39#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/powers/Flame.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7257889">
-          <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
           </folding>
         </state>
       </provider>

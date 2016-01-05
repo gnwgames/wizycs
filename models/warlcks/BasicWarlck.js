@@ -31,6 +31,17 @@ var BasicWarlck = function (game, x, y, range, attackRange, fireRate) {
 BasicWarlck.prototype = Object.create(Enemy.prototype);
 BasicWarlck.prototype.constructor = BasicWarlck;
 
+
+BasicWarlck.prototype.st = function () {
+    this.animations.stop();
+    this.body.velocity.x = 0;
+};
+
+BasicWarlck.prototype.jump = function(velocityY, velocityX) {
+    this.body.velocity.y = velocityY;
+    this.body.velocity.x = velocityX;
+};
+
 BasicWarlck.prototype.update = function () {
     if((this.body.onFloor() || this.body.touching.down)) {
         this.state = Warlck.STATE.STANDING;
@@ -83,35 +94,96 @@ BasicWarlck.prototype.calculateDistanceFromOriginX = function (originX) {
 };
 
 BasicWarlck.prototype.engagePlayer = function(player, distance) {
+    var xDistance = Math.abs(player.position.x - this.position.x);
     if (distance > 100) { this.pursuePlayer(player); }
-    else { this.attackPlayer(player); }
+    else if ((player.position.y === this.position.y) && (xDistance < 50)) { this.meleeAttack(player); }
+    else { this.powerAttack(player); }
 };
 
 BasicWarlck.prototype.pursuePlayer = function (player) {
     this.mode = MODE.PURSUING;
     var playerPosition = player.position;
     var warlckPosition = this.position;
+    console.log(this.state);
+    switch (this.state) {
+        case Warlck.STATE.STANDING:
+            if (warlckPosition.x < playerPosition.x - 50)
+            {
+                this.animations.play('walkRight');
+                this.body.velocity.x = 120;
+            }
+            else if (warlckPosition.x > playerPosition.x + 50) {
+                this.animations.play('walkLeft');
+                this.body.velocity.x = -120;
+            }
+            else {
+                this.body.velocity.x = 0;
+                this.frame = 49;
+            }
 
-    if (warlckPosition.x < playerPosition.x - 50) {
-        this.animations.play('walkRight');
-        this.body.velocity.x = 120;
-    } else if (warlckPosition.x > playerPosition.x + 50)  {
-        this.animations.play('walkLeft');
-        this.body.velocity.x = -120;
+            if (warlckPosition.y < playerPosition.y) {
+                    this.fall();
+            } else if ((warlckPosition.y > playerPosition.y) && (Math.abs(warlckPosition.x - playerPosition.x) < 100)) {
+                    this.fly();
+            }
+            break;
+
+        case Warlck.STATE.FLYING:
+            if (warlckPosition.x < playerPosition.x - 50)
+            {
+                this.animations.play('walkRight');
+                this.body.velocity.x = 120;
+            }
+            else if (warlckPosition.x > playerPosition.x + 50) {
+                this.animations.play('walkLeft');
+                this.body.velocity.x = -120;
+            }
+            else {
+                this.body.velocity.x = 0;
+                this.frame = 49;
+            }
+
+            if (warlckPosition.y < playerPosition.y) {
+                this.fall();
+            }
+            break;
+
+        case Warlck.STATE.FALLING:
+            var distance = game.physics.arcade.distanceBetween(this, collision);
+            console.log(distance);
+            /*
+            if ((player.state = STATE.STANDING) && (warlckPosition.y > playerPosition.y)) {}
+            else if (warlckPosition.y > playerPosition.y) {
+                this.fly();
+                this.state = Warlck.STATE.FLYING;
+            }*/
+            break;
     }
+
 };
 
-BasicWarlck.prototype.st = function () {
-    this.animations.stop();
-    this.body.velocity.x = 0;
+BasicWarlck.prototype.fly = function() {
+    this.state = Warlck.STATE.FLYING;
+    this.body.velocity.y = -100;
 };
 
-BasicWarlck.prototype.jump = function(velocityY, velocityX) {
-    this.body.velocity.y = velocityY;
-    this.body.velocity.x = velocityX;
+BasicWarlck.prototype.fall = function() {
+    this.state = Warlck.STATE.FALLING;
+    this.body.velocity.y = 100;
 };
 
-BasicWarlck.prototype.attackPlayer = function(player) {
+BasicWarlck.prototype.meleeAttack = function(player) {
+    //animate stick thwack
+
+    //tween forward 50
+    var x = player.position.x;
+    var melee = game.add.tween(this);
+    melee.to({ x: x }, 100,  Phaser.Easing.Default);
+    melee.onComplete.add(updateState, this, player);
+    melee.start();
+};
+
+BasicWarlck.prototype.powerAttack = function(player) {
     this.mode = MODE.ATTACKING;
     this.animations.stop();
     this.body.velocity.x = 0;
@@ -172,6 +244,6 @@ BasicWarlck.prototype.blockPower = function(power) {
 };
 
 function updateState(warlck) {
-    warlck.curDir = 'left';
-    warlck.lastDir = 'left';
+    //warlck.curDir = 'left';
+    //warlck.lastDir = 'left';
 }
