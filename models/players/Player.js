@@ -173,7 +173,10 @@ function collidePlayer(player, obj) {
         }
         else {
             //Animate death - blinking sprite, which disappears and then reappears at 0,0
-            player.animateInjury();
+            var dir;
+            if (obj.body.touching.left || obj.body.touching.down) { dir = 'left'; }
+            else { dir = 'right'; }
+            player.animateInjury(dir);
             player.lifeCount -= 1;
         }
     }
@@ -189,6 +192,9 @@ function collidePlayer(player, obj) {
         }
         else {
             //Animate death - blinking sprite, which disappears and then reappears at 0,0
+            var dir;
+            if (obj.body.touching.left || obj.body.touching.down) { dir = 'left'; }
+            else { dir = 'right'; }
             player.animateInjury();
             player.lifeCount -= 2;
         }
@@ -202,9 +208,10 @@ function collidePlayer(player, obj) {
     if (obj.lifeCount < 0) { obj.kill(); obj.parent.removeChild(obj); }
 }
 
-Player.prototype.animateInjury = function() {
+Player.prototype.animateInjury = function(dir) {
     this.state = STATE.INJURED;
     this.animations.play('blink');
-    this.body.velocity.x = -(this.body.velocity.x);
+    if (dir === 'left') { this.body.velocity.x = -200; }
+    if (dir === 'right') { this.body.velocity.x = 200; }
     this.body.velocity.y = -150;
 };

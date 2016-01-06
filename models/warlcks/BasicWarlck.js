@@ -2,7 +2,7 @@
  * Created by gattra on 1/3/16.
  */
 
-var BasicWarlck = function (game, x, y, range, attackRange, fireRate) {
+var BasicWarlck = function (game, x, y, range, detectRange, fireRate) {
     Warlck.call(this, game, x, y, 'chars');
     this.animations.add('walkRight', [72, 73, 74, 73], 10, true);
     this.animations.add('walkLeft', [60, 61, 62, 61], 10, true);
@@ -11,7 +11,7 @@ var BasicWarlck = function (game, x, y, range, attackRange, fireRate) {
     this.body.gravity.y = 550;
     this.body.velocity.y = 0;
     this.patrolRange = range || 150;
-    this.attackRange = attackRange || 250;
+    this.detectRange = detectRange || 450;
     this.power = Flame;
     this.fireRate = fireRate || 1;
     this.state = Warlck.STATE.NEUTRAL;
@@ -93,73 +93,84 @@ BasicWarlck.prototype.calculateDistanceFromOriginX = function (originX) {
     return absoluteDistance;
 };
 
-BasicWarlck.prototype.engagePlayer = function(player, distance) {
-    var xDistance = Math.abs(player.position.x - this.position.x);
-    if (distance > 100) { this.pursuePlayer(player); }
-    else if ((player.position.y === this.position.y) && (xDistance < 50)) { this.meleeAttack(player); }
-    else { this.powerAttack(player); }
-};
-
 BasicWarlck.prototype.pursuePlayer = function (player) {
     this.mode = MODE.PURSUING;
     var playerPosition = player.position;
     var warlckPosition = this.position;
-    console.log(this.state);
-    switch (this.state) {
-        case Warlck.STATE.STANDING:
-            if (warlckPosition.x < playerPosition.x - 50)
-            {
-                this.animations.play('walkRight');
-                this.body.velocity.x = 120;
-            }
-            else if (warlckPosition.x > playerPosition.x + 50) {
-                this.animations.play('walkLeft');
-                this.body.velocity.x = -120;
-            }
-            else {
-                this.body.velocity.x = 0;
-                this.frame = 49;
-            }
 
-            if (warlckPosition.y < playerPosition.y) {
-                    this.fall();
-            } else if ((warlckPosition.y > playerPosition.y) && (Math.abs(warlckPosition.x - playerPosition.x) < 100)) {
-                    this.fly();
-            }
-            break;
+    var xDif = Math.abs(playerPosition.x - warlckPosition.x);
+    var yDif = Math.abs(playerPosition.y - warlckPosition.y);
+    var playerHigher = (playerPosition.y < warlckPosition.y);
 
-        case Warlck.STATE.FLYING:
-            if (warlckPosition.x < playerPosition.x - 50)
-            {
-                this.animations.play('walkRight');
-                this.body.velocity.x = 120;
-            }
-            else if (warlckPosition.x > playerPosition.x + 50) {
-                this.animations.play('walkLeft');
-                this.body.velocity.x = -120;
-            }
-            else {
-                this.body.velocity.x = 0;
-                this.frame = 49;
-            }
-
-            if (warlckPosition.y < playerPosition.y) {
-                this.fall();
-            }
-            break;
-
-        case Warlck.STATE.FALLING:
-            var distance = game.physics.arcade.distanceBetween(this, collision);
-            console.log(distance);
-            /*
-            if ((player.state = STATE.STANDING) && (warlckPosition.y > playerPosition.y)) {}
-            else if (warlckPosition.y > playerPosition.y) {
-                this.fly();
-                this.state = Warlck.STATE.FLYING;
-            }*/
-            break;
+    if (xDif > 250) {
+        this.walkPursue(warlckPosition, playerPosition);
     }
+    else if (xDif < 250 && xDif > 100) {
+        switch (playerHigher) {
+            case true:
+                if (player.state === STATE.FLYING) {
+                    this.fly();
+                } else { this.walkPursue(warlckPosition, playerPosition); }
+                break;
 
+            case false:
+                if (this.state === Warlck.STATE.FLYING) {
+                    this.fall();
+                } else {
+                    this.walkPursue(warlckPosition, playerPosition);
+                }
+                break;
+        }
+    }
+    else if (xDif <= 100) {
+        this.animations.stop();
+        this.frame = 49;
+        console.log(yDif);
+        switch (yDif > 0) {
+            case false:
+                if (this.state === Warlck.STATE.FLYING || this.state === Warlck.STATE.HOVERING) {
+                    this.body.velocity.x = 0;
+                    this.hover();
+                    this.powerAttack(player);
+                }
+                else {
+                    this.body.velocity.x = 0;
+                    this.powerAttack(player);
+                }
+                break;
+            case true:
+                if (playerHigher) {
+                    this.body.velocity.x = 0;
+                    this.fly();
+                    this.powerAttack(player);
+                }
+                else { //dive attack??
+                    //this.powerAttack(player);
+                    //if wizard on platform directly above player, wizard doesn't move off platform to get to player
+                }
+        }
+    }
+};
+
+BasicWarlck.prototype.hover = function() {
+    //move up and down if in the air
+    //change state of warlck to hovering
+    //change gravity and
+};
+
+BasicWarlck.prototype.walkPursue = function(warlckPosition, playerPosition) {
+    if (warlckPosition.x < playerPosition.x - 50) {
+        this.animations.play('walkRight');
+        this.body.velocity.x = 150;
+    }
+    else if (warlckPosition.x > playerPosition.x + 50) {
+        this.animations.play('walkLeft');
+        this.body.velocity.x = -150;
+    }
+    else {
+        this.body.velocity.x = 0;
+        this.frame = 49;
+    }
 };
 
 BasicWarlck.prototype.fly = function() {
@@ -169,7 +180,7 @@ BasicWarlck.prototype.fly = function() {
 
 BasicWarlck.prototype.fall = function() {
     this.state = Warlck.STATE.FALLING;
-    this.body.velocity.y = 100;
+    this.body.velocity.y = 0;
 };
 
 BasicWarlck.prototype.meleeAttack = function(player) {

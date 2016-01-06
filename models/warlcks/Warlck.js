@@ -23,7 +23,8 @@ Warlck.STATE =
     DIVING : 4,
     INJURED : 5,
     DODGING : 6,
-    NEUTRAL : 7
+    HOVERING : 7,
+    NEUTRAL : 8
 };
 
 Warlck.prototype = Object.create(Phaser.Sprite.prototype);

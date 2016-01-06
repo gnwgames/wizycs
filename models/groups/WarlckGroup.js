@@ -26,8 +26,8 @@ WarlckGroup.prototype.distanceFromPlayer = function(warlck, player) {
         warlck.lastDir = 'right';
         warlck.mode = MODE.PATROLING;
     }
-    else if (game.physics.arcade.distanceBetween(warlck,player) < warlck.attackRange) {
-        warlck.engagePlayer(player, game.physics.arcade.distanceBetween(warlck,player));
+    else if (game.physics.arcade.distanceBetween(warlck,player) < warlck.detectRange) {
+        warlck.pursuePlayer(player);
     } else {
         if (warlck.mode === MODE.ATTACKING || warlck.mode === MODE.PURSUING) {
             if (warlck.body.velocity.x < 0) { warlck.lastDir = 'left'; } else { warlck.lastDir = 'right'; }
