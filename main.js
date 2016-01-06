@@ -1,6 +1,6 @@
 'use strict'
 
-var map, layer, terrain, keys, wzrd, collision, flame, pika, enemyGroup, weaponGroup, warlckGroup;
+var map, layer, terrain, keys, wzrd, collision, flame, pika, enemyGroup, weaponGroup, warlckGroup, playerPowersGroup;
 
 // Game instantiation
 var game = new Phaser.Game(600,450, Phaser.AUTO, 'Wizycs', {
@@ -46,7 +46,7 @@ function createObjects() {
     pikas.push(pika);
 
     var warlcks = [];
-    var warlck = new BasicWarlck(game, 450, 350, 150);
+    var warlck = new BasicWarlck(game, 1250, 350, 150);
     warlcks.push(warlck);
 
     enemyGroup = new EnemyGroup(game);
@@ -55,15 +55,16 @@ function createObjects() {
     warlckGroup = new WarlckGroup(game);
     warlckGroup.addEnemies(warlcks);
 
+    playerPowersGroup = new PowerGroup(game);
 }
 
 function integrateObjects() {
    //Flame.hitGroups = enemyGroup;
    // Melee.hitGroups = enemyGroup;
-
+    var hitGroups = [ enemyGroup, warlckGroup ];
     // Equip the flame power to the key D / Melee to W
-    wzrd.equip(Phaser.KeyCode.D, Flame.handleInput, enemyGroup);
-    wzrd.equip(Phaser.KeyCode.DOWN, Melee.handleInput, enemyGroup);
+    wzrd.equip(Phaser.KeyCode.D, Flame.handleInput, hitGroups);
+    wzrd.equip(Phaser.KeyCode.DOWN, Melee.handleInput, hitGroups);
 /*
     enemyGroup.forEachAlive(function(enemy) {
         game.time.events.loop(Phaser.Timer.SECOND, function() {enemy.updateState()}, this);
@@ -89,6 +90,19 @@ function update() {
             wzrd.overlap(warlck);
             warlckGroup.distanceFromPlayer(warlck, wzrd);
         }
+        playerPowersGroup.forEachAlive(function(power) {
+           if ((game.physics.arcade.distanceBetween(power,warlck)<100) && (warlck.state !== Warlck.STATE.DODGING)) {
+               warlck.dodgeOrBlockPower(power);
+           }
+        });
+    });
+
+    enemyGroup.forEachDead(function(enemy){
+        enemyGroup.remove(enemy);
+    });
+
+    warlckGroup.forEachDead(function(warlck){
+        warlckGroup.remove(warlck);
     });
 
   // somehow restart the level or respawn the player when it dies
@@ -100,6 +114,7 @@ function update() {
 var preloadScripts = function() {
     game.load.script('EnemyGroup.js', './models/groups/EnemyGroup.js');
     game.load.script('EnemyGroup.js', './models/groups/WarlckGroup.js');
+    game.load.script('EnemyGroup.js', './models/groups/PowerGroup.js');
     game.load.script('Flame.js', './models/powers/Flame.js');
     game.load.script('Pika.js', './models/enemies/Pika.js');
     game.load.script('Melee.js', './models/powers/Melee.js');

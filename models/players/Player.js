@@ -28,17 +28,17 @@ var Player = function(game, x, y) {
     this.jumpCount = 0;
     this.state = STATE.STANDING;
     this.equippedWeapon = null;
-    this.lifeCount = 10;
+    this.lifeCount = 100;
 };
 
 Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
-Player.prototype.equip = function(key, handler, hitGroup) {
+Player.prototype.equip = function(key, handler, hitGroups) {
     var obj = this;
     this.power[key] = game.input.keyboard.addKey(key);
     this.power[key].onDown.add(function() {
-        handler(obj, hitGroup)
+        handler(obj, hitGroups)
     })
 };
 
@@ -165,14 +165,18 @@ function collidePlayer(player, obj) {
             player.body.velocity.y = -200;
             player.equippedWeapon.kill();
             player.equippedWeapon = null;
-            obj.kill();
+            obj.lifeCount -= 3;
+
         }
         else if (obj.body.touching.up) {
             player.body.velocity.y = -200;
         }
         else {
             //Animate death - blinking sprite, which disappears and then reappears at 0,0
-            player.animateInjury();
+            var dir;
+            if (obj.body.touching.left || obj.body.touching.down) { dir = 'left'; }
+            else { dir = 'right'; }
+            player.animateInjury(dir);
             player.lifeCount -= 1;
         }
     }
@@ -188,7 +192,10 @@ function collidePlayer(player, obj) {
         }
         else {
             //Animate death - blinking sprite, which disappears and then reappears at 0,0
-            player.animateInjury();
+            var dir;
+            if (obj.body.touching.left || obj.body.touching.down) { dir = 'left'; }
+            else { dir = 'right'; }
+            player.animateInjury(dir);
             player.lifeCount -= 2;
         }
     }
@@ -198,11 +205,13 @@ function collidePlayer(player, obj) {
     }
 
     if (player.lifeCount < 0) { player.kill() }
+    if (obj.lifeCount < 0) { obj.kill(); obj.parent.removeChild(obj); }
 }
 
-Player.prototype.animateInjury = function() {
+Player.prototype.animateInjury = function(dir) {
     this.state = STATE.INJURED;
     this.animations.play('blink');
-    this.body.velocity.x = -(this.body.velocity.x);
+    if (dir === 'left') { this.body.velocity.x = 200; }
+    if (dir === 'right') { this.body.velocity.x = -200; }
     this.body.velocity.y = -150;
 };

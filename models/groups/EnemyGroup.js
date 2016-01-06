@@ -19,7 +19,6 @@ EnemyGroup.prototype.addEnemies = function(enemies) {
 
 EnemyGroup.prototype.distanceFromPlayer = function(enemy, player) {
     if (!player.alive) {
-        console.log('here');
         enemy.lastDir = 'right';
         enemy.mode = MODE.PATROLING;
     }
