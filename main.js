@@ -38,7 +38,7 @@ function create() {
 
 function createObjects() {
     keys = game.input.keyboard.createCursorKeys();
-    wzrd = new Player(game, 0, 0);
+    wzrd = new Player(game, 50, 50);
 
     var pikas = [];
     //pika = new PikaEnemy(game, 450, 350, 150, Enemy.ATTACK_TYPE.PURSUE, Flame);
@@ -81,7 +81,7 @@ function update() {
         if (wzrd.alive) {
             wzrd.overlap(enemy);
             enemyGroup.distanceFromPlayer(enemy, wzrd);
-        }
+        } else { enemy.mode = MODE.PATROLING; }
     });
 
     warlckGroup.forEachAlive(function(warlck) {
@@ -89,7 +89,7 @@ function update() {
         if (wzrd.alive) {
             wzrd.overlap(warlck);
             warlckGroup.distanceFromPlayer(warlck, wzrd);
-        }
+        } else { warlck.mode = MODE.PATROLING; }
         playerPowersGroup.forEachAlive(function(power) {
            if ((game.physics.arcade.distanceBetween(power,warlck)<100) && (warlck.state !== Warlck.STATE.DODGING)) {
                warlck.dodgeOrBlockPower(power);

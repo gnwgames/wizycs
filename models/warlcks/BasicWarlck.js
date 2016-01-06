@@ -127,10 +127,12 @@ BasicWarlck.prototype.pursuePlayer = function (player) {
         }
     }
     else if (xDif <= 100) {
+
         this.animations.stop();
         this.frame = 49;
         switch (yDif > 0) {
             case false:
+                if (xDif < 50) { this.meleeAttack(player); }
                 if (this.state === Warlck.STATE.FLYING || this.state === Warlck.STATE.HOVERING) {
                     this.body.velocity.x = 0;
                     this.hover();
@@ -164,11 +166,11 @@ BasicWarlck.prototype.hover = function() {
 BasicWarlck.prototype.walkPursue = function(warlckPosition, playerPosition) {
     if (warlckPosition.x < playerPosition.x - 50) {
         this.animations.play('walkRight');
-        this.body.velocity.x = 150;
+        this.body.velocity.x = 130;
     }
     else if (warlckPosition.x > playerPosition.x + 50) {
         this.animations.play('walkLeft');
-        this.body.velocity.x = -150;
+        this.body.velocity.x = -130;
     }
     else {
         this.body.velocity.x = 0;

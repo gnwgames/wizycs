@@ -114,6 +114,10 @@ PikaEnemy.prototype.pursuePlayer = function (player) {
         this.animations.play('walkLeft');
         this.body.velocity.x = -100;
     }
+    console.log(pikaPosition.y - playerPosition.y);
+    if (Math.abs(pikaPosition.x-playerPosition.x) < 100 && (pikaPosition.y - playerPosition.y) > 100) {
+        this.mode = MODE.PATROLING;
+    }
     /*
      if ((playerPosition.y < pikaPosition.y) && (this.body.onFloor() || this.body.touching.down)) {
      var offsetX = Math.abs(playerPosition.x - pikaPosition.x);
@@ -194,7 +198,6 @@ PikaEnemy.prototype.attackPlayer = function(player) {
 };
 
 PikaEnemy.prototype.animateInjury = function(dir) {
-    console.log(dir);
     this.state = STATE.INJURED;
     //this.animations.play('blink');
     if (dir === 'left') { this.body.velocity.x = 200; }

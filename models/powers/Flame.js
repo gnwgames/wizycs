@@ -67,8 +67,6 @@ Flame.prototype.hitTarget = function(obj1, obj2) {
         obj = obj1;
     }
 
-    console.log(obj.lifeCount);
-
     var dir;
     if (obj.body.touching.left || obj.body.touching.down) { dir = 'left'; }
     else { dir = 'right'; }
