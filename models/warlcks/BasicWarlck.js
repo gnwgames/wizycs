@@ -6,12 +6,13 @@ var BasicWarlck = function (game, x, y, range, detectRange, fireRate) {
     Warlck.call(this, game, x, y, 'chars');
     this.animations.add('walkRight', [72, 73, 74, 73], 10, true);
     this.animations.add('walkLeft', [60, 61, 62, 61], 10, true);
+    this.animations.add('blink', [59,49], 8, true);
     this.origin = { x : x, y : y };
     this.game.add.existing(this);
     this.body.gravity.y = 550;
     this.body.velocity.y = 0;
     this.patrolRange = range || 150;
-    this.detectRange = detectRange || 450;
+    this.detectRange = detectRange || 250;
     this.power = Flame;
     this.fireRate = fireRate || 1;
     this.state = Warlck.STATE.NEUTRAL;
@@ -94,6 +95,9 @@ BasicWarlck.prototype.calculateDistanceFromOriginX = function (originX) {
 };
 
 BasicWarlck.prototype.pursuePlayer = function (player) {
+    if (this.state === STATE.INJURED) {
+        return;
+    }
     this.mode = MODE.PURSUING;
     var playerPosition = player.position;
     var warlckPosition = this.position;
@@ -125,7 +129,6 @@ BasicWarlck.prototype.pursuePlayer = function (player) {
     else if (xDif <= 100) {
         this.animations.stop();
         this.frame = 49;
-        console.log(yDif);
         switch (yDif > 0) {
             case false:
                 if (this.state === Warlck.STATE.FLYING || this.state === Warlck.STATE.HOVERING) {
@@ -258,3 +261,11 @@ function updateState(warlck) {
     //warlck.curDir = 'left';
     //warlck.lastDir = 'left';
 }
+
+BasicWarlck.prototype.animateInjury = function(dir) {
+    this.state = STATE.INJURED;
+    this.animations.play('blink');
+    if (dir === 'left') { this.body.velocity.x = 200; }
+    if (dir === 'right') { this.body.velocity.x = -200; }
+    this.body.velocity.y = -150;
+};

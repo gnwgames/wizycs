@@ -195,7 +195,7 @@ function collidePlayer(player, obj) {
             var dir;
             if (obj.body.touching.left || obj.body.touching.down) { dir = 'left'; }
             else { dir = 'right'; }
-            player.animateInjury();
+            player.animateInjury(dir);
             player.lifeCount -= 2;
         }
     }
@@ -211,7 +211,7 @@ function collidePlayer(player, obj) {
 Player.prototype.animateInjury = function(dir) {
     this.state = STATE.INJURED;
     this.animations.play('blink');
-    if (dir === 'left') { this.body.velocity.x = -200; }
-    if (dir === 'right') { this.body.velocity.x = 200; }
+    if (dir === 'left') { this.body.velocity.x = 200; }
+    if (dir === 'right') { this.body.velocity.x = -200; }
     this.body.velocity.y = -150;
 };

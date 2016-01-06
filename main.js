@@ -43,10 +43,10 @@ function createObjects() {
     var pikas = [];
     //pika = new PikaEnemy(game, 450, 350, 150, Enemy.ATTACK_TYPE.PURSUE, Flame);
     pika = new PikaEnemy(game, 450, 350, 150, null, Flame, null, null);
-    //pikas.push(pika);
+    pikas.push(pika);
 
     var warlcks = [];
-    var warlck = new BasicWarlck(game, 450, 350, 150);
+    var warlck = new BasicWarlck(game, 1250, 350, 150);
     warlcks.push(warlck);
 
     enemyGroup = new EnemyGroup(game);

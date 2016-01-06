@@ -21,7 +21,8 @@ var PikaEnemy = function (game, x, y, range, attackType, power, attackRange, fir
     this.attackRange = attackRange || 250;
     this.fireRate = fireRate || 2;
     this.power = power;
-    this.state = 'stop';
+    this.state = STATE.STANDING;
+    this.curDir = 'stop';
     this.lastStopped = 0;
     this.lastDir = 'right';
     // when the player runs into enemy, he cannot move the enemy
@@ -41,23 +42,25 @@ PikaEnemy.prototype.update = function () {
     if((this.body.blocked.left || this.body.blocked.right)) {
         this.jump(-160, 200);
     }
-
+    if((this.body.onFloor() || this.body.touching.down)) {
+        this.state = STATE.STANDING;
+    }
     if (this.mode === MODE.ATTACKING) {
         //do nothing
     } else if (this.mode === MODE.PATROLING) {
-        switch (this.state){
+        switch (this.curDir){
             case 'left':
                 this.flipLeft();
                 this.animations.play('walkLeft');
                 var distanceTraveled = this.calculateDistanceFromOriginX(this.origin.x);
-                if (distanceTraveled >= this.patrolRange) { this.lastStopped = (new Date().getTime()/1000); this.state = 'stop'; break; }
+                if (distanceTraveled >= this.patrolRange) { this.lastStopped = (new Date().getTime()/1000); this.curDir = 'stop'; break; }
                 this.body.velocity.x = -70;
                 break;
             case 'right':
                 this.flipRight();
                 this.animations.play('walkRight');
                 var distanceTraveled = this.calculateDistanceFromOriginX(this.origin.x);
-                if (distanceTraveled <= 1) { this.lastStopped = (new Date().getTime()/1000); this.state = 'stop'; break; }
+                if (distanceTraveled <= 1) { this.lastStopped = (new Date().getTime()/1000); this.curDir = 'stop'; break; }
                 this.body.velocity.x = 70;
                 break;
             case 'stop':
@@ -66,10 +69,10 @@ PikaEnemy.prototype.update = function () {
                 this.frame = 1;
                 if (this.lastStopped+1 < (new Date().getTime()/1000)) {
                     if (this.lastDir === 'right') {
-                        this.state = 'left';
+                        this.curDir = 'left';
                         this.lastDir = 'left';
                     } else {
-                        this.state = 'right';
+                        this.curDir = 'right';
                         this.lastDir = 'right';
                     }
                 }
@@ -98,6 +101,7 @@ PikaEnemy.prototype.flipRight = function() {
 
 PikaEnemy.prototype.pursuePlayer = function (player) {
     this.mode = MODE.PURSUING;
+    if (this.state === STATE.INJURED) { return; }
     var playerPosition = player.position;
     var pikaPosition = this.position;
 
@@ -110,29 +114,29 @@ PikaEnemy.prototype.pursuePlayer = function (player) {
         this.animations.play('walkLeft');
         this.body.velocity.x = -100;
     }
-/*
-    if ((playerPosition.y < pikaPosition.y) && (this.body.onFloor() || this.body.touching.down)) {
-        var offsetX = Math.abs(playerPosition.x - pikaPosition.x);
-        var offsetY = Math.abs(playerPosition.y - pikaPosition.y);
-        var offset = offsetX + offsetY;
-        var distance = game.physics.arcade.distanceBetween(this,player);
-        console.log ('offset: '+offset+' | distance: '+distance);
-        console.log(offset - distance);
-        console.log(offset/distance);
-        console.log((offset + distance) /2);
-        var velocity = ((offset + distance) /2) + (offset-distance);
-        this.jump(velocity);
-    }
-*/
     /*
-    this.body.collideWorldBounds = true;
-    this.state = 'stop';
-    this.body.velocity.x = 0;
-    this.body.velocity.y = 0;
-    if (player.alive) {
-        game.physics.arcade.moveToObject(this, player, 150);
-    }
-    */
+     if ((playerPosition.y < pikaPosition.y) && (this.body.onFloor() || this.body.touching.down)) {
+     var offsetX = Math.abs(playerPosition.x - pikaPosition.x);
+     var offsetY = Math.abs(playerPosition.y - pikaPosition.y);
+     var offset = offsetX + offsetY;
+     var distance = game.physics.arcade.distanceBetween(this,player);
+     console.log ('offset: '+offset+' | distance: '+distance);
+     console.log(offset - distance);
+     console.log(offset/distance);
+     console.log((offset + distance) /2);
+     var velocity = ((offset + distance) /2) + (offset-distance);
+     this.jump(velocity);
+     }
+     */
+    /*
+     this.body.collideWorldBounds = true;
+     this.state = 'stop';
+     this.body.velocity.x = 0;
+     this.body.velocity.y = 0;
+     if (player.alive) {
+     game.physics.arcade.moveToObject(this, player, 150);
+     }
+     */
 
 };
 
@@ -142,13 +146,14 @@ PikaEnemy.prototype.st = function () {
     this.body.velocity.x = 0;
 };
 
-PikaEnemy.prototype.jump = function(velocityY, velocityX) {
+PikaEnemy.prototype.jump = function(velocityY) {
     this.body.velocity.y = velocityY;
-    this.body.velocity.x = velocityX;
 };
 
 PikaEnemy.prototype.attackPlayer = function(player) {
     this.mode = MODE.ATTACKING;
+
+    if (this.state === STATE.INJURED) { return; }
 
     this.animations.stop();
     this.body.velocity.x = 0;
@@ -186,5 +191,13 @@ PikaEnemy.prototype.attackPlayer = function(player) {
             }
         }
     }
+};
 
+PikaEnemy.prototype.animateInjury = function(dir) {
+    console.log(dir);
+    this.state = STATE.INJURED;
+    //this.animations.play('blink');
+    if (dir === 'left') { this.body.velocity.x = 200; }
+    if (dir === 'right') { this.body.velocity.x = -200; }
+    this.body.velocity.y = -150;
 };
