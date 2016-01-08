@@ -20,4 +20,6 @@ ManaGroup.prototype.addMana = function(mana) {
 ManaGroup.prototype.handleManaCollect = function(mana, player) {
     mana.kill();
     player.manaCount += 10;
+    if (player.lifeCount + 10 < 100) { player.lifeCount += 10; }
+    else { player.lifeCount = 100; }
 };

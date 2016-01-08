@@ -29,7 +29,7 @@ var Player = function(game, x, y) {
     this.state = STATE.STANDING;
     this.equippedWeapon = null;
     this.lifeCount = 100;
-    this.manaCount = 0;
+    this.manaCount = 10;
 };
 
 Player.prototype = Object.create(Phaser.Sprite.prototype);

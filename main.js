@@ -135,6 +135,8 @@ function update() {
     //update text (i.e. mana count, life count)
     lifeCount.text = "Life Count: " + wzrd.lifeCount;
     manaCount.text = "Mana Count: " + wzrd.manaCount;
+    if (wzrd.lifeCount < 30) { lifeCount.fill = 'red'; } else { lifeCount.fill = 'white'; }
+    if (wzrd.manaCount <= 5) { manaCount.fill = 'red'; } else { manaCount.fill = 'white'; }
 }
 
 var preloadScripts = function() {
