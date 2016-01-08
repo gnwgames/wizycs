@@ -29,7 +29,7 @@ var BasicWarlck = function (game, x, y, range, detectRange, fireRate) {
 };
 
 
-BasicWarlck.prototype = Object.create(Enemy.prototype);
+BasicWarlck.prototype = Object.create(Warlck.prototype);
 BasicWarlck.prototype.constructor = BasicWarlck;
 
 
@@ -148,10 +148,6 @@ BasicWarlck.prototype.pursuePlayer = function (player) {
                     this.body.velocity.x = 0;
                     this.fly();
                     this.powerAttack(player);
-                }
-                else { //dive attack??
-                    //this.powerAttack(player);
-                    //if wizard on platform directly above player, wizard doesn't move off platform to get to player
                 }
         }
     }

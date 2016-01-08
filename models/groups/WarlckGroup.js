@@ -13,7 +13,7 @@ var WarlckGroup = function(game) {
 WarlckGroup.prototype = Object.create(Phaser.Group.prototype);
 WarlckGroup.prototype.constructor = WarlckGroup;
 
-WarlckGroup.prototype.addEnemies = function(warlcks) {
+WarlckGroup.prototype.addWarlcks = function(warlcks) {
     for (var i=0;i<warlcks.length;i++) {
         if (warlcks[i]) {
             this.add(warlcks[i]);

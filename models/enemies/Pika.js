@@ -40,7 +40,7 @@ PikaEnemy.prototype.constructor = PikaEnemy;
 
 PikaEnemy.prototype.update = function () {
     if((this.body.blocked.left || this.body.blocked.right)) {
-        this.jump(-160, 200);
+        this.jump(-160);
     }
     if((this.body.onFloor() || this.body.touching.down)) {
         this.state = STATE.STANDING;
@@ -114,8 +114,8 @@ PikaEnemy.prototype.pursuePlayer = function (player) {
         this.animations.play('walkLeft');
         this.body.velocity.x = -100;
     }
-    console.log(pikaPosition.y - playerPosition.y);
-    if (Math.abs(pikaPosition.x-playerPosition.x) < 100 && (pikaPosition.y - playerPosition.y) > 100) {
+
+    if (Math.abs(pikaPosition.x-playerPosition.x) > 200 && (pikaPosition.y - playerPosition.y) > 100) {
         this.mode = MODE.PATROLING;
     }
     /*
@@ -152,6 +152,7 @@ PikaEnemy.prototype.st = function () {
 
 PikaEnemy.prototype.jump = function(velocityY) {
     this.body.velocity.y = velocityY;
+    this.body.velocity.x = 200;
 };
 
 PikaEnemy.prototype.attackPlayer = function(player) {

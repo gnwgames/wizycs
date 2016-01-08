@@ -14,6 +14,9 @@ var Flame = function (game, x, y) {
 };
 
 Flame.handleInput = function (char, hitGroups) {
+    if (char.manaCount === 0) { return; }
+    else { char.manaCount -= 1; }
+    console.log(char.manaCount);
     if (char.body.velocity.x >= 0) {
         var flame = new Flame(char.game, char.position.x-10, char.position.y - 16);
         //flame.overlap(hitGroup);
