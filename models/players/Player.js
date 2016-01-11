@@ -37,7 +37,7 @@ Player.prototype.constructor = Player;
 
 Player.prototype.equip = function(key, handler, hitGroups) {
     var obj = this;
-    this.power[key] = game.input.keyboard.addKey(key);
+    this.power[key] = Wizycs.game.input.keyboard.addKey(key);
     this.power[key].onDown.add(function() {
         handler(obj, hitGroups)
     })
@@ -108,7 +108,7 @@ Player.prototype.handleInput = function (keys) {
         } else {
             this.st()
         }
-        if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+        if (Wizycs.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
             this.fly();
             this.state = STATE.FLYING
         }

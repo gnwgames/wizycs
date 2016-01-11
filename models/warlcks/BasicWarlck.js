@@ -189,7 +189,7 @@ BasicWarlck.prototype.meleeAttack = function(player) {
 
     //tween forward 50
     var x = player.position.x;
-    var melee = game.add.tween(this);
+    var melee = Wizycs.game.add.tween(this);
     melee.to({ x: x }, 100,  Phaser.Easing.Default);
     melee.onComplete.add(updateState, this, player);
     melee.start();
@@ -226,7 +226,7 @@ BasicWarlck.prototype.powerAttack = function(player) {
             power.shoot(shootDir);
 
             if (player.alive) {
-                game.physics.arcade.moveToObject(power, player, 300);
+                Wizycs.game.physics.arcade.moveToObject(power, player, 300);
             }
         }
     }
@@ -245,7 +245,7 @@ BasicWarlck.prototype.dodgePower = function(power) {
     this.state = Warlck.STATE.DODGING;
     this.body.velocity.x = 0;
     var y = power.position.y + -80;
-    var dodge = game.add.tween(this);
+    var dodge = Wizycs.game.add.tween(this);
     dodge.to({ y: y }, 100,  Phaser.Easing.Default);
     dodge.onComplete.add(updateState, this, power);
     dodge.start();

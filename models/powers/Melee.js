@@ -10,7 +10,7 @@ var Melee = function (game, x, y) {
 
 Melee.handleInput = function (char, hitGroup) {
     if ((char.state !== STATE.STANDING) && (char.state !== STATE.FLYING)) {
-        var staff = new Melee(game, 0, 0);
+        var staff = new Melee(Wizycs.game, 0, 0);
         staff.scale.set(.60, .60);
         // Tweak anchor position to correctly align over player
         staff.anchor.setTo(.07, -0.4);
