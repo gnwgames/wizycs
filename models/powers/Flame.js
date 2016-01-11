@@ -14,6 +14,8 @@ var Flame = function (game, x, y) {
 };
 
 Flame.handleInput = function (char, hitGroups) {
+    if (char.manaCount === 0) { return; }
+    else { char.manaCount -= 1; }
     if (char.body.velocity.x >= 0) {
         var flame = new Flame(char.game, char.position.x-10, char.position.y - 16);
         //flame.overlap(hitGroup);
@@ -66,8 +68,6 @@ Flame.prototype.hitTarget = function(obj1, obj2) {
         power = obj2;
         obj = obj1;
     }
-
-    console.log(obj.lifeCount);
 
     var dir;
     if (obj.body.touching.left || obj.body.touching.down) { dir = 'left'; }

@@ -29,6 +29,7 @@ var Player = function(game, x, y) {
     this.state = STATE.STANDING;
     this.equippedWeapon = null;
     this.lifeCount = 100;
+    this.manaCount = 10;
 };
 
 Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -36,7 +37,7 @@ Player.prototype.constructor = Player;
 
 Player.prototype.equip = function(key, handler, hitGroups) {
     var obj = this;
-    this.power[key] = game.input.keyboard.addKey(key);
+    this.power[key] = Wizycs.game.input.keyboard.addKey(key);
     this.power[key].onDown.add(function() {
         handler(obj, hitGroups)
     })
@@ -68,10 +69,6 @@ Player.prototype.jump = function () {
 };
 
 Player.prototype.fly = function () {
-    // flame.visible = true
-    // flame.position.x = wzrd.position.x - 15
-    // flame.position.y = wzrd.position.y + 13
-    // flame.play('fire')
     this.body.velocity.y = -100;
 };
 
@@ -111,7 +108,7 @@ Player.prototype.handleInput = function (keys) {
         } else {
             this.st()
         }
-        if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+        if (Wizycs.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
             this.fly();
             this.state = STATE.FLYING
         }
@@ -205,7 +202,7 @@ function collidePlayer(player, obj) {
     }
 
     if (player.lifeCount < 0) { player.kill() }
-    if (obj.lifeCount < 0) { obj.kill(); obj.parent.removeChild(obj); }
+    if (obj.lifeCount < 0) { obj.kill(); }
 }
 
 Player.prototype.animateInjury = function(dir) {

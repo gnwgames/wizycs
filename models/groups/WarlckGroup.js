@@ -13,7 +13,7 @@ var WarlckGroup = function(game) {
 WarlckGroup.prototype = Object.create(Phaser.Group.prototype);
 WarlckGroup.prototype.constructor = WarlckGroup;
 
-WarlckGroup.prototype.addEnemies = function(warlcks) {
+WarlckGroup.prototype.addWarlcks = function(warlcks) {
     for (var i=0;i<warlcks.length;i++) {
         if (warlcks[i]) {
             this.add(warlcks[i]);
@@ -26,7 +26,7 @@ WarlckGroup.prototype.distanceFromPlayer = function(warlck, player) {
         warlck.lastDir = 'right';
         warlck.mode = MODE.PATROLING;
     }
-    else if (game.physics.arcade.distanceBetween(warlck,player) < warlck.detectRange) {
+    else if (Wizycs.game.physics.arcade.distanceBetween(warlck,player) < warlck.detectRange) {
         warlck.pursuePlayer(player);
     } else if (warlck.mode === MODE.PURSUING && game.physics.arcade.distanceBetween(warlck,player) <= 450) {
         warlck.pursuePlayer(player);

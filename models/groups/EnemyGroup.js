@@ -22,7 +22,7 @@ EnemyGroup.prototype.distanceFromPlayer = function(enemy, player) {
         enemy.lastDir = 'right';
         enemy.mode = MODE.PATROLING;
     }
-    else if (game.physics.arcade.distanceBetween(enemy,player) < enemy.attackRange) {
+    else if (Wizycs.game.physics.arcade.distanceBetween(enemy,player) < enemy.attackRange) {
         //Enemies.chasePlayer(enemy, player);
         animateDetection(enemy);
         switch (enemy.attackType) {

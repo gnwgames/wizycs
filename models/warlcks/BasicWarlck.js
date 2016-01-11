@@ -29,7 +29,7 @@ var BasicWarlck = function (game, x, y, range, detectRange, fireRate) {
 };
 
 
-BasicWarlck.prototype = Object.create(Enemy.prototype);
+BasicWarlck.prototype = Object.create(Warlck.prototype);
 BasicWarlck.prototype.constructor = BasicWarlck;
 
 
@@ -127,10 +127,12 @@ BasicWarlck.prototype.pursuePlayer = function (player) {
         }
     }
     else if (xDif <= 100) {
+
         this.animations.stop();
         this.frame = 49;
         switch (yDif > 0) {
             case false:
+                if (xDif < 50) { this.meleeAttack(player); }
                 if (this.state === Warlck.STATE.FLYING || this.state === Warlck.STATE.HOVERING) {
                     this.body.velocity.x = 0;
                     this.hover();
@@ -147,10 +149,6 @@ BasicWarlck.prototype.pursuePlayer = function (player) {
                     this.fly();
                     this.powerAttack(player);
                 }
-                else { //dive attack??
-                    //this.powerAttack(player);
-                    //if wizard on platform directly above player, wizard doesn't move off platform to get to player
-                }
         }
     }
 };
@@ -164,11 +162,11 @@ BasicWarlck.prototype.hover = function() {
 BasicWarlck.prototype.walkPursue = function(warlckPosition, playerPosition) {
     if (warlckPosition.x < playerPosition.x - 50) {
         this.animations.play('walkRight');
-        this.body.velocity.x = 150;
+        this.body.velocity.x = 130;
     }
     else if (warlckPosition.x > playerPosition.x + 50) {
         this.animations.play('walkLeft');
-        this.body.velocity.x = -150;
+        this.body.velocity.x = -130;
     }
     else {
         this.body.velocity.x = 0;
@@ -191,7 +189,7 @@ BasicWarlck.prototype.meleeAttack = function(player) {
 
     //tween forward 50
     var x = player.position.x;
-    var melee = game.add.tween(this);
+    var melee = Wizycs.game.add.tween(this);
     melee.to({ x: x }, 100,  Phaser.Easing.Default);
     melee.onComplete.add(updateState, this, player);
     melee.start();
@@ -228,7 +226,7 @@ BasicWarlck.prototype.powerAttack = function(player) {
             power.shoot(shootDir);
 
             if (player.alive) {
-                game.physics.arcade.moveToObject(power, player, 300);
+                Wizycs.game.physics.arcade.moveToObject(power, player, 300);
             }
         }
     }
@@ -247,7 +245,7 @@ BasicWarlck.prototype.dodgePower = function(power) {
     this.state = Warlck.STATE.DODGING;
     this.body.velocity.x = 0;
     var y = power.position.y + -80;
-    var dodge = game.add.tween(this);
+    var dodge = Wizycs.game.add.tween(this);
     dodge.to({ y: y }, 100,  Phaser.Easing.Default);
     dodge.onComplete.add(updateState, this, power);
     dodge.start();
