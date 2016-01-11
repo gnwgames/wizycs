@@ -1,22 +1,25 @@
+
 /**
  * Created by gattra on 1/11/2016.
  */
 var Wizycs = Wizycs || {};
 
-Wizycs.Tutorial.prototype.create = function() {
+Wizycs.Testbed.prototype.create = function() {
     this.game.physics.startSystem(Phaser.Physics.Arcade);
     this.game.stage.backgroundColor = '#63D1F4';
-    map = this.game.add.tilemap('tutorial_map');
+    map = this.game.add.tilemap('gregtest');
     map.addTilesetImage('clouds', 'clouds');
     map.addTilesetImage('terrain', 'terrain');
-    map.addTilesetImage('collision_tiles', 'collision');
+    map.addTilesetImage('collision', 'collision');
     layer = map.createLayer('Background');
+    terrain = map.createLayer('Terrain');
     collision = map.createLayer('Collision');
     collision.visible = false;
 
     // this value is seen in the json file for this tile map
     map.setCollision(22, true, collision);
     layer.resizeWorld();
+    terrain.resizeWorld();
     createObjects();
     integrateObjects();
 

@@ -19,5 +19,8 @@ Wizycs.Tutorial.prototype.preload = {
 var Wizycs = Wizycs || {};
 
 Wizycs.Tutorial.prototype.preload = function() {
-
+    this.load.tilemap('tutorial_map', './assets/maps/tutorialMap.json', null, Phaser.Tilemap.TILED_JSON);
+    this.load.image('clouds', './assets/maps/clouds.jpg');
+    this.load.image('terrain', './assets/maps/sprite_sheet (4).png');
+    this.load.image('collision', './assets/maps/collision_tiles.jpg');
 };

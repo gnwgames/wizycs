@@ -20,6 +20,9 @@ Wizycs.Tutorial.prototype = {
 */
 var Wizycs = Wizycs || {};
 
+var map, layer, terrain, keys, wzrd, collision, flame, pika, enemyGroup, weaponGroup, warlckGroup, playerPowersGroup, manaGroup;
+var lifeCount, manaCount;
+
 Wizycs.Tutorial = function() {};
 
 Wizycs.Tutorial.prototype = {

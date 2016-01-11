@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="20" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="terrain" tilewidth="32" tileheight="32" tilecount="20">
+  <image source="sprite_sheet (4).png" trans="ffffff" width="160" height="128"/>
+ </tileset>
+ <tileset firstgid="21" name="clouds" tilewidth="32" tileheight="32" tilecount="1">
+  <image source="clouds.jpg" trans="ffffff" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="22" name="collision_tiles" tilewidth="32" tileheight="32" tilecount="1">
+  <image source="collision_tiles.jpg" trans="ffffff" width="32" height="32"/>
+ </tileset>
+ <layer name="Background" width="50" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztzzsOABAUBdFHQ0ti/1tFohCJ+ETxrtxi+jlJRBJjjDHGoPMKHl4UP7C4kgG3VENoDlTLaEC0zAxIlpUBwbJr0Gw5NfQWq6gbA1oZjXZGtg==
+  </data>
+ </layer>
+ <layer name="Collision" width="50" height="20" opacity="0.5">
+  <data encoding="base64" compression="zlib">
+   eJztz0EKACAMA8G+Iv9/qveCaEW0gV3IPRNBRERE7un3gUsp/C1KcywbHC0zg5NlZXCw7Bo6W6qGjpZTA3u/AUIlDhk=
+  </data>
+ </layer>
+</map>

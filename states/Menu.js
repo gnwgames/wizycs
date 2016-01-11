@@ -13,7 +13,8 @@ Wizycs.Menu.prototype = {
     },
     update: function() {
         if(this.game.input.activePointer.justPressed()) {
-            this.game.state.start('Tutorial');
+            //this.game.state.start('Tutorial');
+            this.game.state.start('Testbed');
         }
     }
 };
