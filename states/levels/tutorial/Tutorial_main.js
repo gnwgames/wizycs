@@ -20,13 +20,14 @@ Wizycs.Tutorial.prototype = {
 */
 var Wizycs = Wizycs || {};
 
-var map, layer, terrain, keys, wzrd, collision, flame, pika, enemyGroup, weaponGroup, warlckGroup, playerPowersGroup, manaGroup;
-var lifeCount, manaCount;
+var map, layer, terrain;
 
-Wizycs.Tutorial = function() {};
+Wizycs.Tutorial = function() {
+
+};
 
 Wizycs.Tutorial.prototype = {
-    preload: function() { this.preload(); },
-    create: function() { this.create(); },
-    update: function() { this.update(); }
+    preload: this.preload,
+    create: this.create,
+    update: this.update
 };

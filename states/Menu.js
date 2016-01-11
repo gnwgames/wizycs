@@ -12,9 +12,12 @@ Wizycs.Menu.prototype = {
         this.game.add.text(this.game.width/3.2,this.game.height/2, "(click anywhere to begin)", {'fill': 'white', fontSize: '14pt'});
     },
     update: function() {
+        this.game.state.start('Tutorial');
+        /*
         if(this.game.input.activePointer.justPressed()) {
-            //this.game.state.start('Tutorial');
-            this.game.state.start('Testbed');
+            this.game.state.start('Tutorial');
+            //this.game.state.start('Testbed');
         }
+        */
     }
 };

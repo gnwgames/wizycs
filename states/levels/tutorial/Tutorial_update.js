@@ -5,52 +5,12 @@
 var Wizycs = Wizycs || {};
 
 Wizycs.Tutorial.prototype.update = function() {
-    wzrd.collide(collision);
-    wzrd.handleInput(keys);
-
-    enemyGroup.forEachAlive(function(enemy) {
-        enemy.collide(collision);
-        if (wzrd.alive) {
-            wzrd.overlap(enemy);
-            enemyGroup.distanceFromPlayer(enemy, wzrd);
-        } else { enemy.mode = MODE.PATROLING; }
-    });
-
-    warlckGroup.forEachAlive(function(warlck) {
-        warlck.collide(collision);
-        if (wzrd.alive) {
-            wzrd.overlap(warlck);
-            warlckGroup.distanceFromPlayer(warlck, wzrd);
-        } else { warlck.mode = MODE.PATROLING; }
-        playerPowersGroup.forEachAlive(function(power) {
-            if ((Wizycs.game.physics.arcade.distanceBetween(power,warlck)<100) && (warlck.state !== Warlck.STATE.DODGING)) {
-                warlck.dodgeOrBlockPower(power);
-            }
-        });
-    });
-
-    manaGroup.forEachAlive(function(mana) {
-        Wizycs.game.physics.arcade.overlap(mana, wzrd, manaGroup.handleManaCollect);
-        mana.collide(collision);
-    });
-
-    enemyGroup.forEachDead(function(enemy){
-        enemy.dropMana();
-        enemyGroup.remove(enemy);
-    });
-
-    warlckGroup.forEachDead(function(warlck){
-        warlck.dropMana();
-        warlckGroup.remove(warlck);
-    });
-
-    manaGroup.forEachDead(function(mana) {
-        manaGroup.removeChild(mana);
-    });
+    this.player.collide(this.collision);
+    this.player.handleInput(this.keys);
 
     //update text (i.e. mana count, life count)
-    lifeCount.text = "Life Count: " + wzrd.lifeCount;
-    manaCount.text = "Mana Count: " + wzrd.manaCount;
-    if (wzrd.lifeCount < 30) { lifeCount.fill = 'red'; } else { lifeCount.fill = 'white'; }
-    if (wzrd.manaCount <= 5) { manaCount.fill = 'red'; } else { manaCount.fill = 'white'; }
+    this.lifeCountText.text = "Life Count: " + this.player.lifeCount;
+    this.manaCountText.text = "Mana Count: " + this.player.manaCount;
+    if (this.player.lifeCount < 30) { this.lifeCountText.fill = 'red'; } else { this.lifeCountText.fill = 'white'; }
+    if (this.player.manaCount <= 5) { this.manaCountText.fill = 'red'; } else { this.manaCountText.fill = 'white'; }
 };

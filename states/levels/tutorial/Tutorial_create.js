@@ -6,67 +6,50 @@ var Wizycs = Wizycs || {};
 Wizycs.Tutorial.prototype.create = function() {
     this.game.physics.startSystem(Phaser.Physics.Arcade);
     this.game.stage.backgroundColor = '#63D1F4';
-    map = this.game.add.tilemap('tutorial_map');
+    var map = this.game.add.tilemap('tutorial_map');
     map.addTilesetImage('clouds', 'clouds');
     map.addTilesetImage('terrain', 'terrain');
     map.addTilesetImage('collision_tiles', 'collision');
-    layer = map.createLayer('Background');
-    collision = map.createLayer('Collision');
-    collision.visible = false;
+    var layer = map.createLayer('Background');
+    this.collision = map.createLayer('Collision');
+    this.collision.visible = false;
 
     // this value is seen in the json file for this tile map
-    map.setCollision(22, true, collision);
+    map.setCollision(22, true, this.collision);
     layer.resizeWorld();
-    createObjects();
-    integrateObjects();
 
-    lifeCount = this.game.add.text(10,350, "Life Count: " + wzrd.lifeCount, {'fill': 'white', fontSize: '14pt'});
-    lifeCount.fixedToCamera = true;
-    lifeCount.cameraOffset.setTo(10,425);
+    this.player = new Player(Wizycs.game, 50, 50);
+    this.keys = Wizycs.game.input.keyboard.createCursorKeys();
 
-    manaCount = this.game.add.text(10,400, "Mana Count: " + wzrd.manaCount, {'fill': 'white', fontSize: '14pt'});
-    manaCount.fixedToCamera = true;
-    manaCount.cameraOffset.setTo(10,405);
+    this.enemyGroup = new EnemyGroup(Wizycs.game);
+    this.warlckGroup = new WarlckGroup(Wizycs.game);
+    this.powersGroup = new PowerGroup(Wizycs.game);
+
+    var hitGroups = [ this.enemyGroup, this.warlckGroup ];
+    // Equip the flame power to the key D / Melee to W
+    this.player.equip(Phaser.KeyCode.D, Flame.handleInput, hitGroups, this.collision, this.powersGroup);
+    this.player.equip(Phaser.KeyCode.DOWN, Melee.handleInput, hitGroups, this.collision, this.powersGroup);
+
+    this.lifeCountText = this.game.add.text(10,350, "Life Count: " + this.player.lifeCount, {'fill': 'white', fontSize: '14pt'});
+    this.lifeCountText.fixedToCamera = true;
+    this.lifeCountText.cameraOffset.setTo(10,425);
+
+    this.manaCountText = this.game.add.text(10,400, "Mana Count: " + this.player.manaCount, {'fill': 'white', fontSize: '14pt'});
+    this.manaCountText.fixedToCamera = true;
+    this.manaCountText.cameraOffset.setTo(10,405);
 
     //Wizycs.game.state.add('Tutorial_update', Wizycs.Tutorial.update);
     //Wizycs.game.state.start('Tutorial_update');
+
+    this.tutorialTextArray = [
+        "Use to arrow keys to navigate.",
+        "Use the 'Up Arrow' to jump. Press it again while in mid-air to double-jump.",
+        "Press the 'Down Arrow' while falling to do a dive attack.",
+        "Press the 'D Key' to shoot a spell at an enemy.",
+        "When you kill an enemy, it will drop mana. Collect mana to recharge your mana count and heal yourself."
+    ];
+
+    this.tutorialText = this.game.add.text(50, 25, this.tutorialTextArray[0], {'fill': 'white', fontSize: '20pt'});
+    this.tutorialText.fixedToCamera = true;
+    this.tutorialText.cameraOffset(50, 25);
 };
-
-function createObjects() {
-    keys = Wizycs.game.input.keyboard.createCursorKeys();
-    wzrd = new Player(Wizycs.game, 50, 50);
-
-    var mana = [];
-    var testMana = new FireMana(Wizycs.game, 100, 100);
-    mana.push(testMana);
-
-    manaGroup = new ManaGroup(Wizycs.game);
-    manaGroup.addMana(mana);
-
-    var pikas = [];
-    //pika = new PikaEnemy(game, 450, 350, 150, Enemy.ATTACK_TYPE.PURSUE, Flame);
-    pika = new PikaEnemy(Wizycs.game, 450, 350, 150, null, Flame, null, null);
-    pikas.push(pika);
-
-    var warlcks = [];
-    var warlck = new BasicWarlck(Wizycs.game, 1250, 350, 150);
-    warlcks.push(warlck);
-
-    enemyGroup = new EnemyGroup(Wizycs.game);
-    enemyGroup.addEnemies(pikas);
-
-    warlckGroup = new WarlckGroup(Wizycs.game);
-    warlckGroup.addWarlcks(warlcks);
-
-    playerPowersGroup = new PowerGroup(Wizycs.game);
-}
-
-function integrateObjects() {
-    //Flame.hitGroups = enemyGroup;
-    // Melee.hitGroups = enemyGroup;
-    var hitGroups = [ enemyGroup, warlckGroup ];
-    // Equip the flame power to the key D / Melee to W
-    wzrd.equip(Phaser.KeyCode.D, Flame.handleInput, hitGroups);
-    wzrd.equip(Phaser.KeyCode.DOWN, Melee.handleInput, hitGroups);
-
-}

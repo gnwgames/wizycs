@@ -13,7 +13,7 @@ var Flame = function (game, x, y) {
     this.hitGroups = null;
 };
 
-Flame.handleInput = function (char, hitGroups) {
+Flame.handleInput = function (char, hitGroups, collision, powersGroup) {
     if (char.manaCount === 0) { return; }
     else { char.manaCount -= 1; }
     if (char.body.velocity.x >= 0) {
@@ -21,14 +21,14 @@ Flame.handleInput = function (char, hitGroups) {
         //flame.overlap(hitGroup);
         flame.hitGroups = hitGroups;
         flame.collideGroups = collision;
-        playerPowersGroup.add(flame);
+        powersGroup.add(flame);
         flame.shoot('right');
     } else if (char.body.velocity.x < 0) {
         var flame = new Flame(char.game, char.position.x - 35, char.position.y - 16);
         //flame.overlap(hitGroup);
         flame.hitGroups = hitGroups;
         flame.collideGroups = collision;
-        playerPowersGroup.add(flame);
+        powersGroup.add(flame);
         flame.shoot('left');
     }
 };
