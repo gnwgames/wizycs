@@ -24,6 +24,7 @@ Wizycs.Tutorial.prototype.create = function() {
     this.enemyGroup = new EnemyGroup(Wizycs.game);
     this.warlckGroup = new WarlckGroup(Wizycs.game);
     this.powersGroup = new PowerGroup(Wizycs.game);
+    this.manaGroup = new ManaGroup(Wizycs.game);
 
     var hitGroups = [ this.enemyGroup, this.warlckGroup ];
     // Equip the flame power to the key D / Melee to W
@@ -42,14 +43,15 @@ Wizycs.Tutorial.prototype.create = function() {
     //Wizycs.game.state.start('Tutorial_update');
 
     this.tutorialTextArray = [
-        "Use to arrow keys to navigate.",
-        "Use the 'Up Arrow' to jump. Press it again while in mid-air to double-jump.",
-        "Press the 'Down Arrow' while falling to do a dive attack.",
-        "Press the 'D Key' to shoot a spell at an enemy.",
-        "When you kill an enemy, it will drop mana. Collect mana to recharge your mana count and heal yourself."
+        "Use the arrow keys to navigate.",
+        "Use the 'Up Arrow' to jump.\nPress it again while in mid-air to double-jump.",
+        "Press the 'Down Arrow' while falling\nto do a dive attack.",
+        "Press the 'D Key' to shoot a spell\nat an enemy.",
+        "When you kill an enemy, it will drop items. \nCollect items to recharge your mana count\nand heal yourself.",
+        "Ok, it looks like you're ready!\nClick anywhere to start level 1."
     ];
 
-    this.tutorialText = this.game.add.text(50, 25, this.tutorialTextArray[0], {'fill': 'white', fontSize: '20pt'});
+    this.tutorialText = this.game.add.text(25, 25, this.tutorialTextArray[0], {'fill': 'white', fontSize: '18pt'});
     this.tutorialText.fixedToCamera = true;
-    this.tutorialText.cameraOffset(50, 25);
+    //this.tutorialText.cameraOffset(50, 25);
 };

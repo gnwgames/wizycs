@@ -22,9 +22,7 @@ var Wizycs = Wizycs || {};
 
 var map, layer, terrain;
 
-Wizycs.Tutorial = function() {
-
-};
+Wizycs.Tutorial = function() {};
 
 Wizycs.Tutorial.prototype = {
     preload: this.preload,

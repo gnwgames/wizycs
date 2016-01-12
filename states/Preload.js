@@ -38,7 +38,7 @@ Wizycs.Preload.prototype = {
         this.load.spritesheet('pika', './assets/sprites/pika.jpg', 16,24);
         this.load.spritesheet('stave_equipped', './assets/sprites/stave.png', 55,55);
         this.load.spritesheet('stave_diving', './assets/sprites/stave_straight.png', 55,55);
-        this.load.spritesheet('test_mana', './assets/sprites/manatest.png', 100, 100);
+        this.load.spritesheet('test_mana', './assets/sprites/mana.png', 100, 100);
         this.load.tilemap('gregtest', './assets/maps/gregtestmap.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.tilemap('tutorial_map', './assets/maps/tutorialMap.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.image('clouds', './assets/maps/clouds.jpg');

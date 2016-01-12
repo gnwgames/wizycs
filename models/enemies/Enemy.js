@@ -21,7 +21,7 @@ Enemy.prototype.collide = function (obj) {
     this.game.physics.arcade.collide(this, obj);
 };
 
-Enemy.prototype.dropMana = function() {
+Enemy.prototype.dropMana = function(manaGroup) {
     var x = this.position.x;
     var y = this.position.y;
     var mana = new FireMana(this.game, x, y);
