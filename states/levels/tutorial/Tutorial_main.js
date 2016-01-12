@@ -17,16 +17,16 @@ Wizycs.Tutorial.prototype = {
     },
     update: function() {}
 };
-*/
+// */
 var Wizycs = Wizycs || {};
-
-var map, layer, terrain;
-
+//
+// var map, layer, terrain;
+//
 Wizycs.Tutorial = function() {};
 
 // you probably don't need this declaration
-Wizycs.Tutorial.prototype = {
-    preload: this.preload,
-    create: this.create,
-    update: this.update
-};
+// Wizycs.Tutorial.prototype = {
+//     preload: this.preload,
+//     create: this.create,
+//     update: this.update
+// };

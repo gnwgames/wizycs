@@ -21,6 +21,7 @@ Flame.handleInput = function (char, hitGroups, collision, powersGroup) {
         //flame.overlap(hitGroup);
         flame.hitGroups = hitGroups;
         flame.collideGroups = collision;
+        // Error: cannot read property 'add' of undefined
         powersGroup.add(flame);
         flame.shoot('right');
     } else if (char.body.velocity.x < 0) {
@@ -28,6 +29,7 @@ Flame.handleInput = function (char, hitGroups, collision, powersGroup) {
         //flame.overlap(hitGroup);
         flame.hitGroups = hitGroups;
         flame.collideGroups = collision;
+        // Error: cannot read property 'add' of undefined
         powersGroup.add(flame);
         flame.shoot('left');
     }
@@ -93,5 +95,3 @@ Flame.prototype.collideTarget = function(obj1, obj2) {
     power.kill();
     power.parent.removeChild(power);
 };
-
-
