@@ -35,6 +35,7 @@ Wizycs.Testbed.prototype.update = function() {
     });
 
     enemyGroup.forEachDead(function(enemy){
+        // this needs a manaGroup in order to work
         enemy.dropMana();
         enemyGroup.remove(enemy);
     });
