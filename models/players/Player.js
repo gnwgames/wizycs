@@ -39,8 +39,8 @@ Player.prototype.equip = function(key, handler, hitGroups, collision, powersGrou
     var obj = this;
     this.power[key] = this.game.input.keyboard.addKey(key);
     this.power[key].onDown.add(function() {
-        handler(obj, hitGroups, collision, powersGroup)
-    })
+        handler(obj, hitGroups, collision, powersGroup);
+    });
 };
 
 Player.prototype.l = function() {
@@ -50,7 +50,7 @@ Player.prototype.l = function() {
 
 Player.prototype.r = function () {
     this.animations.play('right');
-    this.body.velocity.x = 150
+    this.body.velocity.x = 150;
 };
 
 Player.prototype.jump = function () {
@@ -102,15 +102,15 @@ Player.prototype.handleInput = function (keys) {
     else {
         //the actions below (but before the switch statement) happen regardless of the player's state
         if (keys.left.isDown) {
-            this.l()
+            this.l();
         } else if (keys.right.isDown) {
-            this.r()
+            this.r();
         } else {
-            this.st()
+            this.st();
         }
         if (Wizycs.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
             this.fly();
-            this.state = STATE.FLYING
+            this.state = STATE.FLYING;
         }
 
         switch (this.state) {
@@ -138,7 +138,7 @@ Player.prototype.handleInput = function (keys) {
                 break;
 
             case STATE.FLYING:
-                if ((keys.down.isDown) && (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))) {
+                if ((keys.down.isDown) && (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))) {
                     this.body.velocity.y = -(this.body.velocity.y * 2);
                 }
                 break;
@@ -157,6 +157,7 @@ Player.prototype.handleInput = function (keys) {
 };
 
 function collidePlayer(player, obj) {
+    var dir;
     if (obj.instanceType === 'Enemy') {
         if ((obj.body.touching.up) && (player.equippedWeapon)) {
             player.body.velocity.y = -200;
@@ -170,7 +171,6 @@ function collidePlayer(player, obj) {
         }
         else {
             //Animate death - blinking sprite, which disappears and then reappears at 0,0
-            var dir;
             if (obj.body.touching.left || obj.body.touching.down) { dir = 'left'; }
             else { dir = 'right'; }
             player.animateInjury(dir);
@@ -189,7 +189,6 @@ function collidePlayer(player, obj) {
         }
         else {
             //Animate death - blinking sprite, which disappears and then reappears at 0,0
-            var dir;
             if (obj.body.touching.left || obj.body.touching.down) { dir = 'left'; }
             else { dir = 'right'; }
             player.animateInjury(dir);
@@ -201,7 +200,7 @@ function collidePlayer(player, obj) {
         player.equippedWeapon = null;
     }
 
-    if (player.lifeCount < 0) { player.kill() }
+    if (player.lifeCount < 0) { player.kill(); }
     if (obj.lifeCount < 0) { obj.kill(); }
 }
 
