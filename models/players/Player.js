@@ -37,7 +37,7 @@ Player.prototype.constructor = Player;
 
 Player.prototype.equip = function(key, handler, hitGroups, collision, powersGroup) {
     var obj = this;
-    this.power[key] = Wizycs.game.input.keyboard.addKey(key);
+    this.power[key] = this.game.input.keyboard.addKey(key);
     this.power[key].onDown.add(function() {
         handler(obj, hitGroups, collision, powersGroup)
     })
